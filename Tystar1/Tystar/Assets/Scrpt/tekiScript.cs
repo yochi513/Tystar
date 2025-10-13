@@ -15,10 +15,10 @@ public class tekiScript : MonoBehaviour
 
 
     public ChargeScript charge;
-    public AppearEnemyScript AppEnemy;
+    public EnemySpponScript AppEnemy;
 
     private Renderer rend;
-    private TextMeshPro textDisplay;
+   // private TextMeshPro textDisplay;
 
     public enum SPEED
     {
@@ -72,12 +72,9 @@ public class tekiScript : MonoBehaviour
         Speed();
         target = GameObject.Find("player");
         rend = GetComponent<Renderer>();
-        rend.material.color = enemyColor;
-
-        textDisplay = GetComponentInChildren<TextMeshPro>();
-        if (textDisplay != null)
+        if (rend != null)
         {
-            textDisplay.text = assignedKey.ToString();
+            rend.material.color = enemyColor;
         }
         charge.Tystar(0);
     }

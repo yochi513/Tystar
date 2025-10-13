@@ -33,7 +33,6 @@ public class BossScript : MonoBehaviour
     void Start()
     {
         HPP();
-
     }
 
     // Update is called once per frame

@@ -31,17 +31,3 @@ public class Playerscrpt : MonoBehaviour
         }
     }
 }
-//     // 上下キーで前後に移動
-//if (Input.GetKey(KeyCode.UpArrow)|| (Input.GetKey(KeyCode.DownArrow)))
-//     {
-//         float move = Input.GetAxis("Vertical")* moveSpeed * Time.deltaTime;
-//         transform.Translate(0, 0, move);
-
-//     }
-//     // 左右キーで横移動
-//     if (Input.GetKey(KeyCode.RightArrow) || (Input.GetKey(KeyCode.LeftArrow)))
-//     {
-//         float move2 = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-//         transform.Translate(move2, 0, 0);
-
-//     }
