@@ -11,6 +11,7 @@ public class ChargeScript : MonoBehaviour
   private float MaxCharge = 500f;
     private float currentCharge = 0f;
 
+
     public enum Selection
     {
         Two=2,
@@ -72,6 +73,10 @@ public class ChargeScript : MonoBehaviour
     //  “G‚ðÁ‚·Žž‚ÉoŒ»Œ³‚É’Ê’m
     public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
+        Debug.Log("EntarWithCallbackŒÄ‚Î‚ê‚½");
+        Debug.Log("currentCharge: " + currentCharge + " / MaxCharge: " + MaxCharge);
+
+        Debug.Log("appearScript: " + appearScript);
         select();
         if (currentCharge >= MaxCharge )
         {
@@ -81,10 +86,13 @@ public class ChargeScript : MonoBehaviour
             }
 
             Destroy(target);
+
             currentCharge = 0f;
             UpdateGauge();
         }
+      
     }
+
 
 }
 

@@ -10,43 +10,39 @@ public class EnemySpponScript : MonoBehaviour
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] int maxEnemies = 100;
 
-   
-    [SerializeField] float timeBetweenEnemies = 0.5f;  // 1体ずつ出す間隔
-    [SerializeField] float timeBetweenWaves = 10f;      // Wave同士の間隔
+    [SerializeField] float timeBetweenEnemies = 0.5f;
+    [SerializeField] float timeBetweenWaves = 10f;
 
     private int totalSpawned = 0;
     private int totalDefeated = 0;
+    private int currentWave = 1;
     private bool secondWaveSpawned = false;
+    private bool isSpawning = false;//ウェーブの進行がどうか
+    public UItextScript UItext;
 
     void Start()
     {
-        // Wave1を開始
         StartCoroutine(SpawnWaveRoutine());
     }
 
     void Update()
     {
-        // Wave3以降：4体倒したら再びSpawnWaveを呼ぶ
-        if (secondWaveSpawned && totalDefeated >= 4 && totalSpawned < maxEnemies)
+        if (!isSpawning && totalDefeated >= spawnPoints.Length && totalSpawned < maxEnemies)
         {
             totalDefeated = 0;
+            currentWave++;
             StartCoroutine(SpawnWaveRoutine());
         }
     }
 
     private IEnumerator SpawnWaveRoutine()
     {
-        // 1ウェーブ内の敵を順番に出す
+        isSpawning = true;
         yield return StartCoroutine(SpawnEnemiesWithDelay());
-
-        // 次のWaveまで待機
         yield return new WaitForSeconds(timeBetweenWaves);
+        isSpawning = false;
 
-        if (!secondWaveSpawned)
-        {
-            secondWaveSpawned = true;
-            yield return StartCoroutine(SpawnEnemiesWithDelay());
-        }
+      
     }
 
     private IEnumerator SpawnEnemiesWithDelay()
@@ -59,8 +55,8 @@ public class EnemySpponScript : MonoBehaviour
             char letter = (char)('A' + index);
 
             GameObject enemy = Instantiate(Gino, spawnPoints[i].position, Quaternion.identity);
-
             var script = enemy.GetComponent<tekiScript>();
+
             if (script != null)
             {
                 script.AppEnemy = this;
@@ -68,7 +64,6 @@ public class EnemySpponScript : MonoBehaviour
                 script.assignedKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
             }
 
-            // Canvas上のImageにスプライトを反映
             Image img = enemy.GetComponentInChildren<Image>();
             if (img != null && index < Alphabet.Length)
             {
@@ -76,8 +71,6 @@ public class EnemySpponScript : MonoBehaviour
             }
 
             totalSpawned++;
-
-            // 敵の出現を少し遅らせる
             yield return new WaitForSeconds(timeBetweenEnemies);
         }
     }
@@ -85,5 +78,7 @@ public class EnemySpponScript : MonoBehaviour
     public void ReportEnemyDefeated()
     {
         totalDefeated++;
+        UItext.Count(100, 1);
+
     }
 }

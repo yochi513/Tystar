@@ -17,6 +17,9 @@ public class tekiScript : MonoBehaviour
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
 
+
+
+
     private Renderer rend;
    // private TextMeshPro textDisplay;
 
@@ -100,11 +103,12 @@ public class tekiScript : MonoBehaviour
 
     void GinoAttack()
     {
-        Debug.Log("ギノキー反応");
+      //  Debug.Log("ギノキー反応");
         if (Input.GetKey(assignedKey))//キー入力を受付してる
         {
             charge.Tystar(+1);
             charge.EntarWithCallback(gameObject, AppEnemy);
+ 
            
         }
         else

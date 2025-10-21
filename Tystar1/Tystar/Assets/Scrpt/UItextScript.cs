@@ -7,29 +7,38 @@ using TMPro;
 public class UItextScript : MonoBehaviour
 {
 
-    [SerializeField] private GameObject UIText;
-    public GameObject[] enemy;
-  
+    public Text scoreText;
+    public Text countText;
+    private int score=0;
+    private int count=0;
 
     // Start is called before the first frame update
     void Start()
     {
-       // tekiScript ew = enemy;
-
-
+       
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpscoreText();
+        UpcountText();
     }
 
-    void Change()
+   public void Count(int x ,int y)
     {
-
-
+        score +=x;
+        count +=y;
+        UpscoreText();
+        UpcountText();
     }
-
+   public void UpscoreText()
+    {
+        scoreText.text = $"ÉXÉRÉA:{score}";
+    }
+  public  void UpcountText()
+    {
+        countText.text = $"ÉMÉmåÇîjêî:{count}";
+    }
 }
