@@ -3,7 +3,37 @@ guid: b64687de47564344baa45b99b69bf7ef
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ASHI
+    second: {fileID: 2100000, guid: 49706fb1d722a0f4bb53c3808395d5da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HONTAI
+    second: {fileID: 2100000, guid: 656a81aa355cb9d42a3851658f11018b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HUCHI
+    second: {fileID: 2100000, guid: 209ba8f28c8f8aa41b9c29c3cd6e418f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KAMERA
+    second: {fileID: 2100000, guid: e7fe80d537704104d86a994905fd7383, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KANSETU
+    second: {fileID: 2100000, guid: 826590275abfa4a4cbf685fd908e1e63, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LINE
+    second: {fileID: 2100000, guid: 9d5bbba1445a5a246abffd97c71ffbdb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -37,23 +67,23 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
-    sortHierarchyByName: 1
+    sortHierarchyByName: 0
     importPhysicalCameras: 1
-    importVisibility: 1
-    importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
-    bakeAxisConversion: 0
-    preserveHierarchy: 0
+    bakeAxisConversion: 1
+    preserveHierarchy: 1
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
@@ -67,7 +97,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
     strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
