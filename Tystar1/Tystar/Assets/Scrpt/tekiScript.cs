@@ -72,8 +72,9 @@ public class tekiScript : MonoBehaviour
 
     void Start()
     {
+    
         Speed();
-        target = GameObject.Find("player");
+        target = GameObject.FindGameObjectWithTag("Player");
         rend = GetComponent<Renderer>();
         if (rend != null)
         {
