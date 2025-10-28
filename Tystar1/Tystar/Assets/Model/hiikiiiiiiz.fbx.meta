@@ -3,7 +3,72 @@ guid: d33c995cba598a34f8a8e5274c10b6c0
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: 8b05c903857eff14eb2d890cf0f6cdbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 3636781740f745c48b18b6a98df6fec3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: de1291bf62b90df49adb15aac1c98eb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__lambert2
+    second: {fileID: 2100000, guid: a10a8d38f5ed5384b8035032279f6cd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__lambert3
+    second: {fileID: 2100000, guid: 28a8e5e3cace15a498c356336d7d8931, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__lambert7
+    second: {fileID: 2100000, guid: 1dac8d415d4474c4ca7fb65e570e7e25, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__lambert5
+    second: {fileID: 2100000, guid: fa8914ada92dd0141b769d3b44c1716d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4
+    second: {fileID: 2100000, guid: 5ca2bc6e283b50348b7d2c312536a807, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert8
+    second: {fileID: 2100000, guid: 7770d95cd21b79249afad0f2b09009a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert4
+    second: {fileID: 2100000, guid: 7e6fed0f3bc6ad140942532ab0f5d2cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert9
+    second: {fileID: 2100000, guid: 31700b8b7858c134a838f2447fec6d9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface1
+    second: {fileID: 2100000, guid: 7f64b49357c0f7140b460815533c9e9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: standardSurface2
+    second: {fileID: 2100000, guid: faa8259d1f79ecd42b6c4cef8e469d33, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
