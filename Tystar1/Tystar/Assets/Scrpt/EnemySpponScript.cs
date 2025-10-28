@@ -13,6 +13,10 @@ public class EnemySpponScript : MonoBehaviour
     [SerializeField] float timeBetweenEnemies = 0.5f;
     [SerializeField] float timeBetweenWaves = 10f;
 
+    [SerializeField] int ginoMax = 10;
+    [SerializeField] int totalPhaes = 3;
+    public BossScript boss;
+
     private int totalSpawned = 0;
     private int totalDefeated = 0;
     private int currentWave = 1;
@@ -23,6 +27,7 @@ public class EnemySpponScript : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnWaveRoutine());
+        //boss.EnableAttack(false);
     }
 
     void Update()
@@ -33,6 +38,19 @@ public class EnemySpponScript : MonoBehaviour
             currentWave++;
             StartCoroutine(SpawnWaveRoutine());
         }
+        //if (!isSpawning && totalDefeated >= ginoMax)
+        //{
+        //  totalDefeated = 0;
+        // // boss.EnableAttack(true);
+        //}
+
+
+        //if(boss.IsAttacked&&currentWave<totalPhaes)
+        //{
+        //   // boss.EnableAttack(false);
+        //    currentWave++;
+        //    StartCoroutine(SpawnWaveRoutine());
+        //}
     }
 
     private IEnumerator SpawnWaveRoutine()

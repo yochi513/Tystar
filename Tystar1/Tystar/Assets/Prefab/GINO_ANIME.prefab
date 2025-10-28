@@ -463,7 +463,7 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 876309376573198071}
   AppEnemy: {fileID: 0}
-  speedtime: 1
+  speedtime: 2
 --- !u!114 &876309376573198071
 MonoBehaviour:
   m_ObjectHideFlags: 0

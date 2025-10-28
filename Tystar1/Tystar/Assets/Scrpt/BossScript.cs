@@ -4,43 +4,39 @@ using UnityEngine;
 
 public class BossScript : MonoBehaviour
 {
-    
-    public float HP = 0;
+    public float HP = 10;
+    private bool canAttack = false;
+    public bool IsAttacked { get; private set; } = false;
 
-   public enum Hp
-    {
-        Easy=1,
-       Normal=2,
-        Hard=3
-    }
-    public static Hp Statehp = Hp.Normal;
-    // Start is called before the first frame update
-    void HPP()
-    {
-        if (Statehp == Hp.Easy)
-        {
-            HP = 50;
-        }
-        else if (Statehp == Hp.Normal)
-        {
-            HP = 100;
-        }
-        else if (Statehp == Hp.Hard)
-        {
-            HP = 200;
-        }
-    }
     void Start()
     {
-        HPP();
+       
     }
-
     // Update is called once per frame
     void Update()
     {
-        if(HP==0)
+       // bossManager();
+    }
+    void bossManager()
+    {
+        HP--;
+        if (HP == 0)
         {
             Destroy(gameObject);
+        }
+    }
+    public void EnableAttack(bool enable)
+    {
+        canAttack = enable;
+        IsAttacked = false;
+       
+    }
+    void OnMouseDown()
+    {
+        if (canAttack)
+        {
+          
+            IsAttacked = true;
         }
     }
 }

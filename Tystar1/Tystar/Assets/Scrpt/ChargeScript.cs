@@ -73,10 +73,9 @@ public class ChargeScript : MonoBehaviour
     //  “G‚ðÁ‚·Žž‚ÉoŒ»Œ³‚É’Ê’m
     public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
-        Debug.Log("EntarWithCallbackŒÄ‚Î‚ê‚½");
-        Debug.Log("currentCharge: " + currentCharge + " / MaxCharge: " + MaxCharge);
-
-        Debug.Log("appearScript: " + appearScript);
+        //Debug.Log("EntarWithCallbackŒÄ‚Î‚ê‚½");
+        //Debug.Log("currentCharge: " + currentCharge + " / MaxCharge: " + MaxCharge);
+        //Debug.Log("appearScript: " + appearScript);
         select();
         if (currentCharge >= MaxCharge )
         {

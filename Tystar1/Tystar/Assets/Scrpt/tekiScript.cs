@@ -6,19 +6,15 @@ using TMPro;
 public class tekiScript : MonoBehaviour
 {
     private GameObject target;
-   private float speed = 0.05f;
+    private float speed = 0.05f;
 
     public string word;
     public KeyCode assignedKey;
     public char assignedChar;
     public Color enemyColor;
 
-
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
-
-
-
 
     private Renderer rend;
    // private TextMeshPro textDisplay;
@@ -109,13 +105,10 @@ public class tekiScript : MonoBehaviour
         {
             charge.Tystar(+1);
             charge.EntarWithCallback(gameObject, AppEnemy);
- 
-           
         }
         else
         {
             charge.Tystar(-1);
-          
         }
     }
     void BossAttack()
