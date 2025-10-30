@@ -9,6 +9,7 @@ public class UItextScript : MonoBehaviour
 
     public Text scoreText;
     public Text countText;
+    public Text SCOREText;
     private int score=0;
     private int count=0;
 
@@ -36,6 +37,7 @@ public class UItextScript : MonoBehaviour
    public void UpscoreText()
     {
         scoreText.text = $"スコア:{score}";
+        SCOREText.text= $"スコア:{score}";
     }
   public  void UpcountText()
     {
