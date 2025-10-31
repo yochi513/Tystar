@@ -16,6 +16,7 @@ public class tekiScript : MonoBehaviour
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
 
+
     private Renderer rend;
    // private TextMeshPro textDisplay;
 
@@ -50,20 +51,26 @@ public class tekiScript : MonoBehaviour
     }
     public void State()
     {
-        switch (PlayerStateScript.CurrentState)
-        {
-           case PlayerStateScript.PlayerState.GinoAttack:
-                GinoAttack();
-                break;
+      
+      
+            switch (PlayerStateScript.CurrentState)
+            {
+                case PlayerStateScript.PlayerState.GinoAttack:
+                    GinoAttack();
+                    break;
 
-           case PlayerStateScript.PlayerState.BossAttack:
-                BossAttack(); 
-                break;
+                case PlayerStateScript.PlayerState.BossAttack:
+                    BossAttack();
+                    break;
 
-           case PlayerStateScript.PlayerState.Defense: 
-                Defense();
-                break;
+                case PlayerStateScript.PlayerState.Defense:
+                    Defense();
+                    break;
+               case PlayerStateScript.PlayerState.None:
+                    None();
+                    break;
         }
+        
     }
 
     void Start()
@@ -113,10 +120,16 @@ public class tekiScript : MonoBehaviour
     }
     void BossAttack()
     {
-        Debug.Log("ボスキー反応");
+      //  Debug.Log("ボスキー反応");
     }
     void Defense()
     {
-        Debug.Log("防御キー反応");
+       //Debug.Log("無効キー反応");
     }
+    void None()
+    {
+       // Debug.Log("無効キー反応");
+    }
+
+
 }
