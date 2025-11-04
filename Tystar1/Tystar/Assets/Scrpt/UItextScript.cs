@@ -12,6 +12,7 @@ public class UItextScript : MonoBehaviour
     public Text SCOREText;
     private int score=0;
     private int count=0;
+    public CHScript cHScript;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,10 @@ public class UItextScript : MonoBehaviour
         count +=y;
         UpscoreText();
         UpcountText();
+        if (y>0)
+        {
+            cHScript.ChAdd(2);
+        }
     }
    public void UpscoreText()
     {
@@ -42,5 +47,7 @@ public class UItextScript : MonoBehaviour
   public  void UpcountText()
     {
         countText.text = $"ÉMÉmåÇîjêî:{count}";
+    
+
     }
 }
