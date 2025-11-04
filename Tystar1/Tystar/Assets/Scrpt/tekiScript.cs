@@ -51,20 +51,10 @@ public class tekiScript : MonoBehaviour
     }
     public void State()
     {
-      
-      
             switch (PlayerStateScript.CurrentState)
             {
                 case PlayerStateScript.PlayerState.GinoAttack:
                     GinoAttack();
-                    break;
-
-                case PlayerStateScript.PlayerState.BossAttack:
-                    BossAttack();
-                    break;
-
-                case PlayerStateScript.PlayerState.Defense:
-                    Defense();
                     break;
                case PlayerStateScript.PlayerState.None:
                     None();
@@ -88,7 +78,7 @@ public class tekiScript : MonoBehaviour
 
     void Update()
     {
-        State();
+       State();
         transform.LookAt(target.transform);
         transform.position += transform.forward * speed;
     }

@@ -15,57 +15,29 @@ public class PlayerStateScript : MonoBehaviour
     public enum PlayerState
     {
         None,
-        GinoAttack,
-        BossAttack,
-        Defense
+        GinoAttack
     }
     public static PlayerState CurrentState = PlayerState.None;
 
   void Start()
     {
-        Arrow0.SetActive(true);
+        Arrow0.SetActive(false);
         Arrow1.SetActive(false);
-        Arrow2.SetActive(false);
+        Arrow2.SetActive(true);
         Arrow3.SetActive(false);
+        CurrentState = PlayerState.GinoAttack;
     }
     void Update()
     {
-        if (playerA.PlayerHP <= 0)
+       
+            if (playerA.PlayerHP <= 0)
         {
             CurrentState = PlayerState.None;
             Arrow0.SetActive(true);
             Arrow1.SetActive(false);
             Arrow2.SetActive(false);
             Arrow3.SetActive(false);
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                CurrentState = PlayerState.Defense;
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(true);
-            }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                CurrentState = PlayerState.GinoAttack;
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(false);
-                Arrow2.SetActive(true);
-                Arrow3.SetActive(false);
-
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                CurrentState = PlayerState.BossAttack;
-                Arrow0.SetActive(false);
-                Arrow1.SetActive(true);
-                Arrow2.SetActive(false);
-                Arrow3.SetActive(false);
-            }
-
+      
         }
 
     }
