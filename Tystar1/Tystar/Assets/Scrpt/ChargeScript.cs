@@ -77,7 +77,7 @@ public class ChargeScript : MonoBehaviour
         //Debug.Log("currentCharge: " + currentCharge + " / MaxCharge: " + MaxCharge);
         //Debug.Log("appearScript: " + appearScript);
         select();
-        if (currentCharge >= MaxCharge )
+        if (currentCharge >= MaxCharge&&Input.GetKeyDown(KeyCode.Return) )
         {
             if (appearScript != null)
             {
