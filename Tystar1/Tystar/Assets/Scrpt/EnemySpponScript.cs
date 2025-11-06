@@ -26,6 +26,16 @@ public class EnemySpponScript : MonoBehaviour
     public int score=0;
     public UItextScript UItext;
 
+    private List<int[]> spawnPatterns = new List<int[]>()
+    {
+        new int[]{0,1,2,3},
+        new int[]{3,2,1,0},
+        new int[]{0,2,1,3},
+        new int[]{3,1,2,0},
+        new int[]{0,3,1,2},
+        new int[]{2,1,3,0},
+    };
+
     void Start()
     {
         StartCoroutine(SpawnWaveRoutine());
@@ -82,10 +92,15 @@ public class EnemySpponScript : MonoBehaviour
 
     private IEnumerator SpawnEnemiesWithDelay()
     {
-        for (int i = 0; i < spawnPoints.Length; i++)
+        //パターンランダム
+        int[] chosenPattern = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
+       //選ばれた順番にスポーン
+        foreach(int i in chosenPattern)
         {
             if (totalSpawned >= maxEnemies) yield break;
+            if(i>spawnPoints.Length) continue;
 
+            //敵にランダムに文字付与
             int index = Random.Range(0, Alphabet.Length);
             char letter = (char)('A' + index);
 
