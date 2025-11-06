@@ -17,12 +17,24 @@ public class EnemySpponScript : MonoBehaviour
     [SerializeField] int totalPhaes = 3;
     public BossScript boss;
 
+    private List<int> KillsThisFrame=new List<int>();
     private int totalSpawned = 0;
     private int totalDefeated = 0;
     private int currentWave = 1;
     private bool secondWaveSpawned = false;
     private bool isSpawning = false;//ウェーブの進行がどうか
+    public int score=0;
     public UItextScript UItext;
+
+    private List<int[]> spawnPatterns = new List<int[]>()
+    {
+        new int[]{0,1,2,3},
+        new int[]{3,2,1,0},
+        new int[]{0,2,1,3},
+        new int[]{3,1,2,0},
+        new int[]{0,3,1,2},
+        new int[]{2,1,3,0},
+    };
 
     void Start()
     {
@@ -38,6 +50,21 @@ public class EnemySpponScript : MonoBehaviour
             currentWave++;
             StartCoroutine(SpawnWaveRoutine());
         }
+        // 1フレーム中に複数撃破があったら同時撃破扱い
+        if (KillsThisFrame.Count > 0)
+        {
+            if (KillsThisFrame.Count >= 4)
+                SCORE(1.5f, 4);
+            else if (KillsThisFrame.Count == 3)
+                SCORE(1.25f, 3);
+            else if (KillsThisFrame.Count == 2)
+                SCORE(1.1f, 2);
+            else
+                SCORE(1f, 1);
+        }
+        //フレーム終了時にリセット
+        KillsThisFrame.Clear();
+        
         //if (!isSpawning && totalDefeated >= ginoMax)
         //{
         //  totalDefeated = 0;
@@ -65,10 +92,15 @@ public class EnemySpponScript : MonoBehaviour
 
     private IEnumerator SpawnEnemiesWithDelay()
     {
-        for (int i = 0; i < spawnPoints.Length; i++)
+        //パターンランダム
+        int[] chosenPattern = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
+       //選ばれた順番にスポーン
+        foreach(int i in chosenPattern)
         {
             if (totalSpawned >= maxEnemies) yield break;
+            if(i>spawnPoints.Length) continue;
 
+            //敵にランダムに文字付与
             int index = Random.Range(0, Alphabet.Length);
             char letter = (char)('A' + index);
 
@@ -92,11 +124,20 @@ public class EnemySpponScript : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenEnemies);
         }
     }
-
-    public void ReportEnemyDefeated()
+    //敵が死んだら呼ばれる
+    public void ReportEnemyDefeated(int baseScore)
     {
         totalDefeated++;
-        UItext.Count(100, 1);
-
+        KillsThisFrame.Add(baseScore);
+       
+    }
+    public void SCORE(float Multiple ,int Enemy)
+    {
+        int total = 0;
+        foreach(int s in KillsThisFrame)
+            total += s;
+        total=Mathf.RoundToInt(total*Multiple);
+        score += total;
+        UItext.Count(score, Enemy);
     }
 }

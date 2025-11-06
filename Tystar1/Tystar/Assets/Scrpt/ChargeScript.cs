@@ -81,11 +81,11 @@ public class ChargeScript : MonoBehaviour
         {
             if (appearScript != null)
             {
-                appearScript.ReportEnemyDefeated(); // ïÒçê
+                appearScript.ReportEnemyDefeated(100); // ïÒçê
             }
 
             Destroy(target);
-
+           
             currentCharge = 0f;
             UpdateGauge();
         }

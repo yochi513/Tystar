@@ -114,7 +114,6 @@ public class tekiScript : MonoBehaviour
     }
     void Defense()
     {
-       //Debug.Log("–³ŒøƒL[”½‰");
     }
     void None()
     {
