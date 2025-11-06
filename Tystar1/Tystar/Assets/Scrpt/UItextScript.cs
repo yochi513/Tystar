@@ -50,7 +50,5 @@ public class UItextScript : MonoBehaviour
   public  void UpcountText()
     {
         countText.text = $"ÉMÉmåÇîjêî:{count}";
-    
-
     }
 }

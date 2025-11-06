@@ -31,6 +31,14 @@ public class CHScript : MonoBehaviour
         {
             ch.fillAmount =Minch / Maxch;
         }
+       // Ae();
+    }
+    
+    //chゲージエンター長押しで減る
+    public void Ae()
+    {
+        if (Input.GetKey(KeyCode.Return))
+            Minch-=0.1f;
     }
 
 }
