@@ -893,6 +893,7 @@ MonoBehaviour:
   ginoMax: 10
   totalPhaes: 3
   boss: {fileID: 0}
+  score: 100
   UItext: {fileID: 850482671}
 --- !u!1 &317252779
 GameObject:
@@ -6652,7 +6653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 258ff13641cec564aa59c85442687d02, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.91
+      value: 4.17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 258ff13641cec564aa59c85442687d02, type: 3}
       propertyPath: m_LocalPosition.z

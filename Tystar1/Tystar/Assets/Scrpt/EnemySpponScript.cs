@@ -17,11 +17,13 @@ public class EnemySpponScript : MonoBehaviour
     [SerializeField] int totalPhaes = 3;
     public BossScript boss;
 
+    private List<int> KillsThisFrame=new List<int>();
     private int totalSpawned = 0;
     private int totalDefeated = 0;
     private int currentWave = 1;
     private bool secondWaveSpawned = false;
     private bool isSpawning = false;//ウェーブの進行がどうか
+    public int score=0;
     public UItextScript UItext;
 
     void Start()
@@ -38,6 +40,21 @@ public class EnemySpponScript : MonoBehaviour
             currentWave++;
             StartCoroutine(SpawnWaveRoutine());
         }
+        // 1フレーム中に複数撃破があったら同時撃破扱い
+        if (KillsThisFrame.Count > 0)
+        {
+            if (KillsThisFrame.Count >= 4)
+                SCORE(1.5f, 4);
+            else if (KillsThisFrame.Count == 3)
+                SCORE(1.25f, 3);
+            else if (KillsThisFrame.Count == 2)
+                SCORE(1.1f, 2);
+            else
+                SCORE(1f, 1);
+        }
+        //フレーム終了時にリセット
+        KillsThisFrame.Clear();
+        
         //if (!isSpawning && totalDefeated >= ginoMax)
         //{
         //  totalDefeated = 0;
@@ -92,11 +109,20 @@ public class EnemySpponScript : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenEnemies);
         }
     }
-
-    public void ReportEnemyDefeated()
+    //敵が死んだら呼ばれる
+    public void ReportEnemyDefeated(int baseScore)
     {
         totalDefeated++;
-        UItext.Count(100, 1);
-
+        KillsThisFrame.Add(baseScore);
+       
+    }
+    public void SCORE(float Multiple ,int Enemy)
+    {
+        int total = 0;
+        foreach(int s in KillsThisFrame)
+            total += s;
+        total=Mathf.RoundToInt(total*Multiple);
+        score += total;
+        UItext.Count(score, Enemy);
     }
 }
