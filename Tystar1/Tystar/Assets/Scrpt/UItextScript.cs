@@ -27,13 +27,7 @@ public class UItextScript : MonoBehaviour
         UpscoreText();
         UpcountText();
     }
-    public void SetCount(int newScore,int newCount)
-    {
-        score = newScore;
-        count = newCount;
-        UpscoreText();
-        UpcountText();
-    }
+
     public void Count(int x, int y)
     {
         score += x;

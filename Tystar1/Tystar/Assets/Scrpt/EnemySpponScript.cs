@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EnemySpponScript : MonoBehaviour
@@ -13,7 +12,6 @@ public class EnemySpponScript : MonoBehaviour
 
     [SerializeField] float timeBetweenEnemies = 0.5f;
     [SerializeField] float timeBetweenWaves = 10f;
-    [SerializeField] int stopGinoCount = 11;
 
     [SerializeField] int ginoMax = 10;
     [SerializeField] int totalPhaes = 3;
@@ -22,14 +20,10 @@ public class EnemySpponScript : MonoBehaviour
     private List<int> KillsThisFrame=new List<int>();
     private int totalSpawned = 0;
     private int totalDefeated = 0;
-    private int totalGinoCount = 0;
-    private int totalGinoMax = 0;
-    private int totalScore = 0;
     private int currentWave = 1;
     private bool secondWaveSpawned = false;
-    private bool canSpawn = true;
     private bool isSpawning = false;//ウェーブの進行がどうか
-    public  int score=0;
+    public int score=0;
     public UItextScript UItext;
 
     private List<int[]> spawnPatterns = new List<int[]>()
@@ -44,27 +38,9 @@ public class EnemySpponScript : MonoBehaviour
 
     void Start()
     {
-        if (staticScript.ReturnedFromBoss)
-        {
-            // Bossから戻ってきた場合だけスポーン再開
-            staticScript.ReturnedFromBoss = false; // フラグリセット
-                                                  
-            score = staticScript.SaveScore;
-            totalGinoCount = staticScript.SaveKillCount;
-
-            UItext.SetCount(score, totalGinoCount);
-            ResumeSpawn();
-        }
-        else
-        {
-            // シーン開始時は通常のスポーン
-            StartCoroutine(SpawnWaveRoutine());
-            score = 0;
-            totalGinoCount = 0;
-            
-        }
+        StartCoroutine(SpawnWaveRoutine());
+        //boss.EnableAttack(false);
     }
-
 
     void Update()
     {
@@ -106,10 +82,8 @@ public class EnemySpponScript : MonoBehaviour
 
     private IEnumerator SpawnWaveRoutine()
     {
-        if (!canSpawn) yield break;
-            isSpawning = true;
-        
-         yield return StartCoroutine(SpawnEnemiesWithDelay()); 
+        isSpawning = true;
+        yield return StartCoroutine(SpawnEnemiesWithDelay());
         yield return new WaitForSeconds(timeBetweenWaves);
         isSpawning = false;
 
@@ -124,7 +98,7 @@ public class EnemySpponScript : MonoBehaviour
         foreach(int i in chosenPattern)
         {
             if (totalSpawned >= maxEnemies) yield break;
-            if(i>=spawnPoints.Length) continue;
+            if(i>spawnPoints.Length) continue;
 
             //敵にランダムに文字付与
             int index = Random.Range(0, Alphabet.Length);
@@ -153,44 +127,9 @@ public class EnemySpponScript : MonoBehaviour
     //敵が死んだら呼ばれる
     public void ReportEnemyDefeated(int baseScore)
     {
-        totalGinoMax++;
-        totalGinoCount++;
         totalDefeated++;
         KillsThisFrame.Add(baseScore);
-        //if (totalDefeated >= stopGinoCount)
-        // {
-        //     canSpawn = false;
-        //     staticScript.LastSceneName = SceneManager.GetActiveScene().name;
-        //     SceneManager.LoadScene("BossScene");
-        // }
-        if (totalGinoMax >= stopGinoCount)
-        {
-            Debug.Log($"規定数到達: {totalGinoMax}/{stopGinoCount}");
-            canSpawn = false;
-            StartCoroutine ( WaitAndGoBoss());
-        }
-    }
-    private IEnumerator WaitAndGoBoss()
-    {
-        yield return new WaitForSeconds(0.5f);
-        staticScript.LastSceneName = SceneManager.GetActiveScene().name;
-        staticScript.SaveScore = totalScore;
-        staticScript.SavePlayerHP = GameObject.FindWithTag("Player")
-            ?.GetComponent<Playerscrpt>()?.GetCurrentHP() ?? 0;
-        staticScript.SaveKillCount = totalGinoCount;
-
-        staticScript.ReturnedFromBoss = true;
-        Debug.Log("BossSceneに移動します");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("BossScene");
-    }
-
-
-
-    public void ResumeSpawn()
-    {
-        canSpawn = true;
-        totalDefeated = 0;
-        StartCoroutine(SpawnWaveRoutine());
+       
     }
     public void SCORE(float Multiple ,int Enemy)
     {
@@ -200,6 +139,5 @@ public class EnemySpponScript : MonoBehaviour
         total=Mathf.RoundToInt(total*Multiple);
         score += total;
         UItext.Count(score, Enemy);
-        totalScore += score;
     }
 }

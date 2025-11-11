@@ -480,13 +480,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105306045}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89565dfe2dd1c94b8418b8e3c458091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 6000
-  bossTime: 5
 --- !u!1001 &122782859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -891,11 +890,10 @@ MonoBehaviour:
   maxEnemies: 100
   timeBetweenEnemies: 0.5
   timeBetweenWaves: 4
-  stopGinoCount: 11
   ginoMax: 10
   totalPhaes: 3
   boss: {fileID: 0}
-  score: 0
+  score: 100
   UItext: {fileID: 850482671}
 --- !u!1 &317252779
 GameObject:
@@ -1115,10 +1113,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 44
+    m_FontSize: 42
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 1
+    m_MinSize: 10
     m_MaxSize: 46
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -3109,7 +3107,6 @@ GameObject:
   - component: {fileID: 850482671}
   - component: {fileID: 850482672}
   - component: {fileID: 850482673}
-  - component: {fileID: 850482674}
   m_Layer: 0
   m_Name: "\u7BA1\u7406\u30D5\u30A1\u30A4\u30EB"
   m_TagString: Untagged
@@ -3186,13 +3183,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850482667}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89565dfe2dd1c94b8418b8e3c458091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
-  bossTime: 5
 --- !u!114 &850482673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3206,18 +3202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch: {fileID: 163593677}
---- !u!114 &850482674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850482667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8462f56f3d4ef1e4ab7de2a3559a295f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &861300639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b64687de47564344baa45b99b69bf7ef, type: 3}
