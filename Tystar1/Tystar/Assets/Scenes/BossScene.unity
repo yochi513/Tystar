@@ -2379,6 +2379,8 @@ GameObject:
   - component: {fileID: 1350687299}
   - component: {fileID: 1350687298}
   - component: {fileID: 1350687297}
+  - component: {fileID: 1350687303}
+  - component: {fileID: 1350687304}
   m_Layer: 0
   m_Name: "\u7BA1\u7406\u30D5\u30A1\u30A4\u30EB"
   m_TagString: Untagged
@@ -2412,6 +2414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 5000
+  bossTime: 5
 --- !u!114 &1350687299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2474,6 +2477,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1350687303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350687296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89565dfe2dd1c94b8418b8e3c458091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 10
+  bossTime: 5
+--- !u!114 &1350687304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350687296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8462f56f3d4ef1e4ab7de2a3559a295f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1411527655
 GameObject:
   m_ObjectHideFlags: 0
