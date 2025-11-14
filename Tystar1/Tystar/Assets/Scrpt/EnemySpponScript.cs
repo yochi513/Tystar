@@ -13,7 +13,7 @@ public class EnemySpponScript : MonoBehaviour
 
     [SerializeField] float timeBetweenEnemies = 0.5f;
     [SerializeField] float timeBetweenWaves = 10f;
-    [SerializeField] int stopGinoCount = 11;
+
 
     [SerializeField] int ginoMax = 10;
     [SerializeField] int totalPhaes = 3;
@@ -26,6 +26,7 @@ public class EnemySpponScript : MonoBehaviour
     private int totalGinoMax = 0;
     private int totalScore = 0;
     private int currentWave = 1;
+    private int stopGinoCount = 11;
     private bool secondWaveSpawned = false;
     private bool canSpawn = true;
     private bool isSpawning = false;//ウェーブの進行がどうか
@@ -51,8 +52,9 @@ public class EnemySpponScript : MonoBehaviour
 
             score = staticScript.SaveScore;
             totalGinoCount = staticScript.SaveKillCount;
-
+            stopGinoCount = staticScript.SaveMaxGino;
             UItext.SetCount(score, totalGinoCount);
+            stopGinoCount += 2;
             ResumeSpawn();
         }
         else
@@ -159,7 +161,7 @@ public class EnemySpponScript : MonoBehaviour
         staticScript.SavePlayerHP = GameObject.FindWithTag("Player")
             ?.GetComponent<Playerscrpt>()?.GetCurrentHP() ?? 0;
         staticScript.SaveKillCount = totalGinoCount;
-
+        staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
         Debug.Log("BossSceneに移動します");
         UnityEngine.SceneManagement.SceneManager.LoadScene("BossScene");

@@ -9,4 +9,5 @@ public class staticScript : MonoBehaviour
     public static int SavePlayerHP;
     public static bool ReturnedFromBoss = false;
     public static int SaveKillCount;
+    public static int SaveMaxGino;
 }
