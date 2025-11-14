@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Playerscrpt : MonoBehaviour
 {
-   
+    private int currentHP = 6;
     public int PlayerHP = 3;
     public bool isInvincible = false;
     public float invincibleTime = 1.5f;
@@ -12,7 +12,7 @@ public class Playerscrpt : MonoBehaviour
     [SerializeField] Canvas Gameover;
     [SerializeField] Canvas MainCanvas;
 
-     void Start()
+    void Start()
     {
         Gameover.gameObject.SetActive(false);
         MainCanvas.gameObject.SetActive(true);
@@ -20,8 +20,18 @@ public class Playerscrpt : MonoBehaviour
 
     void Update()
     {
-  
 
+
+    }
+
+
+    public int GetCurrentHP()
+    {
+        return currentHP;
+    }
+    public void SetHP(int hp)
+    {
+        currentHP = hp;
     }
     public void TakeDamage(int damage)
     {
@@ -43,9 +53,9 @@ public class Playerscrpt : MonoBehaviour
     }
     public void GameOVER()
     {
-            //Debug.Log("プレイヤーが倒れた");
-            Gameover.gameObject.SetActive(true);
-            MainCanvas.gameObject.SetActive(false);
+        //Debug.Log("プレイヤーが倒れた");
+        Gameover.gameObject.SetActive(true);
+        MainCanvas.gameObject.SetActive(false);
     }
 
 }
