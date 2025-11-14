@@ -22,10 +22,12 @@ public class tekiScript : MonoBehaviour
 
     public enum SPEED
     {
+        Zero=0,
         One=1,
         Two = 2,
         Three = 3,
         Four = 4,
+        Five = 5,
     }
 
 
@@ -44,11 +46,20 @@ public class tekiScript : MonoBehaviour
         {
             speed = 0.15f;
         }
-        else if(speedtime == SPEED.Four)
+        else if (speedtime == SPEED.Four)
         {
             speed = 0.2f;
         }
+        else if (speedtime == SPEED.Five)
+        {
+            speed = 0.9f;
+        }
+        else if (speedtime == SPEED.Zero)
+        {
+            speed = 0.01f;
+        }
     }
+
     public void State()
     {
             switch (PlayerStateScript.CurrentState)

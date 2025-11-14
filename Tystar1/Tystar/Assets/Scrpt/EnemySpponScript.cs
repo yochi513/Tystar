@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EnemySpponScript : MonoBehaviour
 {
-    [SerializeField] GameObject Gino;
+    [SerializeField] List<GameObject> enemyList= new List<GameObject>();
     [SerializeField] Sprite[] Alphabet;
     [SerializeField] Transform[] spawnPoints;
     [SerializeField] int maxEnemies = 100;
@@ -106,11 +106,14 @@ public class EnemySpponScript : MonoBehaviour
 
     private IEnumerator SpawnEnemiesWithDelay()
     {
+
+
         //パターンランダム
         int[] chosenPattern = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
         //選ばれた順番にスポーン
         foreach (int i in chosenPattern)
         {
+            GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
             if (totalSpawned >= maxEnemies) yield break;
             if (i >= spawnPoints.Length) continue;
 
@@ -118,7 +121,7 @@ public class EnemySpponScript : MonoBehaviour
             int index = Random.Range(0, Alphabet.Length);
             char letter = (char)('A' + index);
 
-            GameObject enemy = Instantiate(Gino, spawnPoints[i].position, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity);
             var script = enemy.GetComponent<tekiScript>();
 
             if (script != null)

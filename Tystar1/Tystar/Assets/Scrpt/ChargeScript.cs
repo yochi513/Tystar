@@ -13,12 +13,15 @@ public class ChargeScript : MonoBehaviour
 
 
     public enum Selection
-    {
+    { 
+        Zero=0,
+        One=1,
         Two=2,
         Three = 3,
         Four = 4,
-        Five = 5
-
+        Five = 5,
+        Six=6,
+        Seven =7
     }
 
     public Selection Chargetime = Selection.Three;
@@ -39,6 +42,22 @@ public class ChargeScript : MonoBehaviour
         else if (Chargetime == Selection.Five)
         {
             MaxCharge = 250f;
+        }
+        else if (Chargetime == Selection.Six)
+        {
+            MaxCharge = 350f;
+        }
+        else if (Chargetime == Selection.Seven)
+        {
+            MaxCharge = 500f;
+        }
+        else if (Chargetime == Selection.One)
+        {
+            MaxCharge =50f;
+        }
+        else if (Chargetime == Selection.Zero)
+        {
+            MaxCharge = 1f;
         }
 
     }
@@ -94,8 +113,10 @@ public class ChargeScript : MonoBehaviour
 
 
 }
-
+//10•b=500F
 //300f‚Å6•b‚­‚ç‚¢
 //250f‚Å5•b‚­‚ç‚¢
 //200f‚Å4•b‚­‚ç‚¢
 //150f‚Å3•b‚­‚ç‚¢
+//100f‚Å2•b‚­‚ç‚¢
+//50f ‚Å1•b‚­‚ç‚¢
