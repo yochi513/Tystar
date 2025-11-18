@@ -16,18 +16,15 @@ public class tekiScript : MonoBehaviour
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
 
-
     private Renderer rend;
    // private TextMeshPro textDisplay;
 
     public enum SPEED
     {
-        Zero=0,
         One=1,
         Two = 2,
         Three = 3,
         Four = 4,
-        Five = 5,
     }
 
 
@@ -46,32 +43,27 @@ public class tekiScript : MonoBehaviour
         {
             speed = 0.15f;
         }
-        else if (speedtime == SPEED.Four)
+        else if(speedtime == SPEED.Four)
         {
             speed = 0.2f;
         }
-        else if (speedtime == SPEED.Five)
-        {
-            speed = 0.9f;
-        }
-        else if (speedtime == SPEED.Zero)
-        {
-            speed = 0.01f;
-        }
     }
-
     public void State()
     {
-            switch (PlayerStateScript.CurrentState)
-            {
-                case PlayerStateScript.PlayerState.GinoAttack:
-                    GinoAttack();
-                    break;
-               case PlayerStateScript.PlayerState.None:
-                    None();
-                    break;
+        switch (PlayerStateScript.CurrentState)
+        {
+           case PlayerStateScript.PlayerState.GinoAttack:
+                GinoAttack();
+                break;
+
+           case PlayerStateScript.PlayerState.BossAttack:
+                BossAttack(); 
+                break;
+
+           case PlayerStateScript.PlayerState.Defense: 
+                Defense();
+                break;
         }
-        
     }
 
     void Start()
@@ -89,7 +81,7 @@ public class tekiScript : MonoBehaviour
 
     void Update()
     {
-       State();
+        State();
         transform.LookAt(target.transform);
         transform.position += transform.forward * speed;
     }
@@ -121,15 +113,10 @@ public class tekiScript : MonoBehaviour
     }
     void BossAttack()
     {
-      //  Debug.Log("ボスキー反応");
+        Debug.Log("ボスキー反応");
     }
     void Defense()
     {
+        Debug.Log("防御キー反応");
     }
-    void None()
-    {
-       // Debug.Log("無効キー反応");
-    }
-
-
 }

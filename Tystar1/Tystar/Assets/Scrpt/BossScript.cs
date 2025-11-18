@@ -1,37 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
     public float HP = 10;
-    [SerializeField] float bossTime = 5f;
-
+    private bool canAttack = false;
+    public bool IsAttacked { get; private set; } = false;
 
     void Start()
     {
-        StartCoroutine(BossTimer());
+       
     }
     // Update is called once per frame
     void Update()
     {
-
-
+       // bossManager();
     }
-
-    private IEnumerator BossTimer()
+    void bossManager()
     {
-        yield return new WaitForSeconds(bossTime);
-        if (!string.IsNullOrEmpty(staticScript.LastSceneName))
+        HP--;
+        if (HP == 0)
         {
-            Debug.Log("Boss戦終了！元のシーンに戻ります");
-            SceneManager.LoadScene(staticScript.LastSceneName);
-        }
-        else
-        {
-            Debug.LogWarning("戻るシーン情報がありません");
+            Destroy(gameObject);
         }
     }
-
+    public void EnableAttack(bool enable)
+    {
+        canAttack = enable;
+        IsAttacked = false;
+       
+    }
+    void OnMouseDown()
+    {
+        if (canAttack)
+        {
+          
+            IsAttacked = true;
+        }
+    }
 }

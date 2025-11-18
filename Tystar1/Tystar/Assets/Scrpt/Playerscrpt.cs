@@ -4,58 +4,30 @@ using UnityEngine;
 
 public class Playerscrpt : MonoBehaviour
 {
-    private int currentHP = 6;
-    public int PlayerHP = 3;
-    public bool isInvincible = false;
-    public float invincibleTime = 1.5f;
-
+    // 移動速度と回転速度を設定
+   // public float moveSpeed = 5f;
+    //public float rotationSpeed = 100f;
+    public int PlayerHP = 1;
     [SerializeField] Canvas Gameover;
-    [SerializeField] Canvas MainCanvas;
-
-    void Start()
+     void Start()
     {
-        Gameover.gameObject.SetActive(false);
-        MainCanvas.gameObject.SetActive(true);
+        Gameover.gameObject.SetActive(false);    
     }
 
     void Update()
     {
+  
 
-
-    }
-
-
-    public int GetCurrentHP()
-    {
-        return currentHP;
-    }
-    public void SetHP(int hp)
-    {
-        currentHP = hp;
     }
     public void TakeDamage(int damage)
     {
-        if (isInvincible) return;
-
         PlayerHP -= damage;
 
-        StartCoroutine(InvincibleCoroutine());
         if (PlayerHP <= 0)
         {
-            GameOVER();
+            Debug.Log("プレイヤーが倒れた");
+            Gameover.gameObject.SetActive(true);
+            // ゲームオーバー処理など
         }
     }
-    IEnumerator InvincibleCoroutine()
-    {
-        isInvincible = true; // 無敵ON
-        yield return new WaitForSeconds(invincibleTime); // 決めた時間待つ
-        isInvincible = false; // 無敵OFF
-    }
-    public void GameOVER()
-    {
-        //Debug.Log("プレイヤーが倒れた");
-        Gameover.gameObject.SetActive(true);
-        MainCanvas.gameObject.SetActive(false);
-    }
-
 }
