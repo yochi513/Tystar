@@ -1,0 +1,304 @@
+fileFormatVersion: 2
+guid: 9d17b02ca3064b54eba63de557ab43eb
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BOX_02
+    second: {fileID: 2100000, guid: 2d5df4f79195739468f6af7c6e2a9b31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_02
+    second: {fileID: 2100000, guid: 39a4e688cd729d54bb247c11bc3fbc1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_03
+    second: {fileID: 2100000, guid: 9d50b853b4b921046995ecf46f428b12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_04
+    second: {fileID: 2100000, guid: 320488ce3f8ccdd4ca17cb8a9422d04e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_05
+    second: {fileID: 2100000, guid: a3975fb642d22674d82692d58391da32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_06
+    second: {fileID: 2100000, guid: a93549467557faa42a61b916523d6389, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_07
+    second: {fileID: 2100000, guid: 6a0c12a87a43ed545a28359ecb146e11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_08
+    second: {fileID: 2100000, guid: f5df5c01fc90f504e9395d299228e8ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_09
+    second: {fileID: 2100000, guid: 59330a00de3db3141b8312959afa3956, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_1
+    second: {fileID: 2100000, guid: 5ffbb5b4376cadb4d9e3bb83a09513c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_10
+    second: {fileID: 2100000, guid: 3e34cffa3ff650448b82aa09799308d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EYE1
+    second: {fileID: 2100000, guid: 374b3100d61a38949ba9987980b8a121, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GANKYUU
+    second: {fileID: 2100000, guid: 4cca7e2d837df1c4c9c148d7ccba916d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GANMEN1
+    second: {fileID: 2100000, guid: 87380404970264d49b2723970c883fe4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GAREKI
+    second: {fileID: 2100000, guid: ca4bc107d41f82848a39361164cf5f79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HAKO_01
+    second: {fileID: 2100000, guid: 4bb4340425701b94192879456da927ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HAKO_02
+    second: {fileID: 2100000, guid: abdd1c0cf9dda51428d84463372cdd62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HANDLE1
+    second: {fileID: 2100000, guid: 6cf1f6fc93475de429ce2e174c0ec169, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HONTAI1
+    second: {fileID: 2100000, guid: afc63d45057bd6d44bf0e51f882c5a26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KOTE
+    second: {fileID: 2100000, guid: 6a419b34a3af71d48840901fe9dd6f0b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Little_Box_01
+    second: {fileID: 2100000, guid: eda213528501c05499165a6f45ee0a45, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Little_Box_02
+    second: {fileID: 2100000, guid: 049bda072f19cc34a8900a6df4393b2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NINOUDE
+    second: {fileID: 2100000, guid: 3d272cc53af3e584e9bfcecb1a498804, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PIPE_01
+    second: {fileID: 2100000, guid: 81f67390fd586b04791afa4e1e27ffa5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PIPE_02
+    second: {fileID: 2100000, guid: cc2796ae8872a834696c9a9d7d21def1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SENAKA1
+    second: {fileID: 2100000, guid: 095f89ded18227b469ff3f98f738aa80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TE
+    second: {fileID: 2100000, guid: 2b0620f81a8215440977e651422a126c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_01
+    second: {fileID: 2100000, guid: acb0d6621bb2b1e41b6662f8f0002cdf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_02
+    second: {fileID: 2100000, guid: e433372b696d8d3469ec5a312b40ad8d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_03
+    second: {fileID: 2100000, guid: 3e7bb3b79e513684b99fe752d5a8773a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_04
+    second: {fileID: 2100000, guid: 58b79324ab4f87a41b8c561d2ba419bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_05
+    second: {fileID: 2100000, guid: 0bd7d3ea1488fb145a1d9884e3cda0bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_06
+    second: {fileID: 2100000, guid: 7325516e13496bb479dd207ca8d29f6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_07
+    second: {fileID: 2100000, guid: 89b79dc2bc0a804489d567ae4235a079, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_08
+    second: {fileID: 2100000, guid: 5629718a97bf47b46806359079f6164b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_09
+    second: {fileID: 2100000, guid: 25cb542b38595624fae8657c9093de51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_10
+    second: {fileID: 2100000, guid: 8ef8ced30620814429bf96d85c2c1d8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_11
+    second: {fileID: 2100000, guid: 72ba26951477fb3408152dd20ad68c8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_12
+    second: {fileID: 2100000, guid: fa1367917e2a22f478fb98caa33088b0, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 0
+    importPhysicalCameras: 1
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 1
+    preserveHierarchy: 1
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
