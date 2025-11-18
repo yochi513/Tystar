@@ -12,33 +12,33 @@ public class CHScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Minch=Mathf.Clamp(Minch, 0, Maxch);
+        Minch = Mathf.Clamp(Minch, 0, Maxch);
         UpdateCh();
     }
     public void ChAdd(float point)
     {
-        Minch +=point;
+        Minch += point;
     }
     private void UpdateCh()
     {
         if (ch != null)
         {
-            ch.fillAmount =Minch / Maxch;
+            ch.fillAmount = Minch / Maxch;
         }
-       // Ae();
+        // Ae();
     }
-    
+
     //chゲージエンター長押しで減る
     public void Ae()
     {
         if (Input.GetKey(KeyCode.Return))
-            Minch-=0.1f;
+            Minch -= 0.1f;
     }
 
 }

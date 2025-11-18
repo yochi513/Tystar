@@ -16,19 +16,22 @@ public class tekiScript : MonoBehaviour
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
 
+
     private Renderer rend;
-   // private TextMeshPro textDisplay;
+    // private TextMeshPro textDisplay;
 
     public enum SPEED
     {
-        One=1,
+        Zero = 0,
+        One = 1,
         Two = 2,
         Three = 3,
         Four = 4,
+        Five = 5,
     }
 
 
-    public SPEED speedtime =SPEED.One;
+    public SPEED speedtime = SPEED.One;
     public void Speed()
     {
         if (speedtime == SPEED.One)
@@ -43,32 +46,37 @@ public class tekiScript : MonoBehaviour
         {
             speed = 0.15f;
         }
-        else if(speedtime == SPEED.Four)
+        else if (speedtime == SPEED.Four)
         {
             speed = 0.2f;
         }
+        else if (speedtime == SPEED.Five)
+        {
+            speed = 0.9f;
+        }
+        else if (speedtime == SPEED.Zero)
+        {
+            speed = 0.01f;
+        }
     }
+
     public void State()
     {
         switch (PlayerStateScript.CurrentState)
         {
-           case PlayerStateScript.PlayerState.GinoAttack:
+            case PlayerStateScript.PlayerState.GinoAttack:
                 GinoAttack();
                 break;
-
-           case PlayerStateScript.PlayerState.BossAttack:
-                BossAttack(); 
-                break;
-
-           case PlayerStateScript.PlayerState.Defense: 
-                Defense();
+            case PlayerStateScript.PlayerState.None:
+                None();
                 break;
         }
+
     }
 
     void Start()
     {
-    
+
         Speed();
         target = GameObject.FindGameObjectWithTag("Player");
         rend = GetComponent<Renderer>();
@@ -100,7 +108,7 @@ public class tekiScript : MonoBehaviour
 
     void GinoAttack()
     {
-      //  Debug.Log("ギノキー反応");
+        //  Debug.Log("ギノキー反応");
         if (Input.GetKey(assignedKey))//キー入力を受付してる
         {
             charge.Tystar(+1);
@@ -113,10 +121,15 @@ public class tekiScript : MonoBehaviour
     }
     void BossAttack()
     {
-        Debug.Log("ボスキー反応");
+        //  Debug.Log("ボスキー反応");
     }
     void Defense()
     {
-        Debug.Log("防御キー反応");
     }
+    void None()
+    {
+        // Debug.Log("無効キー反応");
+    }
+
+
 }

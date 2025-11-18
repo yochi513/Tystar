@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 6000
+  bossTime: 5
 --- !u!1 &119485690
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,7 +1079,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a126fa20ccb70d54d85e5cfd5b09bd05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gino: {fileID: 8327208857501706176, guid: 3aa816c9c66ea664e935f30ffe9fe837, type: 3}
+  enemyList:
+  - {fileID: 8327208857501706176, guid: 3aa816c9c66ea664e935f30ffe9fe837, type: 3}
+  - {fileID: 8327208857501706176, guid: 3aa816c9c66ea664e935f30ffe9fe837, type: 3}
+  - {fileID: 8327208857501706176, guid: 3aa816c9c66ea664e935f30ffe9fe837, type: 3}
+  - {fileID: 6396855996680266895, guid: bc46b0d155817a34b9eb68e4cbd7c08a, type: 3}
   Alphabet:
   - {fileID: 21300000, guid: c719f23c59193cb4cb213fa5c77c1df9, type: 3}
   - {fileID: 21300000, guid: 6c2e3453b79ae0b428c598f35174d20d, type: 3}
@@ -1117,6 +1122,7 @@ MonoBehaviour:
   ginoMax: 10
   totalPhaes: 3
   boss: {fileID: 0}
+  score: 0
   UItext: {fileID: 850482671}
 --- !u!1 &317252779
 GameObject:
@@ -3251,8 +3257,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82e919b637f3ef4bbd3c9e0baf575b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHP: 1
+  PlayerHP: 6
+  isInvincible: 0
+  invincibleTime: 1.5
   Gameover: {fileID: 766531841}
+  MainCanvas: {fileID: 1733397057}
 --- !u!1 &806351173
 GameObject:
   m_ObjectHideFlags: 0
@@ -3641,6 +3650,7 @@ MonoBehaviour:
   Arrow1: {fileID: 843688568}
   Arrow2: {fileID: 1200221590}
   Arrow3: {fileID: 813956601}
+  playerA: {fileID: 788611321}
 --- !u!114 &850482671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3655,6 +3665,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 393148438}
   countText: {fileID: 806351175}
+  SCOREText: {fileID: 1362757862}
+  cHScript: {fileID: 850482673}
 --- !u!114 &850482672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3668,6 +3680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
+  bossTime: 5
 --- !u!114 &850482673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6210,7 +6223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerHP: 1
+  isInvincible: 0
+  invincibleTime: 1.5
   Gameover: {fileID: 766531841}
+  MainCanvas: {fileID: 0}
 --- !u!54 &1430560778
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -8,17 +8,20 @@ public class ChargeScript : MonoBehaviour
 {
 
     [SerializeField] Image Char;
-  private float MaxCharge = 500f;
+    private float MaxCharge = 500f;
     private float currentCharge = 0f;
 
 
     public enum Selection
     {
-        Two=2,
+        Zero = 0,
+        One = 1,
+        Two = 2,
         Three = 3,
         Four = 4,
-        Five = 5
-
+        Five = 5,
+        Six = 6,
+        Seven = 7
     }
 
     public Selection Chargetime = Selection.Three;
@@ -40,6 +43,22 @@ public class ChargeScript : MonoBehaviour
         {
             MaxCharge = 250f;
         }
+        else if (Chargetime == Selection.Six)
+        {
+            MaxCharge = 350f;
+        }
+        else if (Chargetime == Selection.Seven)
+        {
+            MaxCharge = 500f;
+        }
+        else if (Chargetime == Selection.One)
+        {
+            MaxCharge = 50f;
+        }
+        else if (Chargetime == Selection.Zero)
+        {
+            MaxCharge = 1f;
+        }
 
     }
 
@@ -47,9 +66,9 @@ public class ChargeScript : MonoBehaviour
     public void Tystar(int amount)
     {
         select();
-        if (amount == 1) 
+        if (amount == 1)
         {
-            currentCharge ++; 
+            currentCharge++;
         }
         else
         {
@@ -58,7 +77,7 @@ public class ChargeScript : MonoBehaviour
         currentCharge = Mathf.Clamp(currentCharge, 0, MaxCharge);
         UpdateGauge();
     }
-  
+
 
     // UIXV
     private void UpdateGauge()
@@ -77,11 +96,11 @@ public class ChargeScript : MonoBehaviour
         //Debug.Log("currentCharge: " + currentCharge + " / MaxCharge: " + MaxCharge);
         //Debug.Log("appearScript: " + appearScript);
         select();
-        if (currentCharge >= MaxCharge )
+        if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return))
         {
             if (appearScript != null)
             {
-                appearScript.ReportEnemyDefeated(); // •ñ
+                appearScript.ReportEnemyDefeated(100); // •ñ
             }
 
             Destroy(target);
@@ -89,13 +108,15 @@ public class ChargeScript : MonoBehaviour
             currentCharge = 0f;
             UpdateGauge();
         }
-      
+
     }
 
 
 }
-
+//10•b=500F
 //300f‚Å6•b‚­‚ç‚¢
 //250f‚Å5•b‚­‚ç‚¢
 //200f‚Å4•b‚­‚ç‚¢
 //150f‚Å3•b‚­‚ç‚¢
+//100f‚Å2•b‚­‚ç‚¢
+//50f ‚Å1•b‚­‚ç‚¢
