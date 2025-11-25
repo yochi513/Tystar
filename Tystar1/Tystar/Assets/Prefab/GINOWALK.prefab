@@ -504,7 +504,7 @@ MonoBehaviour:
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 1
+  speedtime: 3
 --- !u!95 &704391207264150154
 Animator:
   serializedVersion: 5
