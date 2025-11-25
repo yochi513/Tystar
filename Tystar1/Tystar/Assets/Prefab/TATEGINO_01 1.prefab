@@ -493,4 +493,7 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 8872423486280203500}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
