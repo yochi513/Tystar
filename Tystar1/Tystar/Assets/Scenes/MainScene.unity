@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13040188, g: 0.09601609, b: 0.061815403, a: 1}
+  m_IndirectSpecularColor: {r: 0.13040084, g: 0.09601555, b: 0.06181498, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -925,6 +925,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 191440762}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &191440762
 MonoBehaviour:
@@ -3722,6 +3725,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 861300642}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &861300642
 MonoBehaviour:
@@ -3982,6 +3988,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 956508816}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &956508816
 MonoBehaviour:
@@ -7256,6 +7265,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 1838624067}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &1838624067
 MonoBehaviour:
@@ -7780,6 +7792,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 1964811692}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!1 &1988299907
 GameObject:
@@ -11530,8 +11545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c5bd7ac943924b8d21a987aaf9042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragdollprefab: {fileID: 5245391434147142565, guid: 9666dd9b503135440a8f099b1b12c3f2, type: 3}
-  originalRootBone: {fileID: 5291370172817629737}
 --- !u!4 &5597725738878779809
 Transform:
   m_ObjectHideFlags: 0
