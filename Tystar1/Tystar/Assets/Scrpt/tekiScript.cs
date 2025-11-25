@@ -18,6 +18,14 @@ public class tekiScript : MonoBehaviour
 
 
     private Renderer rend;
+
+    //= ここから追加 ==========
+    [Header("エフェクト設定")]
+    [SerializeField] private GameObject defeatEffectPrefab;
+    [SerializeField] private GameObject collisionEffectPrefab;
+    [SerializeField] private float effectDuration = 2f;
+    //ここまで追加
+
     // private TextMeshPro textDisplay;
 
     public enum SPEED

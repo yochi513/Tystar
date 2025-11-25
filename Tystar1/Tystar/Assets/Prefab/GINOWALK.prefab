@@ -501,7 +501,7 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 6386320751065638121}
   AppEnemy: {fileID: 0}
-  speedtime: 2
+  speedtime: 1
 --- !u!95 &704391207264150154
 Animator:
   serializedVersion: 5
