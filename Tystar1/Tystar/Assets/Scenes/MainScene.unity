@@ -925,6 +925,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 191440762}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &191440762
 MonoBehaviour:
@@ -3722,6 +3725,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 861300642}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &861300642
 MonoBehaviour:
@@ -3982,6 +3988,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 956508816}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &956508816
 MonoBehaviour:
@@ -6570,91 +6579,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479001935}
   m_CullTransparentMesh: 1
---- !u!1001 &1586389858
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Name
-      value: WFX_ExplosiveSmokeGround Big
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.2943573
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 30.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900000, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900002, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900004, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900006, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900010, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900012, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
 --- !u!1001 &1608633921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7341,6 +7265,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 1838624067}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!114 &1838624067
 MonoBehaviour:
@@ -7865,6 +7792,9 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 1964811692}
   AppEnemy: {fileID: 0}
+  defeatEffectPrefab: {fileID: 0}
+  collisionEffectPrefab: {fileID: 0}
+  effectDuration: 2
   speedtime: 1
 --- !u!1 &1988299907
 GameObject:
@@ -11615,8 +11545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4c5bd7ac943924b8d21a987aaf9042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ragdollprefab: {fileID: 5245391434147142565, guid: 9666dd9b503135440a8f099b1b12c3f2, type: 3}
-  originalRootBone: {fileID: 5291370172817629737}
 --- !u!4 &5597725738878779809
 Transform:
   m_ObjectHideFlags: 0
@@ -13873,4 +13801,3 @@ SceneRoots:
   - {fileID: 8507597973802001969}
   - {fileID: 4745995}
   - {fileID: 543450651920470969}
-  - {fileID: 1586389858}
