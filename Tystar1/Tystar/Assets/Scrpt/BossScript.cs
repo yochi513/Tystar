@@ -7,6 +7,7 @@ public class BossScript : MonoBehaviour
 {
     public float HP = 10;
     [SerializeField] float bossTime = 5f;
+    [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1消費ごとのダメージ量
 
 
     void Start()
@@ -16,8 +17,38 @@ public class BossScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckBossDamage(); //   るい追加
+    }
 
+    
+    private void CheckBossDamage()//るい追加 
+    {
+        // ボスフェーズかつエンターキー長押し中
+        if (PlayerStateScript.CurrentState == PlayerStateScript.PlayerState.BossAttack
+            && Input.GetKey(KeyCode.Return))
+        {
+            // CHゲージが残っている場合のみダメージ
+            if (staticScript.SaveCh > 0)
+            {
+                // 1フレームあたりのダメージ
+                float damage = damagePerCharge;
+                HP -= damage;
 
+                // HPが0以下になったら倒す
+                if (HP <= 0)
+                {
+                    OnBossDefeated();
+                }
+            }
+        }
+    }
+
+    private void OnBossDefeated()
+    {
+        Debug.Log("ボスを倒した!");
+        // ボス撃破時の処理（エフェクトなど）
+        // TODO: 勝利演出やシーン遷移
+        Destroy(gameObject);//スパル
     }
 
     private IEnumerator BossTimer()
