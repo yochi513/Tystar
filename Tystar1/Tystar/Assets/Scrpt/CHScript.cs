@@ -16,11 +16,19 @@ public class CHScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    
+    
+    void Update()//るい追加
     {
         Minch = staticScript.SaveCh;
         Minch = Mathf.Clamp(Minch, 0, Maxch);
         UpdateCh();
+
+        // ボスフェーズのみゲージ消費を有効化
+        if (PlayerStateScript.CurrentState == PlayerStateScript.PlayerState.BossAttack)
+        {
+            Ae();
+        }
     }
     public void ChAdd(float point)
     {
