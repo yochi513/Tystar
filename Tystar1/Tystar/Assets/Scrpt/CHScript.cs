@@ -18,12 +18,14 @@ public class CHScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Minch = staticScript.SaveCh;
         Minch = Mathf.Clamp(Minch, 0, Maxch);
         UpdateCh();
     }
     public void ChAdd(float point)
     {
         Minch += point;
+        staticScript.SaveCh = Minch;
     }
     private void UpdateCh()
     {
