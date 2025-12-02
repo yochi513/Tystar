@@ -15,7 +15,7 @@ public class tekiScript : MonoBehaviour
 
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
-
+    public DangoBehaviorScript dango;
 
     private Renderer rend;
 
@@ -138,11 +138,16 @@ public class tekiScript : MonoBehaviour
     {
         // Debug.Log("無効キー反応");
     }
+
     // 敵が倒されたときに呼び出すメソッド（ChargeScriptから呼ばれる想定）
     public void OnDefeat()
     {
         // 撃破エフェクトを再生
         PlayEffect(defeatEffectPrefab);
+        if (dango != null)
+        {
+            dango.OnDestroyed();
+        }
     }
 
     // エフェクトを再生するメソッド
