@@ -1,29 +1,36 @@
-using UnityEngine;
+ï»¿using UnityEngine;
+using UnityEngine.UI;
 
 public class BallScript : MonoBehaviour
 {
+ 
     char letter;
-    Transform target;
-    Transform supar;
     bool reflected = false;
+    [SerializeField] Image letterImage;   // â† ãƒœãƒ¼ãƒ«ã®å­ã®UIç”»åƒ
 
-    public void Init(char c, Transform player, Transform suparPos)
+    Transform player;
+    Transform supar;
+
+    public void Init(char letter, KeyCode key, Transform player, Transform supar, Sprite sprite)
     {
-        letter = c;
-        target = player;
-        supar = suparPos;
+        this.player = player;
+        this.supar = supar;
 
-        // UI•\¦“™‚ª‚ ‚é‚È‚ç‚±‚±‚Å
-        // GetComponentInChildren<Text>().text = letter.ToString();
+        // Sprite åæ˜ ï¼
+        if (letterImage != null)
+        {
+            letterImage.sprite = sprite;
+        }
     }
+
 
     void Update()
     {
-        if (target == null) return;
+        if (player == null) return;
 
         transform.position = Vector3.MoveTowards(
             transform.position,
-            target.position,
+            player.position,
             5f * Time.deltaTime
         );
     }
@@ -33,6 +40,6 @@ public class BallScript : MonoBehaviour
         if (reflected) return;
 
         reflected = true;
-        target = supar;
+        player = supar;
     }
 }
