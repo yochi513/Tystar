@@ -114,7 +114,7 @@ public class tekiScript : MonoBehaviour
         }
     }
 
-    void GinoAttack()
+    public void GinoAttack()
     {
         //  Debug.Log("ギノキー反応");
         if (Input.GetKey(assignedKey))//キー入力を受付してる
@@ -138,7 +138,11 @@ public class tekiScript : MonoBehaviour
     {
         // Debug.Log("無効キー反応");
     }
-
+    public bool TryReflect()
+    {
+        // 書かれたキー(assignedKey)を押した瞬間だけ判定
+        return Input.GetKeyDown(assignedKey);
+    }
     // 敵が倒されたときに呼び出すメソッド（ChargeScriptから呼ばれる想定）
     public void OnDefeat()
     {
