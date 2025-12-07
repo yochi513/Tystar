@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5d133deeaa66ed445853e946ff25e073, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.21111888, g: 0.058149647, b: 0.036026325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -980,6 +980,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e3910613aa9ecb544acac39a8806a3b3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1126465317}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e3910613aa9ecb544acac39a8806a3b3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1126465318}
   m_SourcePrefab: {fileID: 100100000, guid: e3910613aa9ecb544acac39a8806a3b3, type: 3}
 --- !u!4 &510937477 stripped
 Transform:
@@ -2183,6 +2186,27 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4ebceebe56c00d647b35f2b84d2d91e9, type: 3}
   - {fileID: 21300000, guid: 6cf05801538a24641a4d1ae9ade5fc67, type: 3}
   - {fileID: 21300000, guid: 7db5097b19fff01498fe1c693025326e, type: 3}
+--- !u!95 &1126465318
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1126465316}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2cc0ab873237fbd4daee9b9a1c3bb7f3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1238470277
 GameObject:
   m_ObjectHideFlags: 0
