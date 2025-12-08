@@ -20,14 +20,15 @@ public class BallCHScrpt : MonoBehaviour
     private void UpGame()
     {if(Char != null) { Char.fillAmount = currentCharge/MaxCharge; }}
 
-    public void EntarWithCallBack(GameObject target)
+    public void EntarWithCallBack()
     {
-        if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return)) {
+        Debug.Log("コールバックよばれたよーん");
+       //if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return)) {
            Ball.Reflect();
             //Destroy(target);
-            currentCharge = 0f;
+          currentCharge = 0f;
             UpGame();
-        }
+       // }
        
     }
 }

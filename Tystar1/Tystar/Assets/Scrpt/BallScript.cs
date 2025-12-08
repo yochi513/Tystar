@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Threading;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BallScript : MonoBehaviour
@@ -6,7 +7,8 @@ public class BallScript : MonoBehaviour
     char letter;
     bool reflected = false;
     [SerializeField] Image letterImage;   // ← ボールの子のUI画像
-
+    public int Num = 15;
+    private int Count=0;
     Transform player;
     Transform supar;
 
@@ -23,16 +25,24 @@ public class BallScript : MonoBehaviour
     void Update()
     {
         if (player == null) return;
-        transform.position = Vector3.MoveTowards(transform.position,player.position,5f * Time.deltaTime);
+ 
     if (player == supar)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.position, 100f * Time.deltaTime);
         }
+    //if (Count==0)
+    //    {
+            transform.position = Vector3.MoveTowards(transform.position, player.position, Num * Time.deltaTime);
+        //}
+
     }
     public void Reflect()
     {
+      //  Debug.Log("Reflect呼ばれてる");
         if (reflected) return;
         reflected = true;
         player = supar;
+      
+        
     }
 }

@@ -13,6 +13,7 @@ public class BossWaveScript : MonoBehaviour
     char currentLetter;     // 今の文字
   public  KeyCode currentKey;     // 押すべきキー
     Sprite currentSprite;
+    public BallScript Ball;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class BossWaveScript : MonoBehaviour
             return;
         }
 
-        phase++;
+        
         int index = Random.Range(0, Alphabet.Length);
 
         currentLetter = (char)('A' + index);
@@ -39,21 +40,34 @@ public class BossWaveScript : MonoBehaviour
 
         // ボールへ渡す
         ball.GetComponent<BallScript>().Init( currentLetter,currentKey,player, supar,currentSprite);
+        phase += 1;
     }
 
     void Update()
     {
-       // Debug.Log("Update動いてる");
-        if (Input.GetKey(currentKey))
+        Debug.Log("回数"+phase);
+        if (Input.GetKeyDown(currentKey))
         {
-            Debug.Log("キー入力検出！ " + currentKey);
-            Debug.Log("呼ばれている: BallCH = " + BallCH);
-            BallCH.BallCharge(1);
-            BallCH.EntarWithCallBack(gameObject);
+            ball.GetComponent<BallScript>().Reflect();
+            StartNextPhase();
+           
         }
-        else
-        {
-            BallCH.BallCharge(-1);
-        }
+        //if (phase == 3)
+        //{
+        //    Destroy(ballPrefab);
+        //}
+        // Debug.Log("Update動いてる");
+        //if (Input.GetKeyDown(currentKey))
+        //{
+        //    Debug.Log("キー入力検出！ " + currentKey);
+        //    //  Debug.Log("呼ばれている: BallCH = " + BallCH);
+        //    Ball.Reflect();
+        //    BallCH.BallCharge(+1);
+        //    BallCH.EntarWithCallBack();
+        //}
+        //else
+        //{
+        //    BallCH.BallCharge(-1);
+        //}
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21111888, g: 0.058149647, b: 0.036026325, a: 1}
+  m_IndirectSpecularColor: {r: 0.2111151, g: 0.058148332, b: 0.03602561, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2186,6 +2186,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4ebceebe56c00d647b35f2b84d2d91e9, type: 3}
   - {fileID: 21300000, guid: 6cf05801538a24641a4d1ae9ade5fc67, type: 3}
   - {fileID: 21300000, guid: 7db5097b19fff01498fe1c693025326e, type: 3}
+  BallCH: {fileID: 3245772224451257827, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+  currentKey: 0
+  Ball: {fileID: 4253522291713531899, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
 --- !u!95 &1126465318
 Animator:
   serializedVersion: 5
@@ -2587,6 +2590,10 @@ PrefabInstance:
     - target: {fileID: 100012, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_Name
       value: ElementalArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.x
