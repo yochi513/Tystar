@@ -98,14 +98,13 @@ public class ChargeScript : MonoBehaviour
         select();
         if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return))
         {
-            //ここから追加
+            
             // 敵を削除する前にエフェクトを再生
             tekiScript enemyScript = target.GetComponent<tekiScript>();
             if (enemyScript != null)
             {
                 enemyScript.OnDefeat();
             }
-            //ここまで追加
 
             if (appearScript != null)
             {
