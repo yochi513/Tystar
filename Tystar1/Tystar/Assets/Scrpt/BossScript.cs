@@ -12,6 +12,15 @@ public class BossScript : MonoBehaviour
 
     void Start()
     {
+        // ボス戦開始時にステートをBossAttackに変更　るい追加
+        PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.BossAttack;
+
+        Debug.Log("ボス戦開始！ステート: " + PlayerStateScript.CurrentState);
+
+        // CHゲージを満タンにする（50が最大値）
+        staticScript.SaveCh = 50f;
+
+
         StartCoroutine(BossTimer());
     }
     // Update is called once per frame
@@ -54,6 +63,10 @@ public class BossScript : MonoBehaviour
     private IEnumerator BossTimer()
     {
         yield return new WaitForSeconds(bossTime);
+
+        // ボス戦終了時にステートを元に戻す　るい追加
+        PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
+
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
             Debug.Log("Boss戦終了！元のシーンに戻ります");
