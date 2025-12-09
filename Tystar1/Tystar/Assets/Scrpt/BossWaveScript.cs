@@ -45,7 +45,7 @@ public class BossWaveScript : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("‰ñ”"+phase);
+       // Debug.Log("‰ñ”"+phase);
         if (Input.GetKeyDown(currentKey))
         {
             ball.GetComponent<BallScript>().Reflect();
