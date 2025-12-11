@@ -15,7 +15,8 @@ public class PlayerStateScript : MonoBehaviour
     public enum PlayerState
     {
         None,
-        GinoAttack
+        GinoAttack,
+        BossAttack@//ƒ{ƒXUŒ‚’Ç‰Á
     }
     public static PlayerState CurrentState = PlayerState.None;
 
