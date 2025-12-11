@@ -19,6 +19,8 @@ public class tekiScript : MonoBehaviour
 
     private Renderer rend;
 
+    private Animator anim;
+
     //= ここから追加 ==========
     [Header("エフェクト設定")]
     [SerializeField] private GameObject defeatEffectPrefab;
@@ -84,6 +86,8 @@ public class tekiScript : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+
 
         Speed();
         target = GameObject.FindGameObjectWithTag("Player");
@@ -109,12 +113,15 @@ public class tekiScript : MonoBehaviour
             Playerscrpt playerHealth = other.GetComponent<Playerscrpt>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(1); // 敵のダメージ量
+                anim.SetTrigger("Attack");
+            
+
+            playerHealth.TakeDamage(1); // 敵のダメージ量
             }
         }
     }
 
-    void GinoAttack()
+    public void GinoAttack()
     {
         //  Debug.Log("ギノキー反応");
         if (Input.GetKey(assignedKey))//キー入力を受付してる
@@ -138,10 +145,18 @@ public class tekiScript : MonoBehaviour
     {
         // Debug.Log("無効キー反応");
     }
-
+    public bool TryReflect()
+    {
+        // 書かれたキー(assignedKey)を押した瞬間だけ判定
+        return Input.GetKeyDown(assignedKey);
+    }
     // 敵が倒されたときに呼び出すメソッド（ChargeScriptから呼ばれる想定）
     public void OnDefeat()
-    {
+    {    //死亡アニメーション
+        if (anim != null)
+        {
+            anim.SetTrigger("Die");
+        }
         // 撃破エフェクトを再生
         PlayEffect(defeatEffectPrefab);
         if (dango != null)
