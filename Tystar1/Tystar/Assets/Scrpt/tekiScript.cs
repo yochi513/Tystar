@@ -19,6 +19,8 @@ public class tekiScript : MonoBehaviour
 
     private Renderer rend;
 
+    private Animator anim;
+
     //= ここから追加 ==========
     [Header("エフェクト設定")]
     [SerializeField] private GameObject defeatEffectPrefab;
@@ -84,6 +86,8 @@ public class tekiScript : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+
 
         Speed();
         target = GameObject.FindGameObjectWithTag("Player");
@@ -109,7 +113,10 @@ public class tekiScript : MonoBehaviour
             Playerscrpt playerHealth = other.GetComponent<Playerscrpt>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(1); // 敵のダメージ量
+                anim.SetTrigger("Attack");
+            
+
+            playerHealth.TakeDamage(1); // 敵のダメージ量
             }
         }
     }
@@ -145,7 +152,11 @@ public class tekiScript : MonoBehaviour
     }
     // 敵が倒されたときに呼び出すメソッド（ChargeScriptから呼ばれる想定）
     public void OnDefeat()
-    {
+    {    //死亡アニメーション
+        if (anim != null)
+        {
+            anim.SetTrigger("Die");
+        }
         // 撃破エフェクトを再生
         PlayEffect(defeatEffectPrefab);
         if (dango != null)
