@@ -42,5 +42,9 @@ public class PlayerStateScript : MonoBehaviour
         }
 
     }
+    public void BossAttack()
+    {
+        CurrentState = PlayerState.BossAttack;
+    }
 
 }

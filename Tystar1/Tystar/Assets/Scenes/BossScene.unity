@@ -2184,6 +2184,7 @@ MonoBehaviour:
   BallCH: {fileID: 3245772224451257827, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
   currentKey: 0
   Ball: {fileID: 4253522291713531899, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+  playerState: {fileID: 1350687300}
 --- !u!95 &1126465318
 Animator:
   serializedVersion: 5
@@ -2209,11 +2210,6 @@ Animator:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e3910613aa9ecb544acac39a8806a3b3, type: 3}
   m_PrefabInstance: {fileID: 510937476}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1178419263 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19800006, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
-  m_PrefabInstance: {fileID: 2132629227}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1238470277
 GameObject:
@@ -2508,7 +2504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch: {fileID: 1960165478}
-  beamEffect: {fileID: 1178419263}
+  beamEffect: {fileID: 2639428932962525407, guid: e356cdabc9616ff46aa77f4ff85400aa, type: 3}
 --- !u!114 &1350687298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2516,7 +2512,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350687296}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c89565dfe2dd1c94b8418b8e3c458091, type: 3}
   m_Name: 
