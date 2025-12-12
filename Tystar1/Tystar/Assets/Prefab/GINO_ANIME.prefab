@@ -467,7 +467,7 @@ MonoBehaviour:
   defeatEffectPrefab: {fileID: 0}
   collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 2
+  speedtime: 1
 --- !u!114 &876309376573198071
 MonoBehaviour:
   m_ObjectHideFlags: 0

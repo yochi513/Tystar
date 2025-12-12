@@ -14,6 +14,7 @@ public class BossWaveScript : MonoBehaviour
   public  KeyCode currentKey;     // ‰Ÿ‚·‚×‚«ƒL[
     Sprite currentSprite;
     public BallScript Ball;
+    public PlayerStateScript playerState;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class BossWaveScript : MonoBehaviour
     {
         if (phase >= 3)
         {
+            playerState.BossAttack();
             Debug.Log("Ÿ—˜I");
             return;
         }

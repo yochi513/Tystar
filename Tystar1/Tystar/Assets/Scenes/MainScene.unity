@@ -1175,6 +1175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElementalArrow
       objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.66
+      objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22.3
@@ -1220,11 +1224,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
---- !u!198 &289106469 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19800006, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
-  m_PrefabInstance: {fileID: 289106468}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &317252779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3850,7 +3849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch: {fileID: 163593677}
-  beamEffect: {fileID: 289106469}
+  beamEffect: {fileID: 1503316860}
 --- !u!114 &850482674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6876,6 +6875,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479001935}
   m_CullTransparentMesh: 1
+--- !u!198 &1503316860 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800006, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+  m_PrefabInstance: {fileID: 289106468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1608633921
 PrefabInstance:
   m_ObjectHideFlags: 0
