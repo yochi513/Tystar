@@ -46,7 +46,7 @@ public class tekiScript : MonoBehaviour
     {
         if (speedtime == SPEED.One)
         {
-            speed = 0.05f;
+            speed = 0.06f;
         }
         else if (speedtime == SPEED.Two)
         {
