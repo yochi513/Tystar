@@ -8,10 +8,14 @@ public class BossScript : MonoBehaviour
     public float HP = 10;
     [SerializeField] float bossTime = 5f;
     [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1消費ごとのダメージ量
-
+    private Animator anim;//アニメーション
+    private bool isDead = false; // ← 多重再生防止
 
     void Start()
     {
+
+        anim = GetComponent<Animator>();
+
         // ボス戦開始時にステートをBossAttackに変更　るい追加
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.BossAttack;
 
@@ -42,6 +46,12 @@ public class BossScript : MonoBehaviour
                 // 1フレームあたりのダメージ
                 float damage = damagePerCharge;
                 HP -= damage;
+               
+                // ★ 被弾アニメーション
+                if (anim != null)
+                {
+                    anim.SetTrigger("Hit");
+                }
 
                 // HPが0以下になったら倒す
                 if (HP <= 0)
@@ -54,10 +64,20 @@ public class BossScript : MonoBehaviour
 
     private void OnBossDefeated()
     {
+        if (isDead) return;   // ★ 二重再生防止
+        isDead = true;
+
         Debug.Log("ボスを倒した!");
         // ボス撃破時の処理（エフェクトなど）
         // TODO: 勝利演出やシーン遷移
-        Destroy(gameObject);//スパル
+
+        // 死亡アニメーション
+        if (anim != null)
+        {
+            anim.SetTrigger("Die");
+        }
+        // アニメーション再生後に消す
+        Destroy(gameObject, 1.5f);//スパル
     }
 
     private IEnumerator BossTimer()

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BossWaveScript : MonoBehaviour
 {
+    private Animator anim; // ★アニメ
     [SerializeField] GameObject ballPrefab;
     [SerializeField] Transform supar;
     [SerializeField] Transform player;
@@ -18,6 +19,7 @@ public class BossWaveScript : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         StartNextPhase();
     }
 
@@ -30,7 +32,12 @@ public class BossWaveScript : MonoBehaviour
             return;
         }
 
-        
+        // ★ 攻撃アニメーション
+        if (anim != null)
+        {
+            anim.SetTrigger("Attack");
+        }
+
         int index = Random.Range(0, Alphabet.Length);
 
         currentLetter = (char)('A' + index);
