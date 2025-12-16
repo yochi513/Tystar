@@ -3,7 +3,42 @@ guid: ac11c13529e9f67479750b82452d9206
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye
+    second: {fileID: 2100000, guid: 1975e0f1daf348443be2321a03d26a50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyearound
+    second: {fileID: 2100000, guid: a5493ef1840191c47a9e6281262fd05d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glasscover
+    second: {fileID: 2100000, guid: 93bc053fe768aae49a749831b5ea8b36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gray
+    second: {fileID: 2100000, guid: f6f8c7a6ec1b0784dad4bcc1eca3f36c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sukima
+    second: {fileID: 2100000, guid: 8a9b0be3326c9ac4180839693a788733, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: temp
+    second: {fileID: 2100000, guid: e0c49d3172ff6f64598aeb602f178b80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white
+    second: {fileID: 2100000, guid: 355c75f7220b3d944afad90233b13376, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

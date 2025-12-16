@@ -7,6 +7,7 @@ public class tekiScript : MonoBehaviour
 {
     private GameObject target;
     private float speed = 0.05f;
+    [SerializeField] private float attackDistance = 1.5f;
 
     public string word;
     public KeyCode assignedKey;
@@ -103,6 +104,22 @@ public class tekiScript : MonoBehaviour
     {
         State();
         transform.LookAt(target.transform);
+        // ★ プレイヤーとの距離チェック
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+
+        if (distance <= attackDistance)
+        {
+            // 攻撃アニメーションを再生
+            if (anim != null)
+            {
+                anim.SetTrigger("Attack");
+            }
+
+            // 近づきすぎる前に止める（必要なら）
+            speed = 0f;
+
+            return; // これ以上前進させない
+        }
         transform.position += transform.forward * speed;
     }
     void OnTriggerEnter(Collider other)
@@ -113,10 +130,8 @@ public class tekiScript : MonoBehaviour
             Playerscrpt playerHealth = other.GetComponent<Playerscrpt>();
             if (playerHealth != null)
             {
-                anim.SetTrigger("Attack");
-            
-
-            playerHealth.TakeDamage(1); // 敵のダメージ量
+                
+             playerHealth.TakeDamage(1); // 敵のダメージ量
             }
         }
     }
@@ -152,11 +167,7 @@ public class tekiScript : MonoBehaviour
     }
     // 敵が倒されたときに呼び出すメソッド（ChargeScriptから呼ばれる想定）
     public void OnDefeat()
-    {    //死亡アニメーション
-        if (anim != null)
-        {
-            anim.SetTrigger("Die");
-        }
+    {   
         // 撃破エフェクトを再生
         PlayEffect(defeatEffectPrefab);
         if (dango != null)
