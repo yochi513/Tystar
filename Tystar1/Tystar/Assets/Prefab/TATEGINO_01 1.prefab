@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d015a2409b34e6488ebec11f8a16e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Char: {fileID: 4786780988801170626}
+  Char: {fileID: 0}
   Chargetime: 3
 --- !u!114 &3656435619325482251
 MonoBehaviour:
@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6ce9e6d435ccc43a4264553e085053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDistance: 1.5
   word: 
   assignedKey: 0
   assignedChar: 103
@@ -500,7 +501,7 @@ MonoBehaviour:
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 1
+  speedtime: 0
 --- !u!95 &394910795663744004
 Animator:
   serializedVersion: 5
