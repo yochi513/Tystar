@@ -47,35 +47,28 @@ public class EnemySpponScript : MonoBehaviour
     {
         if (staticScript.ReturnedFromBoss)
         {
-            // Bossから戻ってきた場合だけスポーン再開
-            staticScript.ReturnedFromBoss = false; // フラグリセット
+            staticScript.ReturnedFromBoss = false;
 
             score = staticScript.SaveScore;
             totalGinoCount = staticScript.SaveKillCount;
             stopGinoCount = staticScript.SaveMaxGino;
             UItext.SetCount(score, totalGinoCount);
             stopGinoCount += 2;
-            ResumeSpawn();
+
+            StartCoroutine(SpawnLoop());
         }
         else
         {
-            // シーン開始時は通常のスポーン
-            StartCoroutine(SpawnWaveRoutine());
             score = 0;
             totalGinoCount = 0;
-
+            StartCoroutine(SpawnLoop());
         }
     }
 
 
+
     void Update()
     {
-        if (!isSpawning && totalDefeated >= spawnPoints.Length && totalSpawned < maxEnemies)
-        {
-            totalDefeated = 0;
-            currentWave++;
-            StartCoroutine(SpawnWaveRoutine());
-        }
         // 1フレーム中に複数撃破があったら同時撃破扱い
         if (KillsThisFrame.Count > 0)
         {
@@ -92,17 +85,48 @@ public class EnemySpponScript : MonoBehaviour
         KillsThisFrame.Clear();
     }
 
-    private IEnumerator SpawnWaveRoutine()
+    private IEnumerator SpawnLoop()
     {
-        if (!canSpawn) yield break;
-        isSpawning = true;
+        canSpawn = true;
 
-        yield return StartCoroutine(SpawnEnemiesWithDelay());
-        yield return new WaitForSeconds(timeBetweenWaves);
-        isSpawning = false;
-
-
+        while (canSpawn)
+        {
+            SpawnOneEnemy();
+            yield return new WaitForSeconds(timeBetweenEnemies);
+        }
     }
+    private void SpawnOneEnemy()
+    {
+        if (enemyList.Count == 0 || spawnPoints.Length == 0) return;
+
+        int spawnIndex = Random.Range(0, spawnPoints.Length);
+        GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
+
+        int index = Random.Range(0, Alphabet.Length);
+        char letter = (char)('A' + index);
+
+        GameObject enemy = Instantiate(
+            enemyPrefab,
+            spawnPoints[spawnIndex].position,
+            Quaternion.identity
+        );
+
+        var script = enemy.GetComponent<tekiScript>();
+        if (script != null)
+        {
+            script.AppEnemy = this;
+            script.assignedChar = letter;
+            script.assignedKey =
+                (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
+        }
+
+        Image img = enemy.GetComponentInChildren<Image>();
+        if (img != null)
+        {
+            img.sprite = Alphabet[index];
+        }
+    }
+
 
     private IEnumerator SpawnEnemiesWithDelay()
     {
@@ -137,8 +161,8 @@ public class EnemySpponScript : MonoBehaviour
                 img.sprite = Alphabet[index];
             }
 
-            totalSpawned++;
-            yield return new WaitForSeconds(timeBetweenEnemies);
+            //totalSpawned++;
+            //yield return new WaitForSeconds(timeBetweenEnemies);
         }
     }
     //敵が死んだら呼ばれる
@@ -146,7 +170,7 @@ public class EnemySpponScript : MonoBehaviour
     {
         totalGinoMax++;
         totalGinoCount++;
-        totalDefeated++;
+       // totalDefeated++;
         KillsThisFrame.Add(baseScore);
 
         if (totalGinoMax >= stopGinoCount)
@@ -169,15 +193,6 @@ public class EnemySpponScript : MonoBehaviour
         Debug.Log("BossSceneに移動します");
         UnityEngine.SceneManagement.SceneManager.LoadScene("BossScene");
     }
-
-
-
-    public void ResumeSpawn()
-    {
-        canSpawn = true;
-        totalDefeated = 0;
-        StartCoroutine(SpawnWaveRoutine());
-    }
     public void SCORE(float Multiple, int Enemy)
     {
         int total = 0;
@@ -188,4 +203,5 @@ public class EnemySpponScript : MonoBehaviour
         UItext.Count(score, Enemy);
         totalScore += score;
     }
+
 }
