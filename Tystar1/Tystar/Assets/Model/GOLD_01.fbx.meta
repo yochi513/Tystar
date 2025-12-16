@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2871abdb16108c64dae37113125085c6
+guid: 2d7c96ed983505c4d98c66e6b7f92dfb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,32 +8,32 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ASHI
-    second: {fileID: 2100000, guid: 667f203cf75d1694b8e1015637f2cefa, type: 2}
+    second: {fileID: 2100000, guid: 876096c472108f94dae9b64dce5b7fa1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: HONTAI
-    second: {fileID: 2100000, guid: 1f24ba396fab6bb448e84a57840ac1d6, type: 2}
+    second: {fileID: 2100000, guid: e6f1999cab093d04a9247919e8031866, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: HUCHI
-    second: {fileID: 2100000, guid: 4b307dcc454db864e8eb464808accdf9, type: 2}
+    second: {fileID: 2100000, guid: 5c71248aa37d9b24794ce76b85ebc3a8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: KAMERA
-    second: {fileID: 2100000, guid: d7d199ae36c959e43b3fc413b3de7d87, type: 2}
+    second: {fileID: 2100000, guid: 0603ee95d1c7adf49a4dfa7a5abe1fa8, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: KANSETU
-    second: {fileID: 2100000, guid: 5f85e39b6005ce64097c3861a91b0c12, type: 2}
+    second: {fileID: 2100000, guid: 233decd63e25eff4fbd98016f85b5355, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: LINE
-    second: {fileID: 2100000, guid: 234c8e556c3b8f14d9c55fbad1b8ac44, type: 2}
+    second: {fileID: 2100000, guid: e75e6d5a4a91cad41b82df4c94000e32, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
