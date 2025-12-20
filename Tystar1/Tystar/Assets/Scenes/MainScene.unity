@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13040014, g: 0.096015215, b: 0.06181486, a: 1}
+  m_IndirectSpecularColor: {r: 0.13040188, g: 0.09601609, b: 0.061815403, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11642,6 +11642,10 @@ PrefabInstance:
     - target: {fileID: 3231442355197383362, guid: 90119f54472553c4bb838b88e5917678, type: 3}
       propertyPath: m_Name
       value: JETT
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231442355197383362, guid: 90119f54472553c4bb838b88e5917678, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8722153987546123568, guid: 90119f54472553c4bb838b88e5917678, type: 3}
       propertyPath: assignedChar
