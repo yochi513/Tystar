@@ -104,10 +104,7 @@ public class CHScript : MonoBehaviour
                     isPlayingEffect = true;
                     Debug.Log("ビーム発射開始！");
                 }
-                else
-                {
-                    Debug.LogError("beamEffectがnullです！");
-                }
+
             }
             else
             {
