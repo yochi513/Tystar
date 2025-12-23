@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Char: {fileID: 4929855209322735573}
-  Chargetime: 3
+  Chargetime: 0
 --- !u!54 &-4888559569037494315
 Rigidbody:
   m_ObjectHideFlags: 0
