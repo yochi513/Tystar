@@ -400,6 +400,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f0f5f6e4b2219a48a70a15cfbf24bdb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3656435619325482251}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f0f5f6e4b2219a48a70a15cfbf24bdb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 394910795663744004}
   m_SourcePrefab: {fileID: 100100000, guid: 6f0f5f6e4b2219a48a70a15cfbf24bdb, type: 3}
 --- !u!4 &6020716833261502005 stripped
 Transform:
@@ -473,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d015a2409b34e6488ebec11f8a16e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Char: {fileID: 4786780988801170626}
+  Char: {fileID: 0}
   Chargetime: 3
 --- !u!114 &3656435619325482251
 MonoBehaviour:
@@ -487,13 +490,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6ce9e6d435ccc43a4264553e085053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDistance: 1.5
   word: 
   assignedKey: 0
   assignedChar: 103
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 8872423486280203500}
   AppEnemy: {fileID: 0}
+  dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 1
+  speedtime: 0
+--- !u!95 &394910795663744004
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396855996680266895}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf8365fc3d0c8e2488e8deadf757d751, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

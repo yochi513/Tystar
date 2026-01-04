@@ -69,7 +69,7 @@ public class CHScript : MonoBehaviour
         {
             ch.fillAmount = Minch / Maxch;
         }
-        Ae();
+        //Ae();
     }
 
     public void Ae()

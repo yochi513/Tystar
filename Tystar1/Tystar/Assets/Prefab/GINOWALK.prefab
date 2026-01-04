@@ -339,15 +339,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
       propertyPath: m_LocalPosition.x
@@ -505,7 +505,7 @@ MonoBehaviour:
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 2
+  speedtime: 0
 --- !u!95 &704391207264150154
 Animator:
   serializedVersion: 5

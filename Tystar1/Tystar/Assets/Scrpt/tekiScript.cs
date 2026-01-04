@@ -7,6 +7,7 @@ public class tekiScript : MonoBehaviour
 {
     private GameObject target;
     private float speed = 0.05f;
+    [SerializeField] private float attackDistance = 1.5f;
 
     public string word;
     public KeyCode assignedKey;
@@ -18,6 +19,8 @@ public class tekiScript : MonoBehaviour
     public DangoBehaviorScript dango;
 
     private Renderer rend;
+
+    private Animator anim;
 
     //= ここから追加 ==========
     [Header("エフェクト設定")]
@@ -44,7 +47,7 @@ public class tekiScript : MonoBehaviour
     {
         if (speedtime == SPEED.One)
         {
-            speed = 0.05f;
+            speed = 0.02f;
         }
         else if (speedtime == SPEED.Two)
         {
@@ -84,6 +87,8 @@ public class tekiScript : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+
 
         Speed();
         target = GameObject.FindGameObjectWithTag("Player");
@@ -99,6 +104,22 @@ public class tekiScript : MonoBehaviour
     {
         State();
         transform.LookAt(target.transform);
+        // ★ プレイヤーとの距離チェック
+        float distance = Vector3.Distance(transform.position, target.transform.position);
+
+        if (distance <= attackDistance)
+        {
+            // 攻撃アニメーションを再生
+            if (anim != null)
+            {
+                anim.SetTrigger("Attack");
+            }
+
+            // 近づきすぎる前に止める（必要なら）
+            speed = 0f;
+
+            return; // これ以上前進させない
+        }
         transform.position += transform.forward * speed;
     }
     void OnTriggerEnter(Collider other)
@@ -109,7 +130,8 @@ public class tekiScript : MonoBehaviour
             Playerscrpt playerHealth = other.GetComponent<Playerscrpt>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(1); // 敵のダメージ量
+                
+             playerHealth.TakeDamage(1); // 敵のダメージ量
             }
         }
     }
@@ -145,7 +167,7 @@ public class tekiScript : MonoBehaviour
     }
     // 敵が倒されたときに呼び出すメソッド（ChargeScriptから呼ばれる想定）
     public void OnDefeat()
-    {
+    {   
         // 撃破エフェクトを再生
         PlayEffect(defeatEffectPrefab);
         if (dango != null)

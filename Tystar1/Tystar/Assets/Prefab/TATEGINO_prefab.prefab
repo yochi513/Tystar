@@ -456,6 +456,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01469805f7515964da3a5e259d4b590d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2802231232989783932}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01469805f7515964da3a5e259d4b590d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4419464959981731049}
   m_SourcePrefab: {fileID: 100100000, guid: 01469805f7515964da3a5e259d4b590d, type: 3}
 --- !u!4 &2465978529781029456 stripped
 Transform:
@@ -503,7 +506,7 @@ MonoBehaviour:
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 1
+  speedtime: 0
 --- !u!136 &9045000321351118727
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -554,3 +557,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &-4419464959981731049
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2986795594752114922}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf8365fc3d0c8e2488e8deadf757d751, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
