@@ -15,6 +15,7 @@ public class BossWaveScript : MonoBehaviour
     Sprite currentSprite;
     public BallScript Ball;
     public PlayerStateScript playerState;
+    public BallCHScrpt BALLCH;
 
     void Start()
     {
@@ -47,29 +48,35 @@ public class BossWaveScript : MonoBehaviour
 
     void Update()
     {
-       // Debug.Log("回数"+phase);
-        if (Input.GetKeyDown(currentKey))
+        // 押している間チャージ
+        bool isHolding = Input.GetKey(currentKey);
+        BALLCH.Charge(isHolding);
+
+        // 最大まで溜まって Enter
+        if (BALLCH.IsMax && Input.GetKeyDown(KeyCode.Return))
         {
-            ball.GetComponent<BallScript>().Reflect();
+            Ball.Reflect();
+            BALLCH.ResetCharge();
             StartNextPhase();
-           
         }
-        //if (phase == 3)
-        //{
-        //    Destroy(ballPrefab);
-        //}
-        // Debug.Log("Update動いてる");
-        //if (Input.GetKeyDown(currentKey))
-        //{
-        //    Debug.Log("キー入力検出！ " + currentKey);
-        //    //  Debug.Log("呼ばれている: BallCH = " + BallCH);
-        //    Ball.Reflect();
-        //    BallCH.BallCharge(+1);
-        //    BallCH.EntarWithCallBack();
-        //}
-        //else
-        //{
-        //    BallCH.BallCharge(-1);
-        //}
     }
+
+    //if (phase == 3)
+    //{
+    //    Destroy(ballPrefab);
+    //}
+    // Debug.Log("Update動いてる");
+    //if (Input.GetKeyDown(currentKey))
+    //{
+    //    Debug.Log("キー入力検出！ " + currentKey);
+    //    //  Debug.Log("呼ばれている: BallCH = " + BallCH);
+    //    Ball.Reflect();
+    //    BallCH.BallCharge(+1);
+    //    BallCH.EntarWithCallBack();
+    //}
+    //else
+    //{
+    //    BallCH.BallCharge(-1);
+    //}
+
 }

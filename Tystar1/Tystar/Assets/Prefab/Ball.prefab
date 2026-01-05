@@ -251,7 +251,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -268,7 +268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Char: {fileID: 176701087281304531}
-  Ball: {fileID: 4253522291713531899}
+  maxCharge: 50
+  chargeSpeed: 20
 --- !u!1 &3580827515918246368
 GameObject:
   m_ObjectHideFlags: 0
