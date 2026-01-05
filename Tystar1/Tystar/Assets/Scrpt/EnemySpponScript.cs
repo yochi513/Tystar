@@ -191,8 +191,8 @@ public class EnemySpponScript : MonoBehaviour
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
-        Debug.Log("BossScene‚ÉˆÚ“®‚µ‚Ü‚·");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("BossScene");
+        Debug.Log("VideoTransitionScene‚ÉˆÚ“®‚µ‚Ü‚·");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("VideoTransitionScene");
     }
     public void SCORE(float Multiple, int Enemy)
     {
