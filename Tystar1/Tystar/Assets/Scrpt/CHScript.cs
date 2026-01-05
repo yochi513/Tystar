@@ -53,7 +53,7 @@ public class CHScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("BossAttack状態ではありません: " + PlayerStateScript.CurrentState);
+           //毎フレーム呼び出されるので一時的に無効化中ByRen　 Debug.Log("BossAttack状態ではありません: " + PlayerStateScript.CurrentState);
         }
     }
 
@@ -74,6 +74,16 @@ public class CHScript : MonoBehaviour
 
     public void Ae()
     {
+        if (Lightning.isExecutingChain)
+        {
+            if (isPlayingEffect && beamEffect != null)
+            {
+                beamEffect.Stop();
+                isPlayingEffect = false;
+            }
+            return;
+        }//雷エフェクトが実行されているかどうか
+
         if (Input.GetKey(KeyCode.Return))
             // まず、メソッドが呼ばれているか確認
             Debug.Log("Ae()メソッドが呼ばれました");

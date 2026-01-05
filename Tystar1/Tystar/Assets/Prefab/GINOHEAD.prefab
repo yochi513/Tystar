@@ -338,12 +338,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.21
+      value: 9.96
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -351,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.859
+      value: 10.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       propertyPath: m_LocalRotation.w
@@ -381,6 +389,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7613073036251032554, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.21
+      objectReference: {fileID: 0}
+    - target: {fileID: -7613073036251032554, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: -7613073036251032554, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.83
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       propertyPath: m_Name
       value: GINOHEAD
@@ -400,7 +420,7 @@ PrefabInstance:
       addedObject: {fileID: -8675277134102929784}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7391816895146074324}
+      addedObject: {fileID: -8912069790712120140}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9171410130276626507}
@@ -423,7 +443,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7375121991193751565}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -2907967935975683382, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
 --- !u!23 &-8675277134102929784
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -466,7 +486,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7391816895146074324
+--- !u!136 &-8912069790712120140
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -501,7 +521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962273e736cb17a4d8527786564be999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterImage: {fileID: 0}
+  letterImage: {fileID: 6094462248817170967}
   Num: 12
 --- !u!54 &-5901584952573425732
 Rigidbody:
@@ -542,8 +562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e4946abd191f04eaa677f871db7a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Char: {fileID: 0}
-  Ball: {fileID: 0}
+  Char: {fileID: 6094462248817170967}
+  Ball: {fileID: 9171410130276626507}
 --- !u!4 &7859452930828937911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2b30006c77416494fa2cf6b47c1277ca, type: 3}
