@@ -7,47 +7,55 @@ public class BossScript : MonoBehaviour
 {
     public float HP = 10;
     [SerializeField] float bossTime = 5f;
-    [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1消費ごとのダメージ量
+    [SerializeField] private float damagePerCharge = 0.1f;
 
+    // ★追加
+    private Animator animator;
 
     void Start()
     {
-        // ボス戦開始時にステートをBossAttackに変更　るい追加
+        // ★アニメーターを取得
+        animator = GetComponent<Animator>();
+
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.BossAttack;
-
         Debug.Log("ボス戦開始！ステート: " + PlayerStateScript.CurrentState);
-
-        // CHゲージを満タンにする（50が最大値）
         staticScript.SaveCh = 50f;
-
-
         StartCoroutine(BossTimer());
     }
-    // Update is called once per frame
+
     void Update()
     {
-        CheckBossDamage(); //   るい追加
+        CheckBossDamage();
     }
 
-    
-    private void CheckBossDamage()//るい追加 
+    private void CheckBossDamage()
     {
-        // ボスフェーズかつエンターキー長押し中
         if (PlayerStateScript.CurrentState == PlayerStateScript.PlayerState.BossAttack
-            && Input.GetKey(KeyCode.Return))
+        && Input.GetKey(KeyCode.Return))
         {
-            // CHゲージが残っている場合のみダメージ
             if (staticScript.SaveCh > 0)
             {
-                // 1フレームあたりのダメージ
+                // ★被弾アニメーション再生
+                if (animator != null)
+                {
+                    animator.SetBool("IsHit", true); // Bool型パラメータを使用
+                }
+
                 float damage = damagePerCharge;
                 HP -= damage;
 
-                // HPが0以下になったら倒す
                 if (HP <= 0)
                 {
                     OnBossDefeated();
                 }
+            }
+        }
+        else
+        {
+            // ★キーを離したらアニメーション停止
+            if (animator != null)
+            {
+                animator.SetBool("IsHit", false);
             }
         }
     }
@@ -55,16 +63,12 @@ public class BossScript : MonoBehaviour
     private void OnBossDefeated()
     {
         Debug.Log("ボスを倒した!");
-        // ボス撃破時の処理（エフェクトなど）
-        // TODO: 勝利演出やシーン遷移
-        Destroy(gameObject);//スパル
+        Destroy(gameObject);
     }
 
     private IEnumerator BossTimer()
     {
         yield return new WaitForSeconds(bossTime);
-
-        // ボス戦終了時にステートを元に戻す　るい追加
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
@@ -77,5 +81,4 @@ public class BossScript : MonoBehaviour
             Debug.LogWarning("戻るシーン情報がありません");
         }
     }
-
 }
