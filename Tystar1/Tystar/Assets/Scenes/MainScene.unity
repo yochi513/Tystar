@@ -11643,6 +11643,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: JETT
       objectReference: {fileID: 0}
+    - target: {fileID: 3231442355197383362, guid: 90119f54472553c4bb838b88e5917678, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722153987546123568, guid: 90119f54472553c4bb838b88e5917678, type: 3}
+      propertyPath: speedtime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8722153987546123568, guid: 90119f54472553c4bb838b88e5917678, type: 3}
       propertyPath: assignedChar
       value: 1536
