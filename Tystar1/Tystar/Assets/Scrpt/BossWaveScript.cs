@@ -48,17 +48,24 @@ public class BossWaveScript : MonoBehaviour
 
     void Update()
     {
-        // 押している間チャージ
-        bool isHolding = Input.GetKey(currentKey);
-        BALLCH.Charge(isHolding);
-
-        // 最大まで溜まって Enter
-        if (BALLCH.IsMax && Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(currentKey))
         {
-            Ball.Reflect();
-            BALLCH.ResetCharge();
+            ball.GetComponent<BallScript>().Reflect();
             StartNextPhase();
         }
+
+
+        //// 押している間チャージ
+        //bool isHolding = Input.GetKey(currentKey);
+        //BALLCH.Charge(isHolding);
+
+        //// 最大まで溜まって Enter
+        //if (BALLCH.IsMax && Input.GetKeyDown(KeyCode.Return))
+        //{
+        //    Ball.Reflect();
+        //    BALLCH.ResetCharge();
+        //    StartNextPhase();
+        //}
     }
 
     //if (phase == 3)
