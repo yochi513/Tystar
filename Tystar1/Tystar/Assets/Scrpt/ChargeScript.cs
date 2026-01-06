@@ -6,11 +6,9 @@ using Unity.VisualScripting;
 
 public class ChargeScript : MonoBehaviour
 {
-
     [SerializeField] Image Char;
     private float MaxCharge = 500f;
     private float currentCharge = 0f;
-
 
     public enum Selection
     {
@@ -25,6 +23,7 @@ public class ChargeScript : MonoBehaviour
     }
 
     public Selection Chargetime = Selection.Three;
+
     public void select()
     {
         if (Chargetime == Selection.Two)
@@ -59,7 +58,6 @@ public class ChargeScript : MonoBehaviour
         {
             MaxCharge = 1f;
         }
-
     }
 
     // ゲージ加算（敵から呼び出される）
@@ -78,7 +76,6 @@ public class ChargeScript : MonoBehaviour
         UpdateGauge();
     }
 
-
     // UI更新
     private void UpdateGauge()
     {
@@ -89,16 +86,12 @@ public class ChargeScript : MonoBehaviour
         }
     }
 
-    //  敵を消す時に出現元に通知
+    // 敵を消す時に出現元に通知（通常のチャージ攻撃用）
     public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
-        //Debug.Log("EntarWithCallback呼ばれた");
-        //Debug.Log("currentCharge: " + currentCharge + " / MaxCharge: " + MaxCharge);
-        //Debug.Log("appearScript: " + appearScript);
         select();
         if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return))
         {
-            
             // 敵を削除する前にエフェクトを再生
             tekiScript enemyScript = target.GetComponent<tekiScript>();
             if (enemyScript != null)
@@ -112,14 +105,35 @@ public class ChargeScript : MonoBehaviour
             }
 
             Destroy(target);
-
             currentCharge = 0f;
             UpdateGauge();
         }
-
     }
 
+    // ★ 連鎖雷専用：チャージ条件を無視して即座に敵を倒す
+    public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript)
+    {
+        if (target == null) return;
 
+        // 敵を削除する前にエフェクトを再生
+        tekiScript enemyScript = target.GetComponent<tekiScript>();
+        if (enemyScript != null)
+        {
+            enemyScript.OnDefeat();
+        }
+
+        if (appearScript != null)
+        {
+            appearScript.ReportEnemyDefeated(100); // 報告
+        }
+
+        Destroy(target);
+
+        // チャージはリセットしない（連鎖雷はチャージを消費しない仕様の場合）
+        // もしチャージを消費させたい場合は以下をコメント解除
+        // currentCharge = 0f;
+        // UpdateGauge();
+    }
 }
 //10秒=500F
 //300fで6秒くらい
