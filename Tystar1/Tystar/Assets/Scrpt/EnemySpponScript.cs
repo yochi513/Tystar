@@ -128,43 +128,44 @@ public class EnemySpponScript : MonoBehaviour
     }
 
 
-    private IEnumerator SpawnEnemiesWithDelay()
-    {
+    //private IEnumerator SpawnEnemiesWithDelay()
+    //{
 
 
-        //パターンランダム
-        int[] chosenPattern = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
-        //選ばれた順番にスポーン
-        foreach (int i in chosenPattern)
-        {
-            GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
-            if (totalSpawned >= maxEnemies) yield break;
-            if (i >= spawnPoints.Length) continue;
+    //    //パターンランダム
+    //    int[] chosenPattern = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
+    //    //選ばれた順番にスポーン
+    //    foreach (int i in chosenPattern)
+    //    {
+    //        GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
+    //        if (totalSpawned >= maxEnemies) yield break;
+    //        if (i >= spawnPoints.Length) continue;
 
-            //敵にランダムに文字付与
-            int index = Random.Range(0, Alphabet.Length);
-            char letter = (char)('A' + index);
+    //        //敵にランダムに文字付与
+    //        int index = Random.Range(0, Alphabet.Length);
+    //        char letter = (char)('A' + index);
 
-            GameObject enemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity);
-            var script = enemy.GetComponent<tekiScript>();
+    //        GameObject enemy = Instantiate(enemyPrefab, spawnPoints[i].position, Quaternion.identity);
+    //        var script = enemy.GetComponent<tekiScript>();
 
-            if (script != null)
-            {
-                script.AppEnemy = this;
-                script.assignedChar = letter;
-                script.assignedKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
-            }
+    //        if (script != null)
+    //        {
+    //            script.AppEnemy = this;
+    //            script.assignedChar = letter;
+    //            script.assignedKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
+    //        }
 
-            Image img = enemy.GetComponentInChildren<Image>();
-            if (img != null && index < Alphabet.Length)
-            {
-                img.sprite = Alphabet[index];
-            }
+    //        Image img = enemy.GetComponentInChildren<Image>();
+    //        if (img != null && index < Alphabet.Length)
+    //        {
+    //            img.sprite = Alphabet[index];
+    //        }
 
-            //totalSpawned++;
-            //yield return new WaitForSeconds(timeBetweenEnemies);
-        }
-    }
+    //        //totalSpawned++;
+    //        //yield return new WaitForSeconds(timeBetweenEnemies);
+    //    }
+    //}
+
     //敵が死んだら呼ばれる
     public void ReportEnemyDefeated(int baseScore)
     {
@@ -190,8 +191,8 @@ public class EnemySpponScript : MonoBehaviour
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
-        Debug.Log("BossSceneに移動します");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("BossScene");
+        Debug.Log("VideoTransitionSceneに移動します");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("VideoTransitionScene");
     }
     public void SCORE(float Multiple, int Enemy)
     {

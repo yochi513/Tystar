@@ -42,7 +42,7 @@ public class tekiScript : MonoBehaviour
     }
 
 
-    public SPEED speedtime = SPEED.One;
+    public SPEED speedtime = SPEED.Five;
     public void Speed()
     {
         if (speedtime == SPEED.One)
@@ -138,6 +138,7 @@ public class tekiScript : MonoBehaviour
 
     public void GinoAttack()
     {
+        if (Lightning.isExecutingChain) return;//雷エフェクトが実行中かどうか
         //  Debug.Log("ギノキー反応");
         if (Input.GetKey(assignedKey))//キー入力を受付してる
         {

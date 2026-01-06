@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/SplashScene.unity
+    guid: 5ae4dc148cb1b5e4f9bfa42951306df7
+  - enabled: 1
     path: Assets/Scenes/SelectionScene.unity
     guid: faaa699e0b7598c44af7c40a3e8bff84
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/VideoTransitionScene.unity
+    guid: 6dcd8545d5e8eb0449351aee4d71f18e
   - enabled: 1
     path: Assets/Scenes/BossScene.unity
     guid: 18c06c85859db494fb7d45f09f7ca244
