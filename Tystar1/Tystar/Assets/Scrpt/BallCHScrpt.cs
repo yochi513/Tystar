@@ -6,29 +6,37 @@ using UnityEngine.UI;
 public class BallCHScrpt : MonoBehaviour
 {
     [SerializeField] Image Char;
-    private float MaxCharge = 50f;
-    private float currentCharge = 0f;
-    public BallScript Ball;
+    [SerializeField] float maxCharge = 50f;
+    [SerializeField] float chargeSpeed = 20f;
 
-    public void BallCharge(int point)
+    float currentCharge = 0f;
+
+    public bool IsMax => currentCharge >= maxCharge;
+
+    public void Charge(bool charging)
     {
-     if (point == 1) {currentCharge++; }
-     else {currentCharge--;}
-     currentCharge = Mathf.Clamp(currentCharge, 0, MaxCharge);
-     UpGame();
+        if (charging)
+        {
+            currentCharge += chargeSpeed * Time.deltaTime;
+        }
+        else
+        {
+            currentCharge -= chargeSpeed * Time.deltaTime;
+        }
+
+        currentCharge = Mathf.Clamp(currentCharge, 0, maxCharge);
+        UpdateUI();
     }
-    private void UpGame()
-    {if(Char != null) { Char.fillAmount = currentCharge/MaxCharge; }}
 
-    public void EntarWithCallBack()
+    public void ResetCharge()
     {
-        Debug.Log("コールバックよばれたよーん");
-       //if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return)) {
-           Ball.Reflect();
-            //Destroy(target);
-          currentCharge = 0f;
-            UpGame();
-       // }
-       
+        currentCharge = 0f;
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        if (Char != null)
+            Char.fillAmount = currentCharge / maxCharge;
     }
 }
