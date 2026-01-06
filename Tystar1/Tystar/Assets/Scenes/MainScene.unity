@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13040191, g: 0.09601602, b: 0.061815564, a: 1}
+  m_IndirectSpecularColor: {r: 0.13040188, g: 0.09601609, b: 0.061815403, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1156,8 +1156,8 @@ MonoBehaviour:
   - {fileID: 178430857}
   - {fileID: 558980376}
   maxEnemies: 100
-  timeBetweenEnemies: 0.8
-  timeBetweenWaves: 4
+  timeBetweenEnemies: 0.3
+  timeBetweenWaves: 8
   ginoMax: 10
   totalPhaes: 3
   boss: {fileID: 0}
@@ -14878,3 +14878,4 @@ SceneRoots:
   - {fileID: 289106468}
   - {fileID: 1389150511830390789}
   - {fileID: 5961726250856077987}
+  - {fileID: 4779655407611586850}
