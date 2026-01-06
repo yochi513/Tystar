@@ -86,12 +86,32 @@ public class ChargeScript : MonoBehaviour
         }
     }
 
-    // 敵を消す時に出現元に通知（通常のチャージ攻撃用）
+    // クラスの先頭に追加するフィールド
+    [SerializeField] private AudioClip defeatSound; // Inspector で設定する効果音
+    private AudioSource audioSource;
+
+    // Start メソッドまたは Awake メソッドに追加
+    void Start()
+    {
+        // AudioSource コンポーネントを取得または追加
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+    }
+
     public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
         select();
         if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return))
         {
+            // 効果音を最初に再生（敵を消す前）
+            if (defeatSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(defeatSound, 1.0f);
+            }
+
             // 敵を削除する前にエフェクトを再生
             tekiScript enemyScript = target.GetComponent<tekiScript>();
             if (enemyScript != null)
@@ -103,7 +123,6 @@ public class ChargeScript : MonoBehaviour
             {
                 appearScript.ReportEnemyDefeated(100); // 報告
             }
-
             Destroy(target);
             currentCharge = 0f;
             UpdateGauge();
