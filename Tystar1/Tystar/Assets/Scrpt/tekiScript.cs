@@ -26,6 +26,22 @@ public class tekiScript : MonoBehaviour
     [SerializeField] private GameObject defeatEffectPrefab;
     [SerializeField] private float effectDuration = 2f;
 
+    // ================================
+    // ★ 撃破状態管理（ここが重要）
+    // ================================
+    public bool IsDefeated { get; private set; } = false;
+
+    // ★ 撃破を確定させる唯一の入口
+    public bool TryDefeat()
+    {
+        if (IsDefeated) return false;
+        IsDefeated = true;
+        return true;
+    }
+
+    // 撃破エフェクト取得用（外部から参照）
+    public GameObject DefeatEffectPrefab => defeatEffectPrefab;
+
     public enum SPEED
     {
         Zero,
@@ -91,9 +107,6 @@ public class tekiScript : MonoBehaviour
             case PlayerStateScript.PlayerState.GinoAttack:
                 GinoAttack();
                 break;
-
-            case PlayerStateScript.PlayerState.None:
-                break;
         }
     }
 
@@ -112,7 +125,6 @@ public class tekiScript : MonoBehaviour
 
     public void GinoAttack()
     {
-        // 雷実行中は入力を受け付けない
         if (Lightning.isExecutingChain) return;
 
         if (Input.GetKey(assignedKey))
@@ -135,29 +147,5 @@ public class tekiScript : MonoBehaviour
         {
             playerHealth.TakeDamage(1);
         }
-    }
-
-    // 撃破時に呼ばれる（ChargeScript / Lightning から）
-    public void OnDefeat()
-    {
-        PlayEffect(defeatEffectPrefab);
-
-        if (dango != null)
-        {
-            dango.OnDestroyed();
-        }
-    }
-
-    private void PlayEffect(GameObject effectPrefab)
-    {
-        if (effectPrefab == null) return;
-
-        GameObject effect = Instantiate(
-            effectPrefab,
-            transform.position,
-            Quaternion.identity
-        );
-
- 
     }
 }
