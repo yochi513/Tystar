@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class BossScript : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class BossScript : MonoBehaviour
     [SerializeField] float bossTime = 5f;
     [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1消費ごとのダメージ量
     [SerializeField] private Image bossHPGaugeImage;
+    [SerializeField] private Animator animator;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class BossScript : MonoBehaviour
         Debug.Log("ボス戦開始! ステート: " + PlayerStateScript.CurrentState);
         Debug.Log("初期チャージ量: " + staticScript.SaveCh);
 
-        maxHP = HP;
+        //maxHP = HP;
         UpdateHPGauge();
 
         // CHゲージを満タンにする（デバッグ用）
@@ -81,7 +81,7 @@ public class BossScript : MonoBehaviour
             {
                 Debug.Log(" チャージあり！ダメージ処理開始");
 
-                float damage = damagePerSecond * Time.deltaTime;
+                float damage = damagePerCharge * Time.deltaTime;
                 HP -= damage;
 
                 //HPを保存
@@ -114,10 +114,12 @@ public class BossScript : MonoBehaviour
     // HPゲージ更新メソッド
     private void UpdateHPGauge()
     {
-        if (hpGaugeImage != null)
+        
+        if (bossHPGaugeImage != null)
         {
-            hpGaugeImage.fillAmount = HP / maxHP;
+            bossHPGaugeImage.fillAmount = HP / MaxHP;
         }
+        
     }
 
     private void OnBossDefeated()
