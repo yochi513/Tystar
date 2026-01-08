@@ -85,48 +85,50 @@ public class EnemySpponScript : MonoBehaviour
         KillsThisFrame.Clear();
     }
 
-    private IEnumerator SpawnLoop()
-    {
-        canSpawn = true;
 
-        while (canSpawn)
-        {
-            SpawnOneEnemy();
-            yield return new WaitForSeconds(timeBetweenEnemies);
-        }
-    }
-    private void SpawnOneEnemy()
-    {
-        if (enemyList.Count == 0 || spawnPoints.Length == 0) return;
+    //‚±‚±‚ª¡‚Ü‚Å‚Ìg‚Á‚Ä‚½•¨
+    //private IEnumerator SpawnLoop()
+    //{
+    //    canSpawn = true;
 
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
-        GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
+    //    while (canSpawn)
+    //    {
+    //        SpawnOneEnemy();
+    //        yield return new WaitForSeconds(timeBetweenEnemies);
+    //    }
+    //}
+    //private void SpawnOneEnemy()
+    //{
+    //    if (enemyList.Count == 0 || spawnPoints.Length == 0) return;
 
-        int index = Random.Range(0, Alphabet.Length);
-        char letter = (char)('A' + index);
+    //    int spawnIndex = Random.Range(0, spawnPatterns.Count);
+    //    GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
 
-        GameObject enemy = Instantiate(
-            enemyPrefab,
-            spawnPoints[spawnIndex].position,
-            Quaternion.identity
-        );
+    //    int index = Random.Range(0, Alphabet.Length);
+    //    char letter = (char)('A' + index);
 
-        var script = enemy.GetComponent<tekiScript>();
-        if (script != null)
-        {
-            script.AppEnemy = this;
-            script.assignedChar = letter;
-            script.assignedKey =
-                (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
-        }
+    //    GameObject enemy = Instantiate(
+    //        enemyPrefab,
+    //        spawnPoints[spawnIndex].position,
+    //        Quaternion.identity
+    //    );
 
-        Image img = enemy.GetComponentInChildren<Image>();
-        if (img != null)
-        {
-            img.sprite = Alphabet[index];
-        }
-    }
+    //    var script = enemy.GetComponent<tekiScript>();
+    //    if (script != null)
+    //    {
+    //        script.AppEnemy = this;
+    //        script.assignedChar = letter;
+    //        script.assignedKey =
+    //            (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
+    //    }
 
+    //    Image img = enemy.GetComponentInChildren<Image>();
+    //    if (img != null)
+    //    {
+    //        img.sprite = Alphabet[index];
+    //    }
+    //}
+    //‚±‚±‚Ü‚Å‚ª‚Â‚©‚Á‚Ä‚½‚â‚Â
 
     //private IEnumerator SpawnEnemiesWithDelay()
     //{
@@ -166,6 +168,60 @@ public class EnemySpponScript : MonoBehaviour
     //    }
     //}
 
+    private IEnumerator SpawnLoop()
+    {
+        canSpawn = true;
+
+        while (canSpawn)
+        {
+            // --- 1‰ò‘I‚Ô ---
+            int[] wave = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
+
+            // --- ‰ò‚Ì’†‚Ì4‘Ì‚ğ‡”Ô‚Éo‚· ---
+            foreach (int spawnIndex in wave)
+            {
+                SpawnOneEnemy(spawnIndex);
+                yield return new WaitForSeconds(timeBetweenEnemies);
+            }
+
+            // --- Ÿ‚Ì‰ò‚Ü‚Å‘Ò‚Â ---
+            yield return new WaitForSeconds(timeBetweenWaves);
+        }
+    }
+    private void SpawnOneEnemy(int spawnIndex)
+    {
+        if (enemyList.Count == 0 || spawnPoints.Length == 0) return;
+        if (spawnIndex < 0 || spawnIndex >= spawnPoints.Length) return;
+
+        GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
+
+        int index = Random.Range(0, Alphabet.Length);
+        char letter = (char)('A' + index);
+
+        GameObject enemy = Instantiate(
+            enemyPrefab,
+            spawnPoints[spawnIndex].position,
+            Quaternion.identity
+        );
+
+        var script = enemy.GetComponent<tekiScript>();
+        if (script != null)
+        {
+            script.AppEnemy = this;
+            script.assignedChar = letter;
+            script.assignedKey =
+                (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
+        }
+
+        Image img = enemy.GetComponentInChildren<Image>();
+        if (img != null)
+        {
+            img.sprite = Alphabet[index];
+        }
+    }
+
+
+
     //“G‚ª€‚ñ‚¾‚çŒÄ‚Î‚ê‚é
     public void ReportEnemyDefeated(int baseScore)
     {
@@ -191,8 +247,8 @@ public class EnemySpponScript : MonoBehaviour
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
-        Debug.Log("BossScene‚ÉˆÚ“®‚µ‚Ü‚·");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("BossScene");
+        Debug.Log("VideoTransitionScene‚ÉˆÚ“®‚µ‚Ü‚·");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("VideoTransitionScene");
     }
     public void SCORE(float Multiple, int Enemy)
     {

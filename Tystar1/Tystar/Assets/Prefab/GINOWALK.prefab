@@ -415,6 +415,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
       insertIndex: -1
       addedObject: {fileID: 704391207264150154}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4527524240481388386}
   m_SourcePrefab: {fileID: 100100000, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
 --- !u!1 &8327208857501706176 stripped
 GameObject:
@@ -482,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Char: {fileID: 3917138832741247749}
+  MaxCharge: 150
   Chargetime: 2
 --- !u!114 &5444555034720698076
 MonoBehaviour:
@@ -495,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6ce9e6d435ccc43a4264553e085053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDistance: 1.5
   word: 
   assignedKey: 0
   assignedChar: 54
@@ -503,9 +508,8 @@ MonoBehaviour:
   AppEnemy: {fileID: 0}
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-  collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 0
+  speedtime: 1
 --- !u!95 &704391207264150154
 Animator:
   serializedVersion: 5
@@ -527,6 +531,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-4527524240481388386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327208857501706176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324e0820a87d1ea4a8c18ef2bcea1703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defeatSound: {fileID: 8300000, guid: 2b1f3871c035b604eb6859c23d2750b3, type: 3}
+  volume: 1
 --- !u!4 &8708801671940046202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}

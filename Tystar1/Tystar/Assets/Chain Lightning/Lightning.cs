@@ -1,18 +1,30 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Lightning : MonoBehaviour
 {
-    // —‹ƒGƒtƒFƒNƒg‚ÌPrefabiInspector‚Åİ’èj
+    [Header("é›·ã‚¨ãƒ•ã‚§ã‚¯ãƒˆè¨­å®š")]
     public GameObject lightningPrefab;
 
-    // ’·‰Ÿ‚µ‚³‚ê‚Ä‚¢‚é“G‚Ìu‡”Ôv‚ğ‹L˜^‚·‚éƒŠƒXƒg
+    [Header("é€£é–è¨­å®š")]
+    [SerializeField] private float chainDelay = 0.2f;
+    [SerializeField] private float hitEffectDuration = 0.5f;
+    [SerializeField] private float chainEffectDuration = 0.3f;
+
+    [Header("ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ã‚¹ã‚±ãƒ¼ãƒ«èª¿æ•´")]
+    [SerializeField] private bool adjustScale = true;
+    [SerializeField] private float baseDistance = 1f;
+
     private List<tekiScript> holdingOrder = new List<tekiScript>();
+    public static bool isExecutingChain { get; private set; } = false;
 
     void Update()
     {
-        // Œ»İ‘¶İ‚·‚é‘S‚Ä‚Ì“G‚ğæ“¾
+        if (isExecutingChain) return;
+
+        holdingOrder.RemoveAll(enemy => enemy == null);
+
         tekiScript[] enemies = FindObjectsOfType<tekiScript>();
 
         foreach (var enemy in enemies)
@@ -21,69 +33,161 @@ public class Lightning : MonoBehaviour
 
             KeyCode key = enemy.assignedKey;
 
-            // ƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ ¨ ‡”Ô‚É’Ç‰Á
-            if (Input.GetKeyDown(key))
+            if (Input.GetKeyDown(key) && !holdingOrder.Contains(enemy))
             {
-                if (!holdingOrder.Contains(enemy))
-                {
-                    holdingOrder.Add(enemy);
-                }
+                holdingOrder.Add(enemy);
             }
 
-            // ƒL[‚ª—£‚³‚ê‚½uŠÔ ¨ ‡”Ô‚©‚çíœ
-            if (Input.GetKeyUp(key))
+            if (Input.GetKeyUp(key) && holdingOrder.Contains(enemy))
             {
-                if (holdingOrder.Contains(enemy))
-                {
-                    holdingOrder.Remove(enemy);
-                }
-            }
-        }
-
-        // EnterƒL[‚Å˜A½—‹‚ğ”­“®
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (holdingOrder.Count >= 1)
-            {
-                StartCoroutine(ChainLightning());
+                holdingOrder.Remove(enemy);
             }
         }
     }
 
-    // ˜A½—‹‚Ì–{‘ÌiŠÔ·‚Å‡”Ô‚Éˆ—j
+    // â˜… å¤–éƒ¨ã‹ã‚‰å‘¼ã¶å°‚ç”¨ãƒ¡ã‚½ãƒƒãƒ‰ï¼ˆChargeScriptã‹ã‚‰å‘¼ã°ã‚Œã‚‹å‰ã«ãƒã‚§ãƒƒã‚¯ï¼‰
+    public bool CanStartChain()
+    {
+        if (isExecutingChain) return false;
+        if (holdingOrder.Count == 0) return false;
+
+        // ãƒãƒ£ãƒ¼ã‚¸ãŒæº€ã‚¿ãƒ³ã®æ•µãŒ1ä½“ã§ã‚‚ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
+        foreach (var enemy in holdingOrder)
+        {
+            if (enemy != null && enemy.charge != null)
+            {
+                if (enemy.charge.CurrentCharge >= enemy.charge.MaxChargeValue)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void StartChain()
+    {
+        if (isExecutingChain) return;
+        if (holdingOrder.Count == 0) return;
+
+        StartCoroutine(ChainLightning());
+    }
+
     IEnumerator ChainLightning()
     {
-        Debug.Log(" ˜A½—‹ ŠJn");
+        isExecutingChain = true;
 
-        // ¡‚Ì‡”Ô‚ğƒRƒs[‚·‚é
-        List<tekiScript> chainList = new List<tekiScript>(holdingOrder);
+        // ãƒãƒ£ãƒ¼ã‚¸ãŒæº€ã‚¿ãƒ³ã®æ•µã ã‘ã‚’ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ï¼ˆãƒªã‚¹ãƒˆã®ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆï¼‰
+        List<tekiScript> chainList = new List<tekiScript>();
 
-        for (int i = 0; i < chainList.Count; i++)
+        foreach (var enemy in holdingOrder)
         {
-            tekiScript enemy = chainList[i];
-
-            if (enemy != null)
+            if (enemy != null && enemy.charge != null)
             {
-                FireLightning(enemy);
-                yield return new WaitForSeconds(0.3f);
+                // ãƒãƒ£ãƒ¼ã‚¸ãŒæº€ã‚¿ãƒ³ã‹ãƒã‚§ãƒƒã‚¯
+                if (enemy.charge.CurrentCharge >= enemy.charge.MaxChargeValue)
+                {
+                    chainList.Add(enemy);
+                }
             }
         }
 
-        Debug.Log(" ˜A½—‹ I—¹");
+       // holdingOrder.Clear();
+
+        // æº€ã‚¿ãƒ³ã®æ•µãŒã„ãªã„å ´åˆã¯çµ‚äº†
+        if (chainList.Count == 0)
+        {
+            holdingOrder.Clear();
+            isExecutingChain = false;
+            yield break;
+        }
+
+        // â˜… é€£é–é–‹å§‹å‰ã«åº§æ¨™ãƒªã‚¹ãƒˆã‚’ä½œæˆï¼ˆæ•µãŒé€”ä¸­ã§æ¶ˆãˆã¦ã‚‚å¤§ä¸ˆå¤«ï¼‰
+        List<Vector3> points = new List<Vector3>();
+        points.Add(transform.position);
+
+        List<tekiScript> validEnemies = new List<tekiScript>();
+        foreach (var enemy in chainList)
+        {
+            if (enemy != null)
+            {
+                points.Add(enemy.transform.position);
+                validEnemies.Add(enemy);
+            }
+        }
+
+        // é€£é–å®Ÿè¡Œ
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            Vector3 startPos = points[i];
+            Vector3 endPos = points[i + 1];
+
+            CreateChainEffect(startPos, endPos);
+
+            // i < validEnemies.Countã§ç¯„å›²ãƒã‚§ãƒƒã‚¯
+            if (i < validEnemies.Count)
+            {
+                tekiScript targetEnemy = validEnemies[i];
+
+                // æ•µãŒã¾ã å­˜åœ¨ã—ã¦ã„ã‚‹ã‹ç¢ºèª
+                if (targetEnemy != null && targetEnemy.charge != null)
+                {
+                    ShowLightningEffect(endPos);
+                    yield return new WaitForSeconds(0.05f);
+
+                    targetEnemy.charge.ForceDefeatEnemy(
+                        targetEnemy.gameObject,
+                        targetEnemy.AppEnemy
+                    );
+                }
+            }
+
+            yield return new WaitForSeconds(chainDelay);
+        }
+
+        isExecutingChain = false;
     }
 
-
-    //—‹‚Ì”­¶
-    void FireLightning(tekiScript enemy)
+    void ShowLightningEffect(Vector3 position)
     {
         if (lightningPrefab == null) return;
 
-        Instantiate(
+        GameObject lightning = Instantiate(
             lightningPrefab,
-            enemy.transform.position,
+            position,
             Quaternion.identity
         );
+
+        Destroy(lightning, hitEffectDuration);
     }
 
+    void CreateChainEffect(Vector3 startPos, Vector3 endPos)
+    {
+        if (lightningPrefab == null) return;
 
+        Vector3 direction = endPos - startPos;
+        float distance = direction.magnitude;
+
+        if (distance < 0.1f) return;
+
+        Vector3 centerPos = startPos + direction * 0.5f;
+
+        GameObject chainEffect = Instantiate(
+            lightningPrefab,
+            centerPos,
+            Quaternion.identity
+        );
+
+        chainEffect.transform.forward = direction.normalized;
+
+        if (adjustScale)
+        {
+            Vector3 scale = chainEffect.transform.localScale;
+            scale.z = distance / baseDistance;
+            chainEffect.transform.localScale = scale;
+        }
+
+        Destroy(chainEffect, chainEffectDuration);
+    }
 }

@@ -7,6 +7,7 @@ public class tekiScript : MonoBehaviour
 {
     private GameObject target;
     private float speed = 0.05f;
+
     [SerializeField] private float attackDistance = 1.5f;
 
     public string word;
@@ -19,56 +20,84 @@ public class tekiScript : MonoBehaviour
     public DangoBehaviorScript dango;
 
     private Renderer rend;
-
     private Animator anim;
 
-    //= ここから追加 ==========
     [Header("エフェクト設定")]
     [SerializeField] private GameObject defeatEffectPrefab;
-    [SerializeField] private GameObject collisionEffectPrefab;
     [SerializeField] private float effectDuration = 2f;
-    //ここまで追加
 
-    // private TextMeshPro textDisplay;
+    // ================================
+    // ★ 撃破状態管理（ここが重要）
+    // ================================
+    public bool IsDefeated { get; private set; } = false;
+
+    // ★ 撃破を確定させる唯一の入口
+    public bool TryDefeat()
+    {
+        if (IsDefeated) return false;
+        IsDefeated = true;
+        return true;
+    }
+
+    // 撃破エフェクト取得用（外部から参照）
+    public GameObject DefeatEffectPrefab => defeatEffectPrefab;
 
     public enum SPEED
     {
-        Zero = 0,
-        One = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5,
+        Zero,
+        One,
+        Two,
+        Three,
+        Four,
+        Five
     }
 
+    public SPEED speedtime = SPEED.Five;
 
-    public SPEED speedtime = SPEED.One;
-    public void Speed()
+    void Start()
     {
-        if (speedtime == SPEED.One)
+        anim = GetComponent<Animator>();
+        target = GameObject.FindGameObjectWithTag("Player");
+
+        rend = GetComponent<Renderer>();
+        if (rend != null)
         {
-            speed = 0.02f;
+            rend.material.color = enemyColor;
         }
-        else if (speedtime == SPEED.Two)
+
+        Speed();
+
+        if (charge != null)
         {
-            speed = 0.1f;
+            charge.Tystar(0);
         }
-        else if (speedtime == SPEED.Three)
+    }
+
+    void Update()
+    {
+        State();
+
+        if (target == null) return;
+
+        transform.LookAt(target.transform);
+
+        float distance = Vector3.Distance(
+            transform.position,
+            target.transform.position
+        );
+
+        if (distance <= attackDistance)
         {
-            speed = 0.15f;
+            if (anim != null)
+            {
+                anim.SetTrigger("Attack");
+            }
+
+            speed = 0f;
+            return;
         }
-        else if (speedtime == SPEED.Four)
-        {
-            speed = 0.2f;
-        }
-        else if (speedtime == SPEED.Five)
-        {
-            speed = 0.9f;
-        }
-        else if (speedtime == SPEED.Zero)
-        {
-            speed = 0.01f;
-        }
+
+        transform.position += transform.forward * speed*Time.deltaTime;
     }
 
     public void State()
@@ -78,68 +107,27 @@ public class tekiScript : MonoBehaviour
             case PlayerStateScript.PlayerState.GinoAttack:
                 GinoAttack();
                 break;
-            case PlayerStateScript.PlayerState.None:
-                None();
-                break;
         }
-
     }
 
-    void Start()
+    public void Speed()
     {
-        anim = GetComponent<Animator>();
-
-
-        Speed();
-        target = GameObject.FindGameObjectWithTag("Player");
-        rend = GetComponent<Renderer>();
-        if (rend != null)
+        switch (speedtime)
         {
-            rend.material.color = enemyColor;
-        }
-        charge.Tystar(0);
-    }
-
-    void Update()
-    {
-        State();
-        transform.LookAt(target.transform);
-        // ★ プレイヤーとの距離チェック
-        float distance = Vector3.Distance(transform.position, target.transform.position);
-
-        if (distance <= attackDistance)
-        {
-            // 攻撃アニメーションを再生
-            if (anim != null)
-            {
-                anim.SetTrigger("Attack");
-            }
-
-            // 近づきすぎる前に止める（必要なら）
-            speed = 0f;
-
-            return; // これ以上前進させない
-        }
-        transform.position += transform.forward * speed;
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            // プレイヤーからPlayerHealthを取得
-            Playerscrpt playerHealth = other.GetComponent<Playerscrpt>();
-            if (playerHealth != null)
-            {
-                
-             playerHealth.TakeDamage(1); // 敵のダメージ量
-            }
+            case SPEED.Zero: speed = 1f; break;
+            case SPEED.One: speed = 2f; break;
+            case SPEED.Two: speed = 3f; break;
+            case SPEED.Three: speed = 4f; break;
+            case SPEED.Four: speed = 5f; break;
+            case SPEED.Five: speed = 10f; break;
         }
     }
 
     public void GinoAttack()
     {
-        //  Debug.Log("ギノキー反応");
-        if (Input.GetKey(assignedKey))//キー入力を受付してる
+        if (Lightning.isExecutingChain) return;
+
+        if (Input.GetKey(assignedKey))
         {
             charge.Tystar(+1);
             charge.EntarWithCallback(gameObject, AppEnemy);
@@ -149,41 +137,15 @@ public class tekiScript : MonoBehaviour
             charge.Tystar(-1);
         }
     }
-    void BossAttack()
+
+    void OnTriggerEnter(Collider other)
     {
-        //  Debug.Log("ボスキー反応");
-    }
-    void Defense()
-    {
-    }
-    void None()
-    {
-        // Debug.Log("無効キー反応");
-    }
-    public bool TryReflect()
-    {
-        // 書かれたキー(assignedKey)を押した瞬間だけ判定
-        return Input.GetKeyDown(assignedKey);
-    }
-    // 敵が倒されたときに呼び出すメソッド（ChargeScriptから呼ばれる想定）
-    public void OnDefeat()
-    {   
-        // 撃破エフェクトを再生
-        PlayEffect(defeatEffectPrefab);
-        if (dango != null)
+        if (!other.CompareTag("Player")) return;
+
+        Playerscrpt playerHealth = other.GetComponent<Playerscrpt>();
+        if (playerHealth != null)
         {
-            dango.OnDestroyed();
+            playerHealth.TakeDamage(1);
         }
     }
-
-    // エフェクトを再生するメソッド
-    private void PlayEffect(GameObject effectPrefab)
-    {
-        if (effectPrefab != null)
-        {
-            GameObject effect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-            Destroy(effect, effectDuration);
-        }
-    }
-
 }
