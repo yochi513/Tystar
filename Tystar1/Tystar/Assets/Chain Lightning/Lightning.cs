@@ -93,21 +93,21 @@ public class Lightning : MonoBehaviour
             }
         }
 
-        holdingOrder.Clear();
+       // holdingOrder.Clear();
 
         // 満タンの敵がいない場合は終了
         if (chainList.Count == 0)
         {
+            holdingOrder.Clear();
             isExecutingChain = false;
             yield break;
         }
 
         // ★ 連鎖開始前に座標リストを作成（敵が途中で消えても大丈夫）
         List<Vector3> points = new List<Vector3>();
-        List<tekiScript> validEnemies = new List<tekiScript>();
-
         points.Add(transform.position);
 
+        List<tekiScript> validEnemies = new List<tekiScript>();
         foreach (var enemy in chainList)
         {
             if (enemy != null)
