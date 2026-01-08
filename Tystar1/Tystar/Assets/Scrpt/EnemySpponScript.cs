@@ -26,7 +26,7 @@ public class EnemySpponScript : MonoBehaviour
     private int totalGinoMax = 0;
     private int totalScore = 0;
     private int currentWave = 1;
-    private int stopGinoCount = 11;
+    private int stopGinoCount = 15;
     private bool secondWaveSpawned = false;
     private bool canSpawn = true;
     private bool isSpawning = false;//ウェーブの進行がどうか

@@ -1,24 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
-    public float HP = 10;
+    public float HP = 1500;
+    private float MaxHP = 1500;
     [SerializeField] float bossTime = 5f;
     [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1消費ごとのダメージ量
-
+    [SerializeField] private Image bossHPGaugeImage;
 
     void Start()
     {
+        if (bossHPGaugeImage == null)
+        {
+            // GameObjectの名前やタグで検索する方法
+            GameObject gaugeObj = GameObject.Find("Bossゲージ本体"); // ★ゲージオブジェクトの名前に合わせて変更
+            if (gaugeObj != null)
+            {
+                bossHPGaugeImage = gaugeObj.GetComponent<Image>();
+            }
+        }
+
+        //保存されているHPがあれば復元、なければ初期値
+        if (staticScript.BossHP > 0)
+        {
+            HP = staticScript.BossHP;
+            MaxHP = staticScript.BossMaxHP;
+        }
+        else
+        {
+            // ★追加★ 初回起動時はMaxHPを保存
+            MaxHP = HP;
+            staticScript.BossMaxHP = MaxHP;
+            staticScript.BossHP = HP;
+        }
+
         // ボス戦開始時にステートをBossAttackに変更　るい追加
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.BossAttack;
 
         Debug.Log("ボス戦開始！ステート: " + PlayerStateScript.CurrentState);
 
-        // CHゲージを満タンにする（50が最大値）
-        staticScript.SaveCh = 50f;
+        // CHゲージを満タンにする（デバッグ用）
+        //staticScript.SaveCh = 50f;
+
+        //HPゲージを満タンで初期化（デバッグ用）
+        UpdateBossHPGauge();
 
 
         StartCoroutine(BossTimer());
@@ -43,6 +72,12 @@ public class BossScript : MonoBehaviour
                 float damage = damagePerCharge;
                 HP -= damage;
 
+                //HPを保存
+                staticScript.BossHP = HP;
+
+                //HPゲージを更新
+                UpdateBossHPGauge();
+
                 // HPが0以下になったら倒す
                 if (HP <= 0)
                 {
@@ -52,8 +87,24 @@ public class BossScript : MonoBehaviour
         }
     }
 
+    //HPゲージ更新メソッド
+    private void UpdateBossHPGauge()
+    {
+        if (bossHPGaugeImage != null)
+        {
+            // HPの割合を計算（0～1の範囲）
+            float hpRatio = Mathf.Clamp01(HP / MaxHP);
+            // fillAmountを更新（右から左に減る）
+            bossHPGaugeImage.fillAmount = hpRatio;
+        }
+    }
+
     private void OnBossDefeated()
     {
+        //ボス撃破時にHPをリセット
+        staticScript.BossHP = 0;
+        staticScript.BossMaxHP = 1500f;
+
         Debug.Log("ボスを倒した!");
         // ボス撃破時の処理（エフェクトなど）
         // TODO: 勝利演出やシーン遷移

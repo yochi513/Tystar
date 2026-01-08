@@ -446,7 +446,7 @@ MonoBehaviour:
   charge: {fileID: -1296003703690229242}
   AppEnemy: {fileID: 0}
   dango: {fileID: 0}
-  defeatEffectPrefab: {fileID: 0}
+  defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
   speedtime: 2

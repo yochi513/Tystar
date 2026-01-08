@@ -11,4 +11,8 @@ public class staticScript : MonoBehaviour
     public static int SaveKillCount;
     public static int SaveMaxGino;
     public static float SaveCh;
+
+    //É{ÉXÇÃHP
+    public static float BossHP = 1500f;
+    public static float BossMaxHP = 1500f;
 }
