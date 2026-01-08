@@ -76,21 +76,18 @@ public class ChargeScript : MonoBehaviour
         Lightning lightning = FindObjectOfType<Lightning>();
         if (lightning != null && lightning.CanStartChain())
         {
+            lightning.StartChain();
             // チャージ消費（雷発動前にリセット）
             currentCharge = 0f;
             UpdateGauge();
 
-            // 雷を発動
-            lightning.StartChain();
         }
 
         // 通常攻撃を併用したい場合だけ使う
         // ForceDefeatEnemy(target, appearScript);
     }
 
-    // ─────────────────────────
-    // 雷・即死用（Lightning専用）
-    // ─────────────────────────
+
     public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript)
     {
         if (target == null) return;
@@ -111,7 +108,7 @@ public class ChargeScript : MonoBehaviour
 
     // ─────────────────────────
     // UI更新
-    // ─────────────────────────
+    // ─────────────────────────    
     void UpdateGauge()
     {
         if (Char != null)
