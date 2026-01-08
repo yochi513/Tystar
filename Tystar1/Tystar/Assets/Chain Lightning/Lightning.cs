@@ -45,7 +45,27 @@ public class Lightning : MonoBehaviour
         }
     }
 
-    // ★ 外部から呼ぶ専用メソッド
+    // ★ 外部から呼ぶ専用メソッド（ChargeScriptから呼ばれる前にチェック）
+    public bool CanStartChain()
+    {
+        if (isExecutingChain) return false;
+        if (holdingOrder.Count == 0) return false;
+
+        // チャージが満タンの敵が1体でもいるかチェック
+        foreach (var enemy in holdingOrder)
+        {
+            if (enemy != null && enemy.charge != null)
+            {
+                if (enemy.charge.CurrentCharge >= enemy.charge.MaxChargeValue)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void StartChain()
     {
         if (isExecutingChain) return;
@@ -58,20 +78,13 @@ public class Lightning : MonoBehaviour
     {
         isExecutingChain = true;
 
-        // ★ まず最初に、チャージが満タンの敵だけをフィルタリング
+        // ★ チャージが満タンの敵だけをフィルタリング（リストのコピーを作成）
         List<tekiScript> chainList = new List<tekiScript>();
-        ChargeScript sharedCharge = null;
 
         foreach (var enemy in holdingOrder)
         {
             if (enemy != null && enemy.charge != null)
             {
-                // 共有ChargeScriptの参照を保持
-                if (sharedCharge == null)
-                {
-                    sharedCharge = enemy.charge;
-                }
-
                 // チャージが満タンかチェック
                 if (enemy.charge.CurrentCharge >= enemy.charge.MaxChargeValue)
                 {
@@ -87,12 +100,6 @@ public class Lightning : MonoBehaviour
         {
             isExecutingChain = false;
             yield break;
-        }
-
-        // ★ フィルタリング後、連鎖開始前にゲージをリセット（1回だけ）
-        if (sharedCharge != null)
-        {
-            sharedCharge.ResetCharge();
         }
 
         // ★ 連鎖開始前に座標リストを作成（敵が途中で消えても大丈夫）
