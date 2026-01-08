@@ -78,7 +78,7 @@ public class Lightning : MonoBehaviour
     {
         isExecutingChain = true;
 
-        // ★ チャージが満タンの敵だけをフィルタリング（リストのコピーを作成）
+        // チャージが満タンの敵だけをフィルタリング（リストのコピーを作成）
         List<tekiScript> chainList = new List<tekiScript>();
 
         foreach (var enemy in holdingOrder)
@@ -117,7 +117,7 @@ public class Lightning : MonoBehaviour
             }
         }
 
-        // ★ 連鎖実行
+        // 連鎖実行
         for (int i = 0; i < points.Count - 1; i++)
         {
             Vector3 startPos = points[i];
