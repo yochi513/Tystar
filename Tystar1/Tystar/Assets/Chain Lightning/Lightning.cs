@@ -149,6 +149,21 @@ public class Lightning : MonoBehaviour
         isExecutingChain = false;
     }
 
+    void OnEnable()
+    {
+        isExecutingChain = false;
+        holdingOrder.Clear();
+        StopAllCoroutines(); // 念のため残っているコルーチンを停止
+    }
+
+    // ★ 外部からリセットできるメソッド（必要に応じて）
+    public void ResetChainState()
+    {
+        StopAllCoroutines();
+        isExecutingChain = false;
+        holdingOrder.Clear();
+        Debug.Log("Lightning state reset");
+    }
     void ShowLightningEffect(Vector3 position)
     {
         if (lightningPrefab == null) return;
