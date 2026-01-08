@@ -81,7 +81,7 @@ public class tekiScript : MonoBehaviour
             return;
         }
 
-        transform.position += transform.forward * speed;
+        transform.position += transform.forward * speed*Time.deltaTime;
     }
 
     public void State()
@@ -101,12 +101,12 @@ public class tekiScript : MonoBehaviour
     {
         switch (speedtime)
         {
-            case SPEED.Zero: speed = 0.01f; break;
-            case SPEED.One: speed = 0.02f; break;
-            case SPEED.Two: speed = 0.1f; break;
-            case SPEED.Three: speed = 0.15f; break;
-            case SPEED.Four: speed = 0.2f; break;
-            case SPEED.Five: speed = 0.9f; break;
+            case SPEED.Zero: speed = 1f; break;
+            case SPEED.One: speed = 2f; break;
+            case SPEED.Two: speed = 3f; break;
+            case SPEED.Three: speed = 4f; break;
+            case SPEED.Four: speed = 5f; break;
+            case SPEED.Five: speed = 10f; break;
         }
     }
 
