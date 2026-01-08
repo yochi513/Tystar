@@ -101,17 +101,19 @@ public class BossScript : MonoBehaviour
 
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
 
-        StartCoroutine(DestroyAndReturn(2f));
+        staticScript.IsGoingToBoss = false;  // ← 追加（ボス戦後）
+
+        StartCoroutine(DestroyAndGoToVideo(2f));
     }
 
-    private IEnumerator DestroyAndReturn(float delay)
+    private IEnumerator DestroyAndGoToVideo(float delay)
     {
         yield return new WaitForSeconds(delay);
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
-            Debug.Log("ボス撃破！元のシーンに戻ります");
-            SceneManager.LoadScene(staticScript.LastSceneName);
+            Debug.Log("ボス撃破！動画シーンへ移動します");
+            SceneManager.LoadScene("VideoTransitionScene");
         }
 
         Destroy(gameObject);
@@ -121,12 +123,14 @@ public class BossScript : MonoBehaviour
     {
         yield return new WaitForSeconds(bossTime);
 
-        Debug.Log("時間切れ！元のシーンに戻ります");
+        Debug.Log("時間切れ！動画シーンへ移動します");
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
+
+        staticScript.IsGoingToBoss = false;  // ← 追加（ボス戦後）
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
-            SceneManager.LoadScene(staticScript.LastSceneName);
+            SceneManager.LoadScene("VideoTransitionScene");
         }
         else
         {
