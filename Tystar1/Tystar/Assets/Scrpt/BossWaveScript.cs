@@ -37,6 +37,7 @@ public class BossWaveScript : MonoBehaviour
         currentLetter = (char)('A' + index);
         currentKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), currentLetter.ToString());
         currentSprite = Alphabet[index];
+       
         // 対応スプライトを選ぶ
         // ボール生成
         ball = Instantiate(ballPrefab, supar.position, Quaternion.identity);
@@ -51,6 +52,13 @@ public class BossWaveScript : MonoBehaviour
         if (Input.GetKeyDown(currentKey))
         {
             ball.GetComponent<BallScript>().Reflect();
+            // ★ボール生成前にスパルのアニメーションを再生
+            Animator suparAnimator = supar.GetComponent<Animator>();
+            if (suparAnimator != null)
+            {
+                suparAnimator.SetTrigger("Attack"); // トリガー名は実際のアニメーターに合わせて変更
+                Debug.Log("アニメーション呼ばれたよ");
+            }
             StartNextPhase();
         }
 
