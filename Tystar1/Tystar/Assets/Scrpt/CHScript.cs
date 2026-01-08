@@ -18,25 +18,15 @@ public class CHScript : MonoBehaviour
         if (beamEffect == null)
         {
             beamEffect = GetComponentInChildren<ParticleSystem>();
-
             if (beamEffect == null)
             {
                 Debug.LogError("ParticleSystemが見つかりません！");
             }
-            else
-            {
-                Debug.Log("子オブジェクトからbeamEffectを自動取得: " + beamEffect.name);
-            }
-        }
-        else
-        {
-            Debug.Log("beamEffect設定OK: " + beamEffect.name);
         }
 
         if (beamEffect != null)
         {
             beamEffect.Stop();
-            Debug.Log("エフェクトを停止状態に設定");
         }
     }
 
@@ -46,14 +36,19 @@ public class CHScript : MonoBehaviour
         Minch = Mathf.Clamp(Minch, 0, Maxch);
         UpdateCh();
 
-        // ボスフェーズのみゲージ消費を有効化
+        // ボスフェーズのみゲージ消費とエフェクトを有効化
         if (PlayerStateScript.CurrentState == PlayerStateScript.PlayerState.BossAttack)
         {
             Ae();
         }
         else
         {
-           //毎フレーム呼び出されるので一時的に無効化中ByRen　 Debug.Log("BossAttack状態ではありません: " + PlayerStateScript.CurrentState);
+            // ボスフェーズ以外ではエフェクトを停止
+            if (isPlayingEffect && beamEffect != null)
+            {
+                beamEffect.Stop();
+                isPlayingEffect = false;
+            }
         }
     }
 
@@ -69,11 +64,11 @@ public class CHScript : MonoBehaviour
         {
             ch.fillAmount = Minch / Maxch;
         }
-        //Ae();
     }
 
     public void Ae()
     {
+        // 雷エフェクト実行中は何もしない
         if (Lightning.isExecutingChain)
         {
             if (isPlayingEffect && beamEffect != null)
@@ -82,71 +77,36 @@ public class CHScript : MonoBehaviour
                 isPlayingEffect = false;
             }
             return;
-        }//雷エフェクトが実行されているかどうか
+        }
 
-        if (Input.GetKey(KeyCode.Return))
-            // まず、メソッドが呼ばれているか確認
-            Debug.Log("Ae()メソッドが呼ばれました");
-
-        // エンターキーの状態を確認
         bool enterPressed = Input.GetKey(KeyCode.Return);
-        Debug.Log($"エンターキー: {enterPressed}, Minch: {Minch}, isPlayingEffect: {isPlayingEffect}");
 
         if (enterPressed && Minch > 0)
         {
-            Debug.Log("条件を満たしました！エフェクト再生処理に入ります");
+            // チャージを消費（毎フレーム）
+            Minch -= 10f * Time.deltaTime; // 1秒で10消費
+            Minch = Mathf.Max(Minch, 0);
 
-            Minch -= 0.1f;
-
-            // エフェクトを再生開始
-            if (!isPlayingEffect)
+            // エフェクトを再生
+            if (!isPlayingEffect && beamEffect != null)
             {
-                Debug.Log("isPlayingEffectがfalseなので再生開始します");
-
-                if (beamEffect != null)
-                {
-                    Debug.Log("beamEffect.Play() を呼び出します");
-                    beamEffect.Play();
-
-                    // エフェクトが実際に再生されているか確認
-                    Debug.Log($"エフェクト再生状態: isPlaying={beamEffect.isPlaying}, isEmitting={beamEffect.isEmitting}, particleCount={beamEffect.particleCount}");
-
-                    isPlayingEffect = true;
-                    Debug.Log("ビーム発射開始！");
-                }
-                else
-                {
-                    Debug.LogError("beamEffectがnullです！");
-                }
-            }
-            else
-            {
-                Debug.Log("すでに再生中です");
+                beamEffect.Play();
+                isPlayingEffect = true;
+                Debug.Log("ビーム発射開始！");
             }
         }
         else
         {
-            if (!enterPressed)
-            {
-                Debug.Log("エンターキーが押されていません");
-            }
-            if (Minch <= 0)
-            {
-                Debug.Log("Minchが0以下です");
-            }
-
             // キーを離したらエフェクトを停止
-            if (isPlayingEffect)
+            if (isPlayingEffect && beamEffect != null)
             {
-                if (beamEffect != null)
-                {
-                    beamEffect.Stop();
-                    isPlayingEffect = false;
-                    Debug.Log("ビーム停止");
-                }
+                beamEffect.Stop();
+                isPlayingEffect = false;
+                Debug.Log("ビーム停止");
             }
         }
 
+        // 静的変数に反映
         staticScript.SaveCh = Minch;
     }
 }

@@ -2415,10 +2415,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6cf05801538a24641a4d1ae9ade5fc67, type: 3}
   - {fileID: 21300000, guid: 7db5097b19fff01498fe1c693025326e, type: 3}
   BallCH: {fileID: 3245772224451257827, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
-  currentKey: 0
-  Ball: {fileID: 4253522291713531899, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
   playerState: {fileID: 1350687300}
-  BALLCH: {fileID: 3245772224451257827, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+  Ball: {fileID: 4253522291713531899, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+  currentKey: 0
 --- !u!95 &1126465318
 Animator:
   serializedVersion: 5
@@ -2751,10 +2750,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89565dfe2dd1c94b8418b8e3c458091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 5000
+  HP: 10
+  maxHP: 10
   bossTime: 10
-  damagePerCharge: 0.1
-  damageInterval: 0.2
+  damagePerSecond: 0.5
+  hitAnimationInterval: 0.1
+  hpGaugeImage: {fileID: 1684904562}
 --- !u!114 &1350687299
 MonoBehaviour:
   m_ObjectHideFlags: 0
