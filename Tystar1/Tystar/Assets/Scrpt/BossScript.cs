@@ -1,63 +1,92 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BossScript : MonoBehaviour
 {
     public float HP = 10;
-    [SerializeField] float bossTime = 5f;
-    [SerializeField] private float damagePerCharge = 0.1f;
-    [SerializeField] private float damageInterval = 0.2f; // ダメージ&アニメーション間隔
+    [SerializeField] float maxHP = 10;
+    [SerializeField] float bossTime = 30f;
+    [SerializeField] private float damagePerSecond = 0.5f;
+    [SerializeField] private float hitAnimationInterval = 0.3f;
+    [SerializeField] Image hpGaugeImage;
 
     private Animator animator;
-    private float lastDamageTime = 0f;
+    private float lastHitAnimTime = 0f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.BossAttack;
         Debug.Log("ボス戦開始! ステート: " + PlayerStateScript.CurrentState);
-        staticScript.SaveCh = 50f;
+        Debug.Log("初期チャージ量: " + staticScript.SaveCh);
+
+        maxHP = HP;
+        UpdateHPGauge();
+
         StartCoroutine(BossTimer());
     }
 
     void Update()
     {
-        CheckBossDamage();
+        CheckBossAttack();
     }
 
-    private void CheckBossDamage()
+    private void CheckBossAttack()
     {
-        if (PlayerStateScript.CurrentState == PlayerStateScript.PlayerState.BossAttack
-            && Input.GetKey(KeyCode.Return))
+        Debug.Log($"ステート: {PlayerStateScript.CurrentState}");
+
+        if (PlayerStateScript.CurrentState != PlayerStateScript.PlayerState.BossAttack)
         {
-            if (staticScript.SaveCh > 0 && Time.time >= lastDamageTime + damageInterval)
+            Debug.Log(" ボス攻撃ステートではありません");
+            return;
+        }
+
+        Debug.Log($"Enterキー: {Input.GetKey(KeyCode.Return)}, チャージ: {staticScript.SaveCh}");
+
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Debug.Log(" Enterキー押されています");
+
+            if (staticScript.SaveCh > 0)
             {
-                ApplyDamage();
+                Debug.Log(" チャージあり！ダメージ処理開始");
+
+                float damage = damagePerSecond * Time.deltaTime;
+                HP -= damage;
+
+                Debug.Log($" ダメージ! HP: {HP:F2}");
+
+                UpdateHPGauge();
+
+                if (Time.time >= lastHitAnimTime + hitAnimationInterval)
+                {
+                    if (animator != null)
+                    {
+                        animator.SetTrigger("Hit");
+                    }
+                    lastHitAnimTime = Time.time;
+                }
+
+                if (HP <= 0)
+                {
+                    OnBossDefeated();
+                }
+            }
+            else
+            {
+                Debug.Log("チャージがありません");
             }
         }
     }
 
-    private void ApplyDamage()
+    // HPゲージ更新メソッド
+    private void UpdateHPGauge()
     {
-        // ダメージ処理
-        float damage = damagePerCharge;
-        HP -= damage;
-        lastDamageTime = Time.time;
-
-        // 被弾アニメーション再生(連続再生)
-        if (animator != null)
+        if (hpGaugeImage != null)
         {
-            animator.SetTrigger("Hit");
-        }
-
-        Debug.Log($"ボスにダメージ! 残りHP: {HP}");
-
-        // ボス撃破チェック
-        if (HP <= 0)
-        {
-            OnBossDefeated();
+            hpGaugeImage.fillAmount = HP / maxHP;
         }
     }
 
@@ -65,30 +94,38 @@ public class BossScript : MonoBehaviour
     {
         Debug.Log("ボスを倒した!");
 
-        // 撃破アニメーションがあれば再生
         if (animator != null)
         {
             animator.SetTrigger("Death");
         }
 
-        // 少し待ってから削除(撃破アニメーションを見せるため)
-        StartCoroutine(DestroyAfterDelay(1f));
+        PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
+
+        StartCoroutine(DestroyAndReturn(2f));
     }
 
-    private IEnumerator DestroyAfterDelay(float delay)
+    private IEnumerator DestroyAndReturn(float delay)
     {
         yield return new WaitForSeconds(delay);
+
+        if (!string.IsNullOrEmpty(staticScript.LastSceneName))
+        {
+            Debug.Log("ボス撃破！元のシーンに戻ります");
+            SceneManager.LoadScene(staticScript.LastSceneName);
+        }
+
         Destroy(gameObject);
     }
 
     private IEnumerator BossTimer()
     {
         yield return new WaitForSeconds(bossTime);
+
+        Debug.Log("時間切れ！元のシーンに戻ります");
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
-            Debug.Log("Boss戦終了! 元のシーンに戻ります");
             SceneManager.LoadScene(staticScript.LastSceneName);
         }
         else
