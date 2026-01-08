@@ -45,7 +45,8 @@ public class Lightning : MonoBehaviour
         }
     }
 
-    // ★ 外部から呼ぶ専用メソッド（ChargeScriptから呼ばれる前にチェック）
+
+    //  外部から呼ぶ専用メソッド（ChargeScriptから呼ばれる前にチェック）
     public bool CanStartChain()
     {
         if (isExecutingChain) return false;
