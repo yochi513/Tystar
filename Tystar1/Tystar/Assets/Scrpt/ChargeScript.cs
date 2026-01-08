@@ -62,7 +62,7 @@ public class ChargeScript : MonoBehaviour
 
     public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
-        if (!Input.GetKeyDown(KeyCode.Return)) return;
+        if (!Input.GetKey(KeyCode.Return)) return;
 
         Lightning lightning = FindObjectOfType<Lightning>();
         if (lightning != null && lightning.CanStartChain())

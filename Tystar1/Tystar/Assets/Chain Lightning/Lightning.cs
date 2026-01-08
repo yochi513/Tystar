@@ -103,7 +103,7 @@ public class Lightning : MonoBehaviour
             yield break;
         }
 
-        // ★ 連鎖開始前に座標リストを作成（敵が途中で消えても大丈夫）
+        // 連鎖開始前に座標リストを作成（敵が途中で消えても大丈夫）
         List<Vector3> points = new List<Vector3>();
         points.Add(transform.position);
 
