@@ -1,144 +1,125 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class ChargeScript : MonoBehaviour
 {
     [SerializeField] Image Char;
-    private float MaxCharge = 500f;
+
+    [SerializeField] private float MaxCharge = 150f;
     private float currentCharge = 0f;
+
+    // 外部参照用（Lightning側など）
+    public float CurrentCharge => currentCharge;
+    public float MaxChargeValue => MaxCharge;
 
     public enum Selection
     {
-        Zero = 0,
-        One = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5,
-        Six = 6,
-        Seven = 7
+        Zero,
+        One,
+        Two,
+        Three,
+        Four,
+        Five,
+        Six,
+        Seven
     }
 
     public Selection Chargetime = Selection.Three;
 
-    public void select()
+    void Awake()
     {
-        if (Chargetime == Selection.Two)
+        SelectCharge();
+        UpdateGauge();
+    }
+
+    void SelectCharge()
+    {
+        switch (Chargetime)
         {
-            MaxCharge = 100f;
-        }
-        else if (Chargetime == Selection.Three)
-        {
-            MaxCharge = 150f;
-        }
-        else if (Chargetime == Selection.Four)
-        {
-            MaxCharge = 200f;
-        }
-        else if (Chargetime == Selection.Five)
-        {
-            MaxCharge = 250f;
-        }
-        else if (Chargetime == Selection.Six)
-        {
-            MaxCharge = 350f;
-        }
-        else if (Chargetime == Selection.Seven)
-        {
-            MaxCharge = 500f;
-        }
-        else if (Chargetime == Selection.One)
-        {
-            MaxCharge = 50f;
-        }
-        else if (Chargetime == Selection.Zero)
-        {
-            MaxCharge = 1f;
+            case Selection.Zero: MaxCharge = 1f; break;
+            case Selection.One: MaxCharge = 50f; break;
+            case Selection.Two: MaxCharge = 100f; break;
+            case Selection.Three: MaxCharge = 150f; break;
+            case Selection.Four: MaxCharge = 200f; break;
+            case Selection.Five: MaxCharge = 250f; break;
+            case Selection.Six: MaxCharge = 350f; break;
+            case Selection.Seven: MaxCharge = 500f; break;
         }
     }
 
-    // ゲージ加算（敵から呼び出される）
+    // ─────────────────────────
+    // チャージ加減算（tekiScript から呼ばれる）
+    // ─────────────────────────
     public void Tystar(int amount)
     {
-        select();
-        if (amount == 1)
-        {
-            currentCharge++;
-        }
+        SelectCharge();
+
+        if (amount > 0)
+            currentCharge += 1f;
         else
-        {
-            currentCharge--;
-        }
+            currentCharge -= 1f;
+
         currentCharge = Mathf.Clamp(currentCharge, 0, MaxCharge);
         UpdateGauge();
     }
 
-    // UI更新
-    private void UpdateGauge()
+    // ─────────────────────────
+    // Enterで発動（チャージMax必須）
+    // ─────────────────────────
+    public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
-        select();
+        // チャージ未完了なら終了
+        if (currentCharge < MaxCharge) return;
+
+        // Enterが押された瞬間のみ
+        if (!Input.GetKeyDown(KeyCode.Return)) return;
+
+        // 雷を発動
+        Lightning lightning = FindObjectOfType<Lightning>();
+        if (lightning != null)
+        {
+            lightning.StartChain();
+        }
+
+        // 通常攻撃を併用したい場合だけ使う
+        // ForceDefeatEnemy(target, appearScript);
+
+        // チャージ消費
+        currentCharge = 0f;
+        UpdateGauge();
+    }
+
+    // ─────────────────────────
+    // 雷・即死用（Lightning専用）
+    // ─────────────────────────
+    public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript)
+    {
+        if (target == null) return;
+
+        tekiScript enemy = target.GetComponent<tekiScript>();
+        if (enemy != null)
+        {
+            enemy.OnDefeat();
+        }
+
+        if (appearScript != null)
+        {
+            appearScript.ReportEnemyDefeated(100);
+        }
+
+        Destroy(target);
+    }
+
+    // ─────────────────────────
+    // UI更新
+    // ─────────────────────────
+    void UpdateGauge()
+    {
         if (Char != null)
         {
             Char.fillAmount = currentCharge / MaxCharge;
         }
     }
-
-    // 敵を消す時に出現元に通知（通常のチャージ攻撃用）
-    public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
-    {
-        select();
-        if (currentCharge >= MaxCharge && Input.GetKeyDown(KeyCode.Return))
-        {
-            // 敵を削除する前にエフェクトを再生
-            tekiScript enemyScript = target.GetComponent<tekiScript>();
-            if (enemyScript != null)
-            {
-                enemyScript.OnDefeat();
-            }
-
-            if (appearScript != null)
-            {
-                appearScript.ReportEnemyDefeated(100); // 報告
-            }
-
-            Destroy(target);
-            currentCharge = 0f;
-            UpdateGauge();
-        }
-    }
-
-    // ★ 連鎖雷専用：チャージ条件を無視して即座に敵を倒す
-    public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript)
-    {
-        if (target == null) return;
-
-        // 敵を削除する前にエフェクトを再生
-        tekiScript enemyScript = target.GetComponent<tekiScript>();
-        if (enemyScript != null)
-        {
-            enemyScript.OnDefeat();
-        }
-
-        if (appearScript != null)
-        {
-            appearScript.ReportEnemyDefeated(100); // 報告
-        }
-
-        Destroy(target);
-
-        // チャージはリセットしない（連鎖雷はチャージを消費しない仕様の場合）
-        // もしチャージを消費させたい場合は以下をコメント解除
-        // currentCharge = 0f;
-        // UpdateGauge();
-    }
 }
-//10秒=500F
-//300fで6秒くらい
-//250fで5秒くらい
-//200fで4秒くらい
-//150fで3秒くらい
-//100fで2秒くらい
-//50f で1秒くらい
