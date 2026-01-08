@@ -158,6 +158,6 @@ public class tekiScript : MonoBehaviour
             Quaternion.identity
         );
 
-        Destroy(effect, effectDuration);
+ 
     }
 }

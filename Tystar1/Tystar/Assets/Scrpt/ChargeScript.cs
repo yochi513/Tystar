@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ChargeScript : MonoBehaviour
 {
     [SerializeField] Image Char;
-
     [SerializeField] private float MaxCharge = 150f;
     private float currentCharge = 0f;
 
@@ -70,30 +69,25 @@ public class ChargeScript : MonoBehaviour
     // ─────────────────────────
     public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
-        // チャージ未完了なら終了
-        if (currentCharge < MaxCharge) return;
-
         // Enterが押された瞬間のみ
         if (!Input.GetKeyDown(KeyCode.Return)) return;
 
-        // 雷を発動
+        // ★ 雷を発動できるかチェック（ゲージリセット前に判定）
         Lightning lightning = FindObjectOfType<Lightning>();
-        if (lightning != null)
+        if (lightning != null && lightning.CanStartChain())
         {
             lightning.StartChain();
+            // チャージ消費（雷発動前にリセット）
+            currentCharge = 0f;
+            UpdateGauge();
+
         }
 
         // 通常攻撃を併用したい場合だけ使う
         // ForceDefeatEnemy(target, appearScript);
-
-        // チャージ消費
-        currentCharge = 0f;
-        UpdateGauge();
     }
 
-    // ─────────────────────────
-    // 雷・即死用（Lightning専用）
-    // ─────────────────────────
+
     public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript)
     {
         if (target == null) return;
@@ -114,7 +108,7 @@ public class ChargeScript : MonoBehaviour
 
     // ─────────────────────────
     // UI更新
-    // ─────────────────────────
+    // ─────────────────────────    
     void UpdateGauge()
     {
         if (Char != null)
