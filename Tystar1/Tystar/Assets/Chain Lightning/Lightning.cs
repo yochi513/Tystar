@@ -26,6 +26,7 @@ public class Lightning : MonoBehaviour
         holdingOrder.RemoveAll(enemy => enemy == null);
 
         tekiScript[] enemies = FindObjectsOfType<tekiScript>();
+
         foreach (var enemy in enemies)
         {
             if (enemy == null) continue;
@@ -36,6 +37,7 @@ public class Lightning : MonoBehaviour
             {
                 holdingOrder.Add(enemy);
             }
+
             if (Input.GetKeyUp(key) && holdingOrder.Contains(enemy))
             {
                 holdingOrder.Remove(enemy);
@@ -56,18 +58,59 @@ public class Lightning : MonoBehaviour
     {
         isExecutingChain = true;
 
-        List<tekiScript> chainList = new List<tekiScript>(holdingOrder);
+        // ★ まず最初に、チャージが満タンの敵だけをフィルタリング
+        List<tekiScript> chainList = new List<tekiScript>();
+        ChargeScript sharedCharge = null;
+
+        foreach (var enemy in holdingOrder)
+        {
+            if (enemy != null && enemy.charge != null)
+            {
+                // 共有ChargeScriptの参照を保持
+                if (sharedCharge == null)
+                {
+                    sharedCharge = enemy.charge;
+                }
+
+                // チャージが満タンかチェック
+                if (enemy.charge.CurrentCharge >= enemy.charge.MaxChargeValue)
+                {
+                    chainList.Add(enemy);
+                }
+            }
+        }
+
         holdingOrder.Clear();
 
+        // 満タンの敵がいない場合は終了
+        if (chainList.Count == 0)
+        {
+            isExecutingChain = false;
+            yield break;
+        }
+
+        // ★ フィルタリング後、連鎖開始前にゲージをリセット（1回だけ）
+        if (sharedCharge != null)
+        {
+            sharedCharge.ResetCharge();
+        }
+
+        // ★ 連鎖開始前に座標リストを作成（敵が途中で消えても大丈夫）
         List<Vector3> points = new List<Vector3>();
+        List<tekiScript> validEnemies = new List<tekiScript>();
+
         points.Add(transform.position);
 
         foreach (var enemy in chainList)
         {
             if (enemy != null)
+            {
                 points.Add(enemy.transform.position);
+                validEnemies.Add(enemy);
+            }
         }
 
+        // ★ 連鎖実行
         for (int i = 0; i < points.Count - 1; i++)
         {
             Vector3 startPos = points[i];
@@ -75,9 +118,12 @@ public class Lightning : MonoBehaviour
 
             CreateChainEffect(startPos, endPos);
 
-            if (i < chainList.Count)
+            // i < validEnemies.Countで範囲チェック
+            if (i < validEnemies.Count)
             {
-                tekiScript targetEnemy = chainList[i];
+                tekiScript targetEnemy = validEnemies[i];
+
+                // 敵がまだ存在しているか確認
                 if (targetEnemy != null && targetEnemy.charge != null)
                 {
                     ShowLightningEffect(endPos);
@@ -105,6 +151,7 @@ public class Lightning : MonoBehaviour
             position,
             Quaternion.identity
         );
+
         Destroy(lightning, hitEffectDuration);
     }
 
@@ -114,9 +161,11 @@ public class Lightning : MonoBehaviour
 
         Vector3 direction = endPos - startPos;
         float distance = direction.magnitude;
+
         if (distance < 0.1f) return;
 
         Vector3 centerPos = startPos + direction * 0.5f;
+
         GameObject chainEffect = Instantiate(
             lightningPrefab,
             centerPos,
