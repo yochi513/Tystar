@@ -448,9 +448,8 @@ MonoBehaviour:
   AppEnemy: {fileID: 0}
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100006, guid: 7c442b9b6852b8a4f93306f3d154d471, type: 3}
-  collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
-  speedtime: 2
+  speedtime: 5
 --- !u!114 &3025276208940840728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,8 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Char: {fileID: 6852855879926400538}
+  MaxCharge: 150
   Chargetime: 0
-  defeatSound: {fileID: 0}
 --- !u!54 &-6170091108835970186
 Rigidbody:
   m_ObjectHideFlags: 0
