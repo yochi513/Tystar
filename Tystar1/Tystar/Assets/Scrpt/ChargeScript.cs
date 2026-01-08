@@ -9,7 +9,6 @@ public class ChargeScript : MonoBehaviour
     [SerializeField] private float MaxCharge = 150f;
     private float currentCharge = 0f;
 
-    // 外部参照用（Lightning側など）
     public float CurrentCharge => currentCharge;
     public float MaxChargeValue => MaxCharge;
 
@@ -48,9 +47,6 @@ public class ChargeScript : MonoBehaviour
         }
     }
 
-    // ─────────────────────────
-    // チャージ加減算（tekiScript から呼ばれる）
-    // ─────────────────────────
     public void Tystar(int amount)
     {
         SelectCharge();
@@ -64,51 +60,56 @@ public class ChargeScript : MonoBehaviour
         UpdateGauge();
     }
 
-    // ─────────────────────────
-    // Enterで発動（チャージMax必須）
-    // ─────────────────────────
     public void EntarWithCallback(GameObject target, EnemySpponScript appearScript)
     {
-        // Enterが押された瞬間のみ
         if (!Input.GetKeyDown(KeyCode.Return)) return;
 
-        // ★ 雷を発動できるかチェック（ゲージリセット前に判定）
         Lightning lightning = FindObjectOfType<Lightning>();
         if (lightning != null && lightning.CanStartChain())
         {
             lightning.StartChain();
-            // チャージ消費（雷発動前にリセット）
             currentCharge = 0f;
             UpdateGauge();
-
         }
-
-        // 通常攻撃を併用したい場合だけ使う
-        // ForceDefeatEnemy(target, appearScript);
     }
 
-
+    // ★ 唯一の撃破処理入口
     public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript)
     {
         if (target == null) return;
 
         tekiScript enemy = target.GetComponent<tekiScript>();
-        if (enemy != null)
+        if (enemy == null) return;
+
+       // 二重撃破防止
+if (!enemy.TryDefeat()) return;
+
+        // ① 連動オブジェクト通知
+        if (enemy.dango != null)
         {
-            enemy.OnDefeat();
+            enemy.dango.OnDestroyed();
         }
 
+        // ② 撃破エフェクト
+        if (enemy.DefeatEffectPrefab != null)
+        {
+            Instantiate(
+                enemy.DefeatEffectPrefab,
+                target.transform.position,
+                Quaternion.identity
+            );
+        }
+
+        // ③ スポーン管理へ報告
         if (appearScript != null)
         {
             appearScript.ReportEnemyDefeated(100);
         }
 
+        // ④ 敵削除
         Destroy(target);
     }
 
-    // ─────────────────────────
-    // UI更新
-    // ─────────────────────────    
     void UpdateGauge()
     {
         if (Char != null)
