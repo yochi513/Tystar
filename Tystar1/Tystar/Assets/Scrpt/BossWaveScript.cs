@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossWaveScript : MonoBehaviour
 {
@@ -6,6 +8,7 @@ public class BossWaveScript : MonoBehaviour
     [SerializeField] Transform supar;
     [SerializeField] Transform player;
     [SerializeField] Sprite[] Alphabet;
+    [SerializeField] GameObject Entra;
 
     public BallCHScrpt BallCH;
     public PlayerStateScript playerState;
@@ -23,13 +26,14 @@ public class BossWaveScript : MonoBehaviour
     void Start()
     {
         StartNextPhase();
-       
+       Entra.SetActive(false);  
     }
 
     void StartNextPhase()
     {
         if (phase >= 3)
         {
+            Entra.gameObject.SetActive(true);
             staticScript.BossCount++;
             Debug.Log("Bossフェーズ突入回数" + staticScript.BossCount);
             if (!bossPhaseStarted)
