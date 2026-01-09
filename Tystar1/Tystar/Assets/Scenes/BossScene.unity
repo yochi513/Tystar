@@ -2879,7 +2879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 1500
-  bossTime: 10
+  bossTime: 20
   damagePerCharge: 150
   bossHPGaugeImage: {fileID: 1684904562}
   animator: {fileID: 0}
@@ -2898,7 +2898,9 @@ MonoBehaviour:
   scoreText: {fileID: 483387343}
   countText: {fileID: 1238470279}
   SCOREText: {fileID: 483387343}
+  HPText: {fileID: 0}
   cHScript: {fileID: 1350687297}
+  playerScript: {fileID: 0}
 --- !u!114 &1350687300
 MonoBehaviour:
   m_ObjectHideFlags: 0
