@@ -2865,7 +2865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch: {fileID: 1960165478}
-  beamEffect: {fileID: 8673173945784845238, guid: 271a0929b646f0747bd070da6d6b9c42, type: 3}
+  beamEffect: {fileID: 1372445577}
 --- !u!114 &1350687298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2878,12 +2878,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89565dfe2dd1c94b8418b8e3c458091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
-  maxHP: 10
+  HP: 1500
   bossTime: 10
-  damagePerSecond: 0.5
-  hitAnimationInterval: 0.1
-  hpGaugeImage: {fileID: 1684904562}
+  damagePerCharge: 150
+  bossHPGaugeImage: {fileID: 1684904562}
+  animator: {fileID: 0}
 --- !u!114 &1350687299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2954,17 +2953,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100004, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_Name
       value: ElementalArrow
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.9
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2992,11 +3003,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.1399992
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.45247
+      value: -4.8
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3391,6 +3402,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+--- !u!198 &1372445577 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19800006, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
+  m_PrefabInstance: {fileID: 1372445576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411527655
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,6 +3760,7 @@ GameObject:
   - component: {fileID: 1684904561}
   - component: {fileID: 1684904563}
   - component: {fileID: 1684904562}
+  - component: {fileID: 1684904564}
   m_Layer: 5
   m_Name: "Boss\u30B2\u30FC\u30B8\u672C\u4F53"
   m_TagString: Untagged
@@ -3808,6 +3825,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684904560}
   m_CullTransparentMesh: 1
+--- !u!114 &1684904564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684904560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9575c5f169c4bdc4da78650593ed6e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHPGaugeImage: {fileID: 1684904562}
 --- !u!1 &1734573665 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1461143316982299378, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
@@ -4585,7 +4615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.x
