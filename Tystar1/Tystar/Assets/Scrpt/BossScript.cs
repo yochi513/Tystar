@@ -1,29 +1,57 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BossScript : MonoBehaviour
 {
-    public float HP = 10;
-    [SerializeField] float maxHP = 10;
-    [SerializeField] float bossTime = 30f;
-    [SerializeField] private float damagePerSecond = 0.5f;
-    [SerializeField] private float hitAnimationInterval = 0.3f;
-    [SerializeField] Image hpGaugeImage;
-
-    private Animator animator;
-    private float lastHitAnimTime = 0f;
+    public float HP = 1500;
+    private float MaxHP = 1500;
+    [SerializeField] float bossTime = 5f;
+    [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1消費ごとのダメージ量
+    [SerializeField] private Image bossHPGaugeImage;
+    [SerializeField] private Animator animator;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        if (bossHPGaugeImage == null)
+        {
+            // GameObjectの名前やタグで検索する方法
+            GameObject gaugeObj = GameObject.Find("Bossゲージ本体"); // ★ゲージオブジェクトの名前に合わせて変更
+            if (gaugeObj != null)
+            {
+                bossHPGaugeImage = gaugeObj.GetComponent<Image>();
+            }
+        }
+
+        //保存されているHPがあれば復元、なければ初期値
+        if (staticScript.BossHP > 0)
+        {
+            HP = staticScript.BossHP;
+            MaxHP = staticScript.BossMaxHP;
+        }
+        else
+        {
+            // ★追加★ 初回起動時はMaxHPを保存
+            MaxHP = HP;
+            staticScript.BossMaxHP = MaxHP;
+            staticScript.BossHP = HP;
+        }
+
+        // ボス戦開始時にステートをBossAttackに変更　るい追加
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.BossAttack;
         Debug.Log("ボス戦開始! ステート: " + PlayerStateScript.CurrentState);
         Debug.Log("初期チャージ量: " + staticScript.SaveCh);
 
-        maxHP = HP;
+        //maxHP = HP;
         UpdateHPGauge();
+
+        // CHゲージを満タンにする（デバッグ用）
+        //staticScript.SaveCh = 50f;
+
+        //HPゲージを満タンで初期化（デバッグ用）
+        UpdateBossHPGauge();
+
 
         StartCoroutine(BossTimer());
     }
@@ -53,45 +81,53 @@ public class BossScript : MonoBehaviour
             {
                 Debug.Log(" チャージあり！ダメージ処理開始");
 
-                float damage = damagePerSecond * Time.deltaTime;
+                float damage = damagePerCharge * Time.deltaTime;
                 HP -= damage;
 
-                Debug.Log($" ダメージ! HP: {HP:F2}");
+                //HPを保存
+                staticScript.BossHP = HP;
 
-                UpdateHPGauge();
+                //HPゲージを更新
+                UpdateBossHPGauge();
 
-                if (Time.time >= lastHitAnimTime + hitAnimationInterval)
-                {
-                    if (animator != null)
-                    {
-                        animator.SetTrigger("Hit");
-                    }
-                    lastHitAnimTime = Time.time;
-                }
-
+                // HPが0以下になったら倒す
                 if (HP <= 0)
                 {
                     OnBossDefeated();
                 }
             }
-            else
-            {
-                Debug.Log("チャージがありません");
-            }
+        }
+    }
+
+    //HPゲージ更新メソッド
+    private void UpdateBossHPGauge()
+    {
+        if (bossHPGaugeImage != null)
+        {
+            // HPの割合を計算（0～1の範囲）
+            float hpRatio = Mathf.Clamp01(HP / MaxHP);
+            // fillAmountを更新（右から左に減る）
+            bossHPGaugeImage.fillAmount = hpRatio;
         }
     }
 
     // HPゲージ更新メソッド
     private void UpdateHPGauge()
     {
-        if (hpGaugeImage != null)
+        
+        if (bossHPGaugeImage != null)
         {
-            hpGaugeImage.fillAmount = HP / maxHP;
+            bossHPGaugeImage.fillAmount = HP / MaxHP;
         }
+        
     }
 
     private void OnBossDefeated()
     {
+        //ボス撃破時にHPをリセット
+        staticScript.BossHP = 0;
+        staticScript.BossMaxHP = 1500f;
+
         Debug.Log("ボスを倒した!");
 
         if (animator != null)
@@ -101,17 +137,19 @@ public class BossScript : MonoBehaviour
 
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
 
-        StartCoroutine(DestroyAndReturn(2f));
+        staticScript.IsGoingToBoss = false;  // ← 追加（ボス戦後）
+
+        StartCoroutine(DestroyAndGoToVideo(2f));
     }
 
-    private IEnumerator DestroyAndReturn(float delay)
+    private IEnumerator DestroyAndGoToVideo(float delay)
     {
         yield return new WaitForSeconds(delay);
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
-            Debug.Log("ボス撃破！元のシーンに戻ります");
-            SceneManager.LoadScene(staticScript.LastSceneName);
+            Debug.Log("ボス撃破！動画シーンへ移動します");
+            SceneManager.LoadScene("VideoTransitionScene");
         }
 
         Destroy(gameObject);
@@ -121,12 +159,14 @@ public class BossScript : MonoBehaviour
     {
         yield return new WaitForSeconds(bossTime);
 
-        Debug.Log("時間切れ！元のシーンに戻ります");
+        Debug.Log("時間切れ！動画シーンへ移動します");
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
+
+        staticScript.IsGoingToBoss = false;  // ← 追加（ボス戦後）
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
-            SceneManager.LoadScene(staticScript.LastSceneName);
+            SceneManager.LoadScene("VideoTransitionScene");
         }
         else
         {

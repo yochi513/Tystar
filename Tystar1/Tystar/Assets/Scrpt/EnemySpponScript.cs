@@ -26,7 +26,7 @@ public class EnemySpponScript : MonoBehaviour
     private int totalGinoMax = 0;
     private int totalScore = 0;
     private int currentWave = 1;
-    private int stopGinoCount = 11;
+    private int stopGinoCount = 15;
     private bool secondWaveSpawned = false;
     private bool canSpawn = true;
     private bool isSpawning = false;//ウェーブの進行がどうか
@@ -247,6 +247,9 @@ public class EnemySpponScript : MonoBehaviour
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
+
+        staticScript.IsGoingToBoss = true;  // ← 追加（ボス戦前）
+
         Debug.Log("VideoTransitionSceneに移動します");
         UnityEngine.SceneManagement.SceneManager.LoadScene("VideoTransitionScene");
     }

@@ -90,13 +90,37 @@ public class CHScript : MonoBehaviour
             // エフェクトを再生
             if (!isPlayingEffect && beamEffect != null)
             {
-                beamEffect.Play();
-                isPlayingEffect = true;
-                Debug.Log("ビーム発射開始！");
+                Debug.Log("isPlayingEffectがfalseなので再生開始します");
+
+                if (beamEffect != null)
+                {
+                    Debug.Log("beamEffect.Play() を呼び出します");
+                    beamEffect.Play();
+
+                    // エフェクトが実際に再生されているか確認
+                    Debug.Log($"エフェクト再生状態: isPlaying={beamEffect.isPlaying}, isEmitting={beamEffect.isEmitting}, particleCount={beamEffect.particleCount}");
+
+                    isPlayingEffect = true;
+                    Debug.Log("ビーム発射開始！");
+                }
+
+            }
+            else
+            {
+                Debug.Log("すでに再生中です");
             }
         }
         else
         {
+            if (!enterPressed)
+            {
+                Debug.Log("エンターキーが押されていません");
+            }
+            if (Minch <= 0)
+            {
+                Debug.Log("Minchが0以下です");
+            }
+
             // キーを離したらエフェクトを停止
             if (isPlayingEffect && beamEffect != null)
             {
