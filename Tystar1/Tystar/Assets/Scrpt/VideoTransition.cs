@@ -9,17 +9,44 @@ public class VideoTransition : MonoBehaviour
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private RawImage videoDisplay;
 
+    [Header("動画ファイル")]
+    [SerializeField] private VideoClip bossBeforeVideo;  // ← ボス戦前の動画
+    [SerializeField] private VideoClip bossAfterVideo;   // ← ボス戦後の動画
+
     [Header("シーン設定")]
-    [SerializeField] private string nextSceneName = "BossScene";
+    [SerializeField] private string bossSceneName = "BossScene";
 
     [Header("スキップ設定")]
     [SerializeField] private bool allowSkip = true;
-    [SerializeField] private Text skipText; // 任意: "Press any key to skip" 表示用
+    [SerializeField] private Text skipText;
 
     private bool isVideoPlaying = false;
+    private string nextSceneName;
 
     void Start()
     {
+        // ボス戦前か後かで動画とシーンを切り替え
+        if (staticScript.IsGoingToBoss)
+        {
+            // ボス戦前
+            if (bossBeforeVideo != null)
+            {
+                videoPlayer.clip = bossBeforeVideo;
+                Debug.Log("ボス戦前の動画を再生");
+            }
+            nextSceneName = bossSceneName;
+        }
+        else
+        {
+            // ボス戦後
+            if (bossAfterVideo != null)
+            {
+                videoPlayer.clip = bossAfterVideo;
+                Debug.Log("ボス戦後の動画を再生");
+            }
+            nextSceneName = staticScript.LastSceneName;
+        }
+
         SetupVideoPlayer();
         PlayVideo();
     }
@@ -28,12 +55,9 @@ public class VideoTransition : MonoBehaviour
     {
         if (videoPlayer != null && videoDisplay != null)
         {
-            // RenderTextureを作成
             RenderTexture renderTexture = new RenderTexture(1920, 1080, 0);
             videoPlayer.targetTexture = renderTexture;
             videoDisplay.texture = renderTexture;
-
-            // 動画終了時のイベント設定
             videoPlayer.loopPointReached += OnVideoEnd;
         }
         else
@@ -53,7 +77,6 @@ public class VideoTransition : MonoBehaviour
 
     void Update()
     {
-        // スキップ機能
         if (allowSkip && isVideoPlaying && Input.anyKeyDown)
         {
             SkipVideo();
@@ -77,6 +100,15 @@ public class VideoTransition : MonoBehaviour
     void LoadNextScene()
     {
         isVideoPlaying = false;
-        SceneManager.LoadScene(nextSceneName);
+
+        if (!string.IsNullOrEmpty(nextSceneName))
+        {
+            Debug.Log($"次のシーンに移動: {nextSceneName}");
+            SceneManager.LoadScene(nextSceneName);
+        }
+        else
+        {
+            Debug.LogError("次のシーン名が設定されていません！");
+        }
     }
 }
