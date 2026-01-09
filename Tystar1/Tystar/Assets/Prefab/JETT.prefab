@@ -132,7 +132,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5072219728439453502}
   m_Father: {fileID: 2464125809988362700}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -420,6 +421,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bd664bbcfda007428d8698b86a44240, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8613163553637128869}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bd664bbcfda007428d8698b86a44240, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4291884274078894570}
   m_SourcePrefab: {fileID: 100100000, guid: 2bd664bbcfda007428d8698b86a44240, type: 3}
 --- !u!4 &2851819938656635000 stripped
 Transform:
@@ -468,8 +472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Char: {fileID: 0}
+  MaxCharge: 150
   Chargetime: 0
-  defeatSound: {fileID: 0}
 --- !u!54 &-4888559569037494315
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -577,3 +581,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defeatSound: {fileID: 8300000, guid: 2b1f3871c035b604eb6859c23d2750b3, type: 3}
   volume: 1
+--- !u!114 &4291884274078894570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231442355197383362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985bcf77fca134349b957d845cdb8113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargingSound: {fileID: 8300000, guid: b854afbbf02743b4d9337754ac9d610c, type: 3}
+  volume: 0.01
