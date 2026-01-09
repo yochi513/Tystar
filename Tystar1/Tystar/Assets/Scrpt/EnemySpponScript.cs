@@ -61,6 +61,10 @@ public class EnemySpponScript : MonoBehaviour
         }
         else
         {
+            staticScript.BossHP = 1500;
+            staticScript.SaveKillCount = 0;
+            staticScript.SaveScore = 0;
+            staticScript.SavePlayerHP = 6;
             score = 0;
             totalGinoCount = 0;
             StartCoroutine(SpawnLoop());
@@ -249,6 +253,7 @@ public class EnemySpponScript : MonoBehaviour
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
+        
 
         staticScript.IsGoingToBoss = true;  // ← 追加（ボス戦前）
 

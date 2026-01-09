@@ -1238,7 +1238,7 @@ MonoBehaviour:
   - {fileID: 558980376}
   maxEnemies: 100
   timeBetweenEnemies: 0.3
-  timeBetweenWaves: 5
+  timeBetweenWaves: 7
   ginoMax: 10
   totalPhaes: 3
   boss: {fileID: 0}
