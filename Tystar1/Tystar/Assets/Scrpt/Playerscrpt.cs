@@ -47,12 +47,15 @@ public class Playerscrpt : MonoBehaviour
             GameOVER();
         }
     }
+
+    
     IEnumerator InvincibleCoroutine()
     {
-        isInvincible = true; // –³“GON
+        //isInvincible = true; // –³“GON
         yield return new WaitForSeconds(invincibleTime); // Œˆ‚ß‚½ŠÔ‘Ò‚Â
-        isInvincible = false; // –³“GOFF
+        //isInvincible = false; // –³“GOFF
     }
+    
     public void GameOVER()
     {
         //Debug.Log("ƒvƒŒƒCƒ„[‚ª“|‚ê‚½");

@@ -10,9 +10,11 @@ public class UItextScript : MonoBehaviour
     public Text scoreText;
     public Text countText;
     public Text SCOREText;
+    public Text HPText;
     private int score = 0;
     private int count = 0;
     public CHScript cHScript;
+    public Playerscrpt playerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class UItextScript : MonoBehaviour
     {
         UpscoreText();
         UpcountText();
+        UpHPText();
     }
     public void SetCount(int newScore, int newCount)
     {
@@ -56,5 +59,13 @@ public class UItextScript : MonoBehaviour
     public void UpcountText()
     {
         countText.text = $"ÉMÉmåÇîjêî:{count}";
+    }
+
+    public void UpHPText()
+    {
+        if (playerScript != null && HPText != null)
+        {
+            HPText.text = playerScript.PlayerHP.ToString();
+        }
     }
 }
