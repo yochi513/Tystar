@@ -61,6 +61,9 @@ public class EnemySpponScript : MonoBehaviour
         }
         else
         {
+
+            staticScript.SaveCh=0;
+            staticScript.SavePlayerHP=6;
             score = 0;
             totalGinoCount = 0;
             StartCoroutine(SpawnLoop());
