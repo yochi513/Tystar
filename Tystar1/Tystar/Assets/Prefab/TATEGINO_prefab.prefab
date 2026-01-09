@@ -462,6 +462,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01469805f7515964da3a5e259d4b590d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6175826170722947010}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 01469805f7515964da3a5e259d4b590d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3732241367826975475}
   m_SourcePrefab: {fileID: 100100000, guid: 01469805f7515964da3a5e259d4b590d, type: 3}
 --- !u!4 &2465978529781029456 stripped
 Transform:
@@ -486,8 +489,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Char: {fileID: 5169817294085646932}
+  MaxCharge: 150
   Chargetime: 4
-  defeatSound: {fileID: 0}
 --- !u!114 &5402348542074892429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,7 +512,6 @@ MonoBehaviour:
   AppEnemy: {fileID: 0}
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
-  collisionEffectPrefab: {fileID: 0}
   effectDuration: 2
   speedtime: 0
 --- !u!136 &9045000321351118727
@@ -597,3 +599,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defeatSound: {fileID: 8300000, guid: 2b1f3871c035b604eb6859c23d2750b3, type: 3}
   volume: 1
+--- !u!114 &-3732241367826975475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2986795594752114922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985bcf77fca134349b957d845cdb8113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargingSound: {fileID: 8300000, guid: b854afbbf02743b4d9337754ac9d610c, type: 3}
+  volume: 0.01
