@@ -11,6 +11,7 @@ public class staticScript : MonoBehaviour
     public static int SaveKillCount;
     public static int SaveMaxGino;
     public static float SaveCh;
+    public static int BossCount;
 
     // ← これを追加
     public static bool IsGoingToBoss = false;  // true: ボス戦前, false: ボス戦後
