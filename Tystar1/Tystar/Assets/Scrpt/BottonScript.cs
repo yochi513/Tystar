@@ -31,5 +31,7 @@ public class BottonScript : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("SelectionScene");
+        UIT.aiu(-999999999);
+        BossHP.HPMAX(1500);
     }
 }
