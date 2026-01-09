@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13040084, g: 0.09601555, b: 0.06181498, a: 1}
+  m_IndirectSpecularColor: {r: 0.16711412, g: 0.16711412, b: 0.16711412, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1238,10 +1238,10 @@ MonoBehaviour:
   - {fileID: 558980376}
   maxEnemies: 100
   timeBetweenEnemies: 0.3
-  timeBetweenWaves: 5
+  timeBetweenWaves: 8
   ginoMax: 10
   totalPhaes: 3
-  boss: {fileID: 0}
+  boss: {fileID: 850482672}
   score: 0
   UItext: {fileID: 850482671}
 --- !u!1001 &289106468
@@ -4308,6 +4308,7 @@ GameObject:
   - component: {fileID: 850482672}
   - component: {fileID: 850482673}
   - component: {fileID: 850482674}
+  - component: {fileID: 850482675}
   m_Layer: 0
   m_Name: "\u7BA1\u7406\u30D5\u30A1\u30A4\u30EB"
   m_TagString: Untagged
@@ -4329,6 +4330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Retry: {fileID: 531638239}
   BacktoMainMenu: {fileID: 490154348}
+  UIT: {fileID: 0}
+  BossHP: {fileID: 0}
 --- !u!4 &850482669
 Transform:
   m_ObjectHideFlags: 0
@@ -4392,7 +4395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
-  bossTime: 15
+  bossTime: 20
   damagePerCharge: 0.1
   bossHPGaugeImage: {fileID: 429320757}
   animator: {fileID: 0}
@@ -4426,6 +4429,19 @@ MonoBehaviour:
   - {fileID: 191440763}
   - {fileID: 1964811694}
   - {fileID: 1838624068}
+--- !u!114 &850482675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850482667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9575c5f169c4bdc4da78650593ed6e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHPGaugeImage: {fileID: 429320757}
 --- !u!1 &861300639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b64687de47564344baa45b99b69bf7ef, type: 3}
@@ -4915,13 +4931,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1564345, y: -0, z: -0, w: 0.98768836}
-  m_LocalPosition: {x: 9.27, y: 9, z: 4.58}
+  m_LocalRotation: {x: 0.16504757, y: 0, z: 0, w: 0.9862857}
+  m_LocalPosition: {x: 9.27, y: 10, z: 4.58}
   m_LocalScale: {x: 0.49999997, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 18, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 19, y: 0, z: 0}
 --- !u!82 &963194229
 AudioSource:
   m_ObjectHideFlags: 0

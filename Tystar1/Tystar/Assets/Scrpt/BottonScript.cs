@@ -8,6 +8,8 @@ public class BottonScript : MonoBehaviour
 {
     [SerializeField] Button Retry;
     [SerializeField] Button BacktoMainMenu;
+    public UItextScript UIT;
+    public BossHPGaugeManager BossHP;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +24,14 @@ public class BottonScript : MonoBehaviour
     public void retry()
     {
         SceneManager.LoadScene("MainScene");
+        UIT.aiu(-999999999);
+        BossHP.HPMAX(1500);
+
     }
     public void MainMenu()
     {
         SceneManager.LoadScene("SelectionScene");
+        UIT.aiu(-999999999);
+        BossHP.HPMAX(1500);
     }
 }

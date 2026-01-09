@@ -68,4 +68,14 @@ public class UItextScript : MonoBehaviour
             HPText.text = playerScript.PlayerHP.ToString();
         }
     }
+    public void aiu(int a)
+    {
+
+        staticScript.SaveKillCount=count;
+        staticScript.SaveScore=score;
+
+        score = a;
+        count = a;
+        cHScript.ChAdd(-100);
+    }
 }
