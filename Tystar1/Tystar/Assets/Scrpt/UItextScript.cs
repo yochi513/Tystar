@@ -9,6 +9,7 @@ public class UItextScript : MonoBehaviour
 
     public Text scoreText;
     public Text countText;
+    public Text toGinoText;
     public Text SCOREText;
     public Text HPText;
     private int score = 0;
@@ -59,6 +60,7 @@ public class UItextScript : MonoBehaviour
     public void UpcountText()
     {
         countText.text = $"ÉMÉmåÇîjêî:{count}";
+        toGinoText.text = $"BossÉtÉFÅ[ÉYÇ‹Ç≈:{staticScript.SaveMaxGino-count}";
     }
 
     public void UpHPText()
