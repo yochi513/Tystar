@@ -30,4 +30,8 @@ public class BossHPGaugeManager : MonoBehaviour
             bossHPGaugeImage.fillAmount = hpRatio;
         }
     }
+  public  void HPMAX(float a)
+    {
+        staticScript.BossHP = a;
+    }
 }

@@ -1241,7 +1241,7 @@ MonoBehaviour:
   timeBetweenWaves: 8
   ginoMax: 10
   totalPhaes: 3
-  boss: {fileID: 0}
+  boss: {fileID: 850482672}
   score: 0
   UItext: {fileID: 850482671}
 --- !u!1001 &289106468
@@ -4308,6 +4308,7 @@ GameObject:
   - component: {fileID: 850482672}
   - component: {fileID: 850482673}
   - component: {fileID: 850482674}
+  - component: {fileID: 850482675}
   m_Layer: 0
   m_Name: "\u7BA1\u7406\u30D5\u30A1\u30A4\u30EB"
   m_TagString: Untagged
@@ -4329,6 +4330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Retry: {fileID: 531638239}
   BacktoMainMenu: {fileID: 490154348}
+  UIT: {fileID: 0}
+  BossHP: {fileID: 0}
 --- !u!4 &850482669
 Transform:
   m_ObjectHideFlags: 0
@@ -4392,7 +4395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
-  bossTime: 15
+  bossTime: 120
   damagePerCharge: 0.1
   bossHPGaugeImage: {fileID: 429320757}
   animator: {fileID: 0}
@@ -4426,6 +4429,19 @@ MonoBehaviour:
   - {fileID: 191440763}
   - {fileID: 1964811694}
   - {fileID: 1838624068}
+--- !u!114 &850482675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850482667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9575c5f169c4bdc4da78650593ed6e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHPGaugeImage: {fileID: 429320757}
 --- !u!1 &861300639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b64687de47564344baa45b99b69bf7ef, type: 3}

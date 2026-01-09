@@ -18,7 +18,7 @@ public class EnemySpponScript : MonoBehaviour
     [SerializeField] int ginoMax = 10;
     [SerializeField] int totalPhaes = 3;
     public BossScript boss;
-
+    BossHPGaugeManager BossHp;
 
     private List<int> KillsThisFrame = new List<int>();
     private int totalSpawned = 0;
@@ -61,12 +61,17 @@ public class EnemySpponScript : MonoBehaviour
         }
         else
         {
-            staticScript.BossHP = 1500;
-            staticScript.SaveKillCount = 0;
-            staticScript.SaveScore = 0;
+           // staticScript.BossHP = 1500;
+            staticScript.SaveKillCount = totalGinoCount;
+            staticScript.SaveMaxGino = stopGinoCount;
+            staticScript.SaveScore = score;
             staticScript.SavePlayerHP = 6;
+
+           // BossHp.HPMAX(1500);
+
             score = 0;
             totalGinoCount = 0;
+            stopGinoCount = 11;
             StartCoroutine(SpawnLoop());
         }
     }
