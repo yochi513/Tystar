@@ -19,6 +19,7 @@ public class EnemySpponScript : MonoBehaviour
     [SerializeField] int totalPhaes = 3;
     public BossScript boss;
 
+
     private List<int> KillsThisFrame = new List<int>();
     private int totalSpawned = 0;
     private int totalDefeated = 0;
@@ -45,6 +46,7 @@ public class EnemySpponScript : MonoBehaviour
 
     void Start()
     {
+ 
         if (staticScript.ReturnedFromBoss)
         {
             staticScript.ReturnedFromBoss = false;
