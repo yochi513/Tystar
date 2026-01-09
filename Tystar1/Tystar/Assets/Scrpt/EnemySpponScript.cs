@@ -249,6 +249,9 @@ public class EnemySpponScript : MonoBehaviour
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
+
+        staticScript.IsGoingToBoss = true;  // ← 追加（ボス戦前）
+
         Debug.Log("VideoTransitionSceneに移動します");
         UnityEngine.SceneManagement.SceneManager.LoadScene("VideoTransitionScene");
     }
