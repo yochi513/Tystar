@@ -23,12 +23,15 @@ public class BossWaveScript : MonoBehaviour
     void Start()
     {
         StartNextPhase();
+       
     }
 
     void StartNextPhase()
     {
         if (phase >= 3)
         {
+            staticScript.BossCount++;
+            Debug.Log("Bossフェーズ突入回数" + staticScript.BossCount);
             if (!bossPhaseStarted)
             {
                 bossPhaseStarted = true;

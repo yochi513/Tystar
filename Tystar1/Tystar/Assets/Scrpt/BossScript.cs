@@ -94,6 +94,7 @@ public class BossScript : MonoBehaviour
                 if (HP <= 0)
                 {
                     OnBossDefeated();
+                    SceneManager.LoadScene("Clear");
                 }
             }
         }
