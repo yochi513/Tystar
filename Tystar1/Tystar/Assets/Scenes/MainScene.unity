@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13040188, g: 0.09601609, b: 0.061815403, a: 1}
+  m_IndirectSpecularColor: {r: 0.16711412, g: 0.16711412, b: 0.16711412, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2355,7 +2355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &531638237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3375,7 +3375,7 @@ GameObject:
   - component: {fileID: 788611317}
   - component: {fileID: 788611316}
   - component: {fileID: 788611321}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3428,8 +3428,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.49
-  m_Height: 16.11
+  m_Radius: 0.5000001
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &788611318
@@ -3491,8 +3491,8 @@ Transform:
   m_GameObject: {fileID: 788611314}
   serializedVersion: 2
   m_LocalRotation: {x: -0.006140654, y: -0.0074668787, z: 0.00003185868, w: 0.99995327}
-  m_LocalPosition: {x: -0.0247, y: -0.0465, z: 0.0077}
-  m_LocalScale: {x: -0.006657479, y: 0.011586346, z: 0.013950426}
+  m_LocalPosition: {x: -0.024156751, y: 0.0034277386, z: 0.0047700447}
+  m_LocalScale: {x: -0.0019907171, y: 0.0012453675, z: 0.001717187}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4777222770250966252}
@@ -3509,7 +3509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82e919b637f3ef4bbd3c9e0baf575b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHP: 2
+  PlayerHP: 6
   isInvincible: 0
   invincibleTime: 1.5
   Gameover: {fileID: 766531841}
@@ -4895,7 +4895,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
