@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 4253522291713531899}
   - component: {fileID: 7867283420752389129}
   - component: {fileID: 3245772224451257827}
+  - component: {fileID: -3548172671379492480}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -270,6 +271,20 @@ MonoBehaviour:
   Char: {fileID: 176701087281304531}
   maxCharge: 50
   chargeSpeed: 20
+--- !u!114 &-3548172671379492480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461143316982299378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61e302db8d05394e97312bc07e168a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwSound: {fileID: 8300000, guid: 93f2210576ae5f343a6d50c7ba9762b8, type: 3}
+  volume: 1
 --- !u!1 &3580827515918246368
 GameObject:
   m_ObjectHideFlags: 0
