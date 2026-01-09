@@ -9,7 +9,7 @@ public class Playerscrpt : MonoBehaviour
     public int PlayerHP = 3;
     public bool isInvincible = false;
     public float invincibleTime = 1.5f;
-    public VideoPlayer player;
+ 
 
     [SerializeField] Canvas Gameover;
     [SerializeField] Canvas MainCanvas;
@@ -57,7 +57,7 @@ public class Playerscrpt : MonoBehaviour
     {
         //Debug.Log("ƒvƒŒƒCƒ„[‚ª“|‚ê‚½");
         Gameover.gameObject.SetActive(true);
-        player.Play();
+       
         MainCanvas.gameObject.SetActive(false);
     }
 
