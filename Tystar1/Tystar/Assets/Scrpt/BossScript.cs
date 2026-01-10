@@ -48,7 +48,7 @@ public class BossScript : MonoBehaviour
         UpdateHPGauge();
 
         // CHゲージを満タンにする（デバッグ用）
-        //staticScript.SaveCh = 50f;
+      //  staticScript.SaveCh = 50f;
 
         //HPゲージを満タンで初期化（デバッグ用）
         UpdateBossHPGauge();
@@ -100,6 +100,15 @@ public class BossScript : MonoBehaviour
             }
             
         }
+    }
+
+    private IEnumerator Efctttttt(float time)
+    {
+
+        yield return new WaitForSeconds(time);
+
+        OnBossDefeated();
+        SceneManager.LoadScene("Clear");
     }
 
     //HPゲージ更新メソッド

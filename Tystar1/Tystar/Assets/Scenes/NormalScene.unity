@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.13040084, g: 0.09601555, b: 0.06181498, a: 1}
+  m_IndirectSpecularColor: {r: 0.13040014, g: 0.096015215, b: 0.06181486, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6080,13 +6080,14 @@ MonoBehaviour:
   - {fileID: 178430857}
   - {fileID: 558980376}
   maxEnemies: 100
-  timeBetweenEnemies: 0.3
-  timeBetweenWaves: 8
+  timeBetweenEnemies: 0.15
+  timeBetweenWaves: 6.5
   ginoMax: 17
   totalPhaes: 3
   boss: {fileID: 850482672}
   score: 0
   UItext: {fileID: 850482671}
+  stopcount: 1
 --- !u!1001 &289106468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14100,6 +14101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ch: {fileID: 163593677}
   beamEffect: {fileID: 4156992981516161066, guid: 271a0929b646f0747bd070da6d6b9c42, type: 3}
+  bossScript: {fileID: 0}
 --- !u!114 &850482674
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -130,7 +130,10 @@ public class tekiScript : MonoBehaviour
             case SPEED.Three: speed = 4f; break;
             case SPEED.Four: speed = 5f; break;
             case SPEED.Five: speed = 10f; break;
-
+            case SPEED.Normalsix:speed=4f; break;
+            case SPEED.Seven:speed = 5.6f;break;
+            case SPEED.Eight:speed = 4f;break;
+            case SPEED.Nine:speed = 7.3f;break;
         }
     }
 
