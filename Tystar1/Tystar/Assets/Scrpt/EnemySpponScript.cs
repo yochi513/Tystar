@@ -68,7 +68,7 @@ public class EnemySpponScript : MonoBehaviour
 
     void Start()
     {
-       
+        selctcount();
         if (staticScript.ReturnedFromBoss)
         {
             staticScript.ReturnedFromBoss = false;
