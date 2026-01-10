@@ -10,6 +10,7 @@ public class BossScript : MonoBehaviour
     [SerializeField] float bossTime = 5f;
     [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1消費ごとのダメージ量
     [SerializeField] private Image bossHPGaugeImage;
+    [SerializeField] private ParticleSystem defeatEffect;
     [SerializeField] private Animator animator;
 
     void Start()
@@ -134,6 +135,13 @@ public class BossScript : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("Death");
+        }
+
+        //撃破エフェクトを再生
+        if (defeatEffect != null)
+        {
+            defeatEffect.Play();
+            Debug.Log("撃破エフェクトを再生しました");
         }
 
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
