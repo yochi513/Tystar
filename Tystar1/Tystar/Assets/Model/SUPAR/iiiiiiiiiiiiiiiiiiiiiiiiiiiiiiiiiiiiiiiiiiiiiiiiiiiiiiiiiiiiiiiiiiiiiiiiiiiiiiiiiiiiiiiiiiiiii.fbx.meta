@@ -3,7 +3,202 @@ guid: e3910613aa9ecb544acac39a8806a3b3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BOX_02
+    second: {fileID: 2100000, guid: 2c8b9a6e2a9139049a6484a5cb413579, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_02
+    second: {fileID: 2100000, guid: eae0e1efd7c9d814cafda2c485382465, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_03
+    second: {fileID: 2100000, guid: 7b530c4396c3d154d8c99da31a80b0a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_04
+    second: {fileID: 2100000, guid: 31fb969586e611c41ba7369f97b6720c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_05
+    second: {fileID: 2100000, guid: 38f0cf99afd466f4b86fc298efd812d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_06
+    second: {fileID: 2100000, guid: 93d3460185318f24a97aabf89e1049b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_07
+    second: {fileID: 2100000, guid: 0e6e88d31e3939c4a8ec3503f60cbcd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_08
+    second: {fileID: 2100000, guid: 4faa10f18e2be2a409b84329cf1e9496, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_09
+    second: {fileID: 2100000, guid: f55bcfdc1d04d444e8be84d9ef460511, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_1
+    second: {fileID: 2100000, guid: 5713b91be3022f24996022d1dfc16e9f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CODE_10
+    second: {fileID: 2100000, guid: 02e82d0657a33ce4e98dfbc832cc8f95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EYE1
+    second: {fileID: 2100000, guid: d67cf6a0cff6a4c4b987a814ff2327aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GANKYUU
+    second: {fileID: 2100000, guid: 400235a16c614164b84bd17962d43938, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GANMEN1
+    second: {fileID: 2100000, guid: 72345fdbdfd890744a545c813a87ab8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GAREKI
+    second: {fileID: 2100000, guid: d955af31a3420c14bb2f88421507be79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HAKO_01
+    second: {fileID: 2100000, guid: 6820f0fd235d08841a56bf2b900111d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HAKO_02
+    second: {fileID: 2100000, guid: 5a5a0f1ad4952fe4aaaec693346bdfda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HANDLE1
+    second: {fileID: 2100000, guid: e04a39d9f4f885747871dd6f96da2af9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HONTAI1
+    second: {fileID: 2100000, guid: 9148d26e156ca2b4387e795bd757500d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KOTE
+    second: {fileID: 2100000, guid: 4e9da02a7f14c80458d404a76ff2d504, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Little_Box_01
+    second: {fileID: 2100000, guid: 00ef782d0d771834bb1331747dc096a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Little_Box_02
+    second: {fileID: 2100000, guid: 17b0b47babf54bf47aef702c08780c51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: NINOUDE
+    second: {fileID: 2100000, guid: c8ee27bbcf8ec8d4cac4adb5f56198d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PIPE_01
+    second: {fileID: 2100000, guid: 6dbeea463c09cf341b05cf3ce5c617f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PIPE_02
+    second: {fileID: 2100000, guid: 9a0b64acec285f649bb7d15105ed13dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SENAKA1
+    second: {fileID: 2100000, guid: cc777c2ff0cbdde4fa72c02af2af5229, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TE
+    second: {fileID: 2100000, guid: 9d588a50e3d737243ba20eee3c9cd47f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_01
+    second: {fileID: 2100000, guid: 6db2611c7657d7647842fc3a1ce99bea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_02
+    second: {fileID: 2100000, guid: c2ebff91ec9222241b7cbe2ce57b1e9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_03
+    second: {fileID: 2100000, guid: 6645cfa9c7c5470488f04cf1e2002ff6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_04
+    second: {fileID: 2100000, guid: 77e78cca3fecd4b4c9dddbe219e93b4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_05
+    second: {fileID: 2100000, guid: 2c56ef9916c07674cb76695aa284b510, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_06
+    second: {fileID: 2100000, guid: c50c521550cab5b44acf9b09cb945926, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_07
+    second: {fileID: 2100000, guid: 8eaa06f0bffad094494cabea71669ae4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_08
+    second: {fileID: 2100000, guid: f21bafaf1a5fe944eb9626a961383e12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_09
+    second: {fileID: 2100000, guid: 7ef431a775411e44c9e78b61fd44a6dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_10
+    second: {fileID: 2100000, guid: b043df101c48fd8448554cf61b11afdf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_11
+    second: {fileID: 2100000, guid: 0480e855ba9d5984f9eeb7387188cd23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tokki_12
+    second: {fileID: 2100000, guid: f98e14aa571517d43ab82b7a860b6b3c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
