@@ -49,7 +49,17 @@ public class tekiScript : MonoBehaviour
         Two,
         Three,
         Four,
-        Five
+        Five,
+        Normalsix,
+        Seven,
+        Eight,
+        Nine,
+        Ten,
+        HardEleven,
+        Twelve,
+        Thirteen,
+        Fourteen,
+        Fifteen,
     }
 
     public SPEED speedtime = SPEED.Five;
@@ -120,6 +130,7 @@ public class tekiScript : MonoBehaviour
             case SPEED.Three: speed = 4f; break;
             case SPEED.Four: speed = 5f; break;
             case SPEED.Five: speed = 10f; break;
+
         }
     }
 
