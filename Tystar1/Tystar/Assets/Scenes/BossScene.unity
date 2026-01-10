@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2111151, g: 0.058148332, b: 0.03602561, a: 1}
+  m_IndirectSpecularColor: {r: 0.21108171, g: 0.05813721, b: 0.036018983, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2885,7 +2885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 1500
-  bossTime: 20
+  bossTime: 15
   damagePerCharge: 150
   bossHPGaugeImage: {fileID: 1684904562}
   defeatEffect: {fileID: 2864310080369916117, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
@@ -2954,7 +2954,8 @@ Transform:
   m_LocalPosition: {x: 960.00085, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1864076377}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1372445576
@@ -4217,7 +4218,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864076373}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -4227,11 +4228,11 @@ RectTransform:
   - {fileID: 2020464322}
   - {fileID: 669750794}
   - {fileID: 429128564}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1350687302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -960.00085, y: -540}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1001 &1930473781
@@ -5080,7 +5081,6 @@ SceneRoots:
   - {fileID: 1827418219}
   - {fileID: 1442795955}
   - {fileID: 1350687302}
-  - {fileID: 1864076377}
   - {fileID: 654362460}
   - {fileID: 1372445576}
   - {fileID: 5644271109251994031}
