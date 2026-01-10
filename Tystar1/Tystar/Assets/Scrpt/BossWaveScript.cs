@@ -13,6 +13,7 @@ public class BossWaveScript : MonoBehaviour
     public BallCHScrpt BallCH;
     public PlayerStateScript playerState;
     public BallScript Ball;
+   
 
     int phase = 0;
     GameObject ball;
@@ -22,6 +23,8 @@ public class BossWaveScript : MonoBehaviour
 
     private bool isWaitingForReflect = false;
     private bool bossPhaseStarted = false; // ボスフェーズ開始フラグ
+
+
 
     void Start()
     {

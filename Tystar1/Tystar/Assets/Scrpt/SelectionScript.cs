@@ -14,6 +14,7 @@ public class SelectionScript : MonoBehaviour
     [SerializeField] Canvas Select;
     [SerializeField] Canvas Setumei2;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,10 @@ public class SelectionScript : MonoBehaviour
     public void SELECTEASY()
     {
         SceneManager.LoadScene("MainScene");
+    }
+    public void SELECTNORMAL()
+    {
+        SceneManager.LoadScene("NormalScene");
     }
     public void Setumei()
     {

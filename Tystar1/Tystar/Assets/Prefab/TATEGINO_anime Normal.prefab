@@ -452,7 +452,7 @@ MonoBehaviour:
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   effectDuration: 2
-  speedtime: 1
+  speedtime: 6
 --- !u!136 &-277123799049057014
 CapsuleCollider:
   m_ObjectHideFlags: 0
