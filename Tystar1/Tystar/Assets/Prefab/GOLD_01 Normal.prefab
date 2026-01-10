@@ -391,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6d35ac5eae4880c44b8026eedb25cde3, type: 3}
       propertyPath: m_Name
-      value: GOLD_01
+      value: GOLD_01 Normal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -514,7 +514,7 @@ MonoBehaviour:
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100006, guid: 7c442b9b6852b8a4f93306f3d154d471, type: 3}
   effectDuration: 2
-  speedtime: 0
+  speedtime: 7
 --- !u!95 &-279210278115706464
 Animator:
   serializedVersion: 5

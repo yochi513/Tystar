@@ -43,10 +43,32 @@ public class EnemySpponScript : MonoBehaviour
         new int[]{0,3,1,2},
         new int[]{2,1,3,0},
     };
+    public enum GinoCount
+    {
+       
+        easy,
+        normal,
+        hard,
+
+    }
+    public GinoCount stopcount =GinoCount.easy;
+
+    public void selctcount()
+    {
+        switch (stopcount)
+        {
+                case GinoCount.easy:stopGinoCount=11; break;
+                case GinoCount.normal:stopGinoCount=22;break;
+                case GinoCount.hard:stopGinoCount=30;break;
+
+        }
+
+    }
+
 
     void Start()
     {
- 
+        selctcount();
         if (staticScript.ReturnedFromBoss)
         {
             staticScript.ReturnedFromBoss = false;
@@ -67,11 +89,10 @@ public class EnemySpponScript : MonoBehaviour
             staticScript.SaveScore = score;
             staticScript.SavePlayerHP = 6;
 
-           // BossHp.HPMAX(1500);
-
+            // BossHp.HPMAX(1500);
+            selctcount();
             score = 0;
             totalGinoCount = 0;
-            stopGinoCount = 11;
             StartCoroutine(SpawnLoop());
         }
     }

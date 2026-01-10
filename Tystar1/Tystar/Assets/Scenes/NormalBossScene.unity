@@ -2516,7 +2516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc30b770dc4d47244b797cef59398df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 1461143316982299378, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+  ballPrefab: {fileID: 1461143316982299378, guid: 86698ed4a650062439437cf67934566e, type: 3}
   supar: {fileID: 1126465319}
   player: {fileID: 1827418220}
   Alphabet:
@@ -2547,9 +2547,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6cf05801538a24641a4d1ae9ade5fc67, type: 3}
   - {fileID: 21300000, guid: 7db5097b19fff01498fe1c693025326e, type: 3}
   Entra: {fileID: 1787287617}
-  BallCH: {fileID: 3245772224451257827, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+  BallCH: {fileID: 3245772224451257827, guid: 86698ed4a650062439437cf67934566e, type: 3}
   playerState: {fileID: 1350687300}
-  Ball: {fileID: 4253522291713531899, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+  Ball: {fileID: 4253522291713531899, guid: 86698ed4a650062439437cf67934566e, type: 3}
   currentKey: 0
 --- !u!95 &1126465318
 Animator:
@@ -2884,8 +2884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89565dfe2dd1c94b8418b8e3c458091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 1500
-  bossTime: 15
+  HP: 1750
+  bossTime: 20
   damagePerCharge: 150
   bossHPGaugeImage: {fileID: 1684904562}
   defeatEffect: {fileID: 2864310080369916117, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
@@ -2954,8 +2954,7 @@ Transform:
   m_LocalPosition: {x: 960.00085, y: 540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1864076377}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1372445576
@@ -4218,7 +4217,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864076373}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -4228,11 +4227,11 @@ RectTransform:
   - {fileID: 2020464322}
   - {fileID: 669750794}
   - {fileID: 429128564}
-  m_Father: {fileID: 1350687302}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -960.00085, y: -540}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!1001 &1930473781
@@ -5081,6 +5080,7 @@ SceneRoots:
   - {fileID: 1827418219}
   - {fileID: 1442795955}
   - {fileID: 1350687302}
+  - {fileID: 1864076377}
   - {fileID: 654362460}
   - {fileID: 1372445576}
   - {fileID: 5644271109251994031}

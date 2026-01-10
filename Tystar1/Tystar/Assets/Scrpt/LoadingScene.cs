@@ -21,9 +21,14 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadScene()
     {
         AsyncOperation async = SceneManager.LoadSceneAsync("MainScene");
+      //  AsyncOperation async2 = SceneManager.LoadSceneAsync("NormalScene");
         while (!async.isDone)
         {
             yield return null;
         }
+        //while (!async2.isDone)
+        //{
+        //    yield return null;
+        //}
     }
 }
