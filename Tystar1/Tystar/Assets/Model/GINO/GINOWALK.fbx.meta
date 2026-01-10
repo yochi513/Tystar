@@ -3,7 +3,37 @@ guid: 388b9eb8f0251a04db82a57e6b75c652
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ASHI
+    second: {fileID: 2100000, guid: ac5a977840be8944997bf4ea02d3af62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HONTAI
+    second: {fileID: 2100000, guid: 9197f179baba80343aee6644a69bc52d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HUCHI
+    second: {fileID: 2100000, guid: ca85fb161f806ba4b874390a6f2d7350, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KAMERA
+    second: {fileID: 2100000, guid: 29926ef8cb4320f4681f8b65361feab2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KANSETU
+    second: {fileID: 2100000, guid: 72f0bf69bb949cc45832799c69d3265b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LINE
+    second: {fileID: 2100000, guid: b61f9e18e51d5e746a3ac4c251e845e1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
