@@ -12,6 +12,7 @@ public class CHScript : MonoBehaviour
     private float Maxch = 50f;
     private float Minch = 0f;
     private bool isPlayingEffect = false;
+    public BossScript bossScript;
 
     void Start()
     {
@@ -118,6 +119,7 @@ public class CHScript : MonoBehaviour
             }
             if (Minch <= 0)
             {
+                bossScript.BossTime();
                 Debug.Log("Minch‚ª0ˆÈ‰º‚Å‚·");
             }
 
