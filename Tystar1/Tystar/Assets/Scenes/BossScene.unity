@@ -2867,6 +2867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ch: {fileID: 1960165478}
   beamEffect: {fileID: 1372445577}
+  bossScript: {fileID: 1350687298}
 --- !u!114 &1350687298
 MonoBehaviour:
   m_ObjectHideFlags: 0

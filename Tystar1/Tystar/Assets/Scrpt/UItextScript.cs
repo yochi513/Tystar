@@ -60,7 +60,7 @@ public class UItextScript : MonoBehaviour
     public void UpcountText()
     {
         countText.text = $"ギノ撃破数:{count}";
-        toGinoText.text = $"Bossフェーズまで:{staticScript.SaveMaxGino-count}";
+       // toGinoText.text = $"Bossフェーズまで:{staticScript.SaveMaxGino-count}";
     }
 
     public void UpHPText()

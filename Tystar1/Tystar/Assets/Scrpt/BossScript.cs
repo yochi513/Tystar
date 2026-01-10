@@ -97,6 +97,7 @@ public class BossScript : MonoBehaviour
                     SceneManager.LoadScene("Clear");
                 }
             }
+            
         }
     }
 
@@ -156,9 +157,27 @@ public class BossScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator BossTimer()
+  private IEnumerator BossTimer()
     {
         yield return new WaitForSeconds(bossTime);
+
+        Debug.Log("時間切れ！動画シーンへ移動します");
+        PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
+
+        staticScript.IsGoingToBoss = false;  // ← 追加（ボス戦後）
+
+        if (!string.IsNullOrEmpty(staticScript.LastSceneName))
+        {
+            SceneManager.LoadScene("VideoTransitionScene");
+        }
+        else
+        {
+            Debug.LogWarning("戻るシーン情報がありません");
+        }
+    }
+    public void BossTime()
+    {
+       
 
         Debug.Log("時間切れ！動画シーンへ移動します");
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
