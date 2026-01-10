@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2111151, g: 0.058148332, b: 0.03602561, a: 1}
+  m_IndirectSpecularColor: {r: 0.21111888, g: 0.058149647, b: 0.036026325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2225,6 +2225,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4753397404375449747, guid: 271a0929b646f0747bd070da6d6b9c42, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8193528830021623989, guid: 271a0929b646f0747bd070da6d6b9c42, type: 3}
       propertyPath: m_Name
       value: Arrow
@@ -2866,8 +2870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ch: {fileID: 1960165478}
-  beamEffect: {fileID: 1372445577}
-  bossScript: {fileID: 1350687298}
+  beamEffect: {fileID: 4156992981516161066, guid: 271a0929b646f0747bd070da6d6b9c42, type: 3}
 --- !u!114 &1350687298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2884,6 +2887,7 @@ MonoBehaviour:
   bossTime: 20
   damagePerCharge: 150
   bossHPGaugeImage: {fileID: 1684904562}
+  defeatEffect: {fileID: 2864310080369916117, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
   animator: {fileID: 0}
 --- !u!114 &1350687299
 MonoBehaviour:
@@ -2978,7 +2982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3409,11 +3413,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
---- !u!198 &1372445577 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19800006, guid: 45cba24a6a5389a4ab385f65964c554a, type: 3}
-  m_PrefabInstance: {fileID: 1372445576}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1411527655
 GameObject:
   m_ObjectHideFlags: 0
@@ -5004,6 +5003,67 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1734573681}
   m_SourcePrefab: {fileID: 100100000, guid: 9b890f6969ed0a24b9a0b1d510afe580, type: 3}
+--- !u!1001 &8560054852453536524
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2864310080355656117, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_Name
+      value: WFX_ExplosiveSmokeGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355656117, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2864310080355761557, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15eec2aeaa5117d4c9f5235b3c912b26, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5026,3 +5086,4 @@ SceneRoots:
   - {fileID: 2132629227}
   - {fileID: 927027106}
   - {fileID: 1930473781}
+  - {fileID: 8560054852453536524}
