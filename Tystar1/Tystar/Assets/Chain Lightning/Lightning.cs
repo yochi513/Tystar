@@ -138,7 +138,8 @@ public class Lightning : MonoBehaviour
 
                     targetEnemy.charge.ForceDefeatEnemy(
                         targetEnemy.gameObject,
-                        targetEnemy.AppEnemy
+                        targetEnemy.AppEnemy,
+                        targetEnemy.HardEnemy
                     );
                 }
             }

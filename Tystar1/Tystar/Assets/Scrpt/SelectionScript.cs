@@ -51,6 +51,10 @@ public class SelectionScript : MonoBehaviour
     {
         SceneManager.LoadScene("NormalScene");
     }
+    public void SELECTHARD()
+    {
+        SceneManager.LoadScene("HardScene");
+    }
     public void Setumei()
     {
         Select.gameObject.SetActive(false);

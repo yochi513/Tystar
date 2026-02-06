@@ -17,6 +17,7 @@ public class tekiScript : MonoBehaviour
 
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
+    public HardEnemySponScript HardEnemy;
     public DangoBehaviorScript dango;
 
     private Renderer rend;
@@ -124,18 +125,24 @@ public class tekiScript : MonoBehaviour
     {
         switch (speedtime)
         {
-            case SPEED.Zero: speed = 1f; break;
-            case SPEED.One: speed = 2f; break;
-            case SPEED.Two: speed = 3f; break;
-            case SPEED.Three: speed = 4f; break;
-            case SPEED.Four: speed = 5f; break;
-            case SPEED.Five: speed = 10f; break;
-            case SPEED.Normalsix:speed=4f; break;
-            case SPEED.Seven:speed = 5.6f;break;
-            case SPEED.Eight:speed = 4f;break;
-            case SPEED.Nine:speed = 7.3f;break;
+            case SPEED.Zero:     speed = 1f; break;
+            case SPEED.One:      speed = 2f; break;
+            case SPEED.Two:      speed = 3f; break;
+            case SPEED.Three:    speed = 4f; break;
+            case SPEED.Four:     speed = 5f; break;
+            case SPEED.Five:    speed = 10f; break;
+            case SPEED.Normalsix:  speed=4f; break;
+            case SPEED.Seven:   speed = 5.6f;break;
+            case SPEED.Eight:     speed = 4f;break;
+            case SPEED.Nine:    speed = 7.3f;break;
+            case SPEED.HardEleven:speed = 5f;break;
+            case SPEED.Twelve:   speed = 8f; break;
+            case SPEED.Thirteen: speed = 10f; break;
+            case SPEED.Fourteen: speed = 12f; break;
+            case SPEED.Fifteen: speed = 15f; break;
         }
     }
+   
 
     public void GinoAttack()
     {
@@ -144,7 +151,8 @@ public class tekiScript : MonoBehaviour
         if (Input.GetKey(assignedKey))
         {
             charge.Tystar(+1);
-            charge.EntarWithCallback(gameObject, AppEnemy);
+            charge.EntarWithCallback(gameObject, AppEnemy,HardEnemy);
+            charge.EntarCallback(gameObject, HardEnemy);
         }
         else
         {
