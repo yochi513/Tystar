@@ -17,7 +17,7 @@ public class tekiScript : MonoBehaviour
 
     public ChargeScript charge;
     public EnemySpponScript AppEnemy;
-    public HardEnemySponScript HardEnemy;
+    public HardEnemySpawnScript HardEnemy;
     public DangoBehaviorScript dango;
 
     private Renderer rend;
@@ -137,8 +137,8 @@ public class tekiScript : MonoBehaviour
             case SPEED.Nine:    speed = 7.3f;break;
             case SPEED.HardEleven:speed = 5f;break;
             case SPEED.Twelve:   speed = 8f; break;
-            case SPEED.Thirteen: speed = 10f; break;
-            case SPEED.Fourteen: speed = 12f; break;
+            case SPEED.Thirteen:speed = 10f; break;
+            case SPEED.Fourteen:speed = 12f; break;
             case SPEED.Fifteen: speed = 15f; break;
         }
     }

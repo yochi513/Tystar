@@ -138,7 +138,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 13.4, y: 21.3}
-  m_SizeDelta: {x: 3, y: 3}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4674397657512435952
 CanvasRenderer:
@@ -449,6 +449,7 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 3025276208940840728}
   AppEnemy: {fileID: 0}
+  HardEnemy: {fileID: 0}
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100006, guid: 7c442b9b6852b8a4f93306f3d154d471, type: 3}
   effectDuration: 2

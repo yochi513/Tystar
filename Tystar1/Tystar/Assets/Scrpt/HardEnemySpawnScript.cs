@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class HardEnemySponScript : MonoBehaviour
+public class HardEnemySpawnScript : MonoBehaviour
 {
     [Header("スポーンする敵の設定")]
     [SerializeField] List<GameObject> ENEMYLIST = new List<GameObject>();
@@ -42,43 +42,51 @@ public class HardEnemySponScript : MonoBehaviour
         EnemyCount =0;
     }
 
-    // Update is called once per frame
+    // 同時に撃破した時の処理
     void Update()
     {
         if (KillThisFrame.Count > 0)
         {
             if (KillThisFrame.Count >= 4)
-                EneUI.Count(4);
+                Score(+4);
             else if (KillThisFrame.Count == 3)
-                EneUI.Count(3);
+                Score(+3);
             else if (KillThisFrame.Count == 2)
-                EneUI.Count(2);
+                Score(+2);
             else 
-                EneUI.Count(1);
+                Score(+1);
         }
         KillThisFrame.Clear();
     }
 
     private IEnumerator SpawnLoop()
     {
-        canSpawn = true;
-        while (canSpawn)
+        while (true)
         {
-            SpawnEnemy();
-            yield return new WaitForSeconds(TimeBetEnemy);
+            int patternIndex = Random.Range(0, SpawnPattern.Count);
+            int[] currentPattern = SpawnPattern[patternIndex];
+
+            foreach (int pointIndex in currentPattern)
+            {
+                SpawnEnemy(pointIndex);
+
+                // パターン内で少しズラして出したい場合はここを有効にする
+                yield return new WaitForSeconds(TimeBetEnemy);
+            }
+
+          //  yield return new WaitForSeconds(TimeBetEnemy);
+
         }
     }
-    private void SpawnEnemy()
+    private void SpawnEnemy(int pointIndex)
     {
         if (ENEMYLIST.Count == 0 || SpawnPoint.Length == 0) return;
 
-        int SpawnIndex=Random.Range(0,SpawnPattern.Count);
         int index = Random.Range(0,Alphabet.Length);
-
-        GameObject EnemyPrefab = ENEMYLIST[Random.Range(0, ENEMYLIST.Count)];
         char letter = (char)('A'+index);
 
-        GameObject enemy = Instantiate(EnemyPrefab, SpawnPoint[SpawnIndex].position, Quaternion.identity);
+        GameObject EnemyPrefab = ENEMYLIST[Random.Range(0, ENEMYLIST.Count)];
+        GameObject enemy = Instantiate(EnemyPrefab, SpawnPoint[pointIndex].position, Quaternion.identity);
 
         var script = enemy.GetComponent<tekiScript>();
         if (script != null)
@@ -96,5 +104,9 @@ public class HardEnemySponScript : MonoBehaviour
         public void ReportEnemy()
     {
         EnemyCount++;
+    }
+    public void Score(int a)
+    {
+        EneUI.Count(a);
     }
 }

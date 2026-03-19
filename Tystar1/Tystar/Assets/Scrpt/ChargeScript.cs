@@ -60,7 +60,7 @@ public class ChargeScript : MonoBehaviour
         UpdateGauge();
     }
 
-    public void EntarWithCallback(GameObject target, EnemySpponScript appearScript,HardEnemySponScript hardEnemy)
+    public void EntarWithCallback(GameObject target, EnemySpponScript appearScript,HardEnemySpawnScript hardEnemy)
     {
         if (!Input.GetKeyDown(KeyCode.Return)) return;
 
@@ -72,7 +72,7 @@ public class ChargeScript : MonoBehaviour
             UpdateGauge();
         }
     }
-    public void EntarCallback(GameObject target, HardEnemySponScript hardEnemy)
+    public void EntarCallback(GameObject target, HardEnemySpawnScript hardEnemy)
     {
         if (currentCharge==MaxCharge)
         { if (Input.GetKeyDown(KeyCode.Return))
@@ -81,7 +81,7 @@ public class ChargeScript : MonoBehaviour
     }
 
     // š —Bˆê‚ÌŒ‚”jˆ—“üŒû
-    public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript, HardEnemySponScript hardEnemy)
+    public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript, HardEnemySpawnScript hardEnemy)
     {
         if (target == null) return;
 
@@ -115,6 +115,7 @@ if (!enemy.TryDefeat()) return;
         if (hardEnemy != null)
         {
             hardEnemy.ReportEnemy();
+            GetComponent<EnemyUIScript>().Count(1);
         }
 
         // ‡C “Gíœ

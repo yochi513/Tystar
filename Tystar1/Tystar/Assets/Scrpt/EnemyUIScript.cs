@@ -7,23 +7,21 @@ using UnityEngine.UI;
 public class EnemyUIScript : MonoBehaviour
 {
     public Text EneCountText;
-    private int count=0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    private int count;
     // Update is called once per frame
+    private void Start()
+    {
+        count = 0;        
+    }
     void Update()
     {
         CountText();
-      
+       // Debug.Log(count);
     }
     public void Count(int x)
     {
-        count += x;
+        count +=x;
+        CountText();
     }
     public void CountText()
     {
