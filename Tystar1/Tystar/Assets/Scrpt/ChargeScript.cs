@@ -76,7 +76,10 @@ public class ChargeScript : MonoBehaviour
     {
         if (currentCharge==MaxCharge)
         { if (Input.GetKeyDown(KeyCode.Return))
+            {
+               
                 Destroy(target);
+            }
         }
     }
 
@@ -112,12 +115,7 @@ if (!enemy.TryDefeat()) return;
         {
             appearScript.ReportEnemyDefeated(100);
         }
-        if (hardEnemy != null)
-        {
-            hardEnemy.ReportEnemy();
-            GetComponent<EnemyUIScript>().Count(1);
-        }
-
+       
         // ‡C “Gíœ
         Destroy(target);
     }

@@ -48,13 +48,13 @@ public class HardEnemySpawnScript : MonoBehaviour
         if (KillThisFrame.Count > 0)
         {
             if (KillThisFrame.Count >= 4)
-                Score(+4);
+                ReportEnemy(+4);
             else if (KillThisFrame.Count == 3)
-                Score(+3);
+                ReportEnemy(+3);
             else if (KillThisFrame.Count == 2)
-                Score(+2);
-            else 
-                Score(+1);
+                ReportEnemy(+2);
+            else
+                ReportEnemy(+1);
         }
         KillThisFrame.Clear();
     }
@@ -101,12 +101,10 @@ public class HardEnemySpawnScript : MonoBehaviour
             img.sprite = Alphabet[index];
         }
     }
-        public void ReportEnemy()
+        public void ReportEnemy(int Enemy)
     {
-        EnemyCount++;
+        EneUI.Count(Enemy);
+        KillThisFrame.Add(Enemy);
     }
-    public void Score(int a)
-    {
-        EneUI.Count(a);
-    }
+   
 }

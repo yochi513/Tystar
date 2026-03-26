@@ -7,12 +7,9 @@ using UnityEngine.UI;
 public class EnemyUIScript : MonoBehaviour
 {
     public Text EneCountText;
-    private int count;
+    private int count=0;
     // Update is called once per frame
-    private void Start()
-    {
-        count = 0;        
-    }
+   
     void Update()
     {
         CountText();
