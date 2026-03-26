@@ -672,6 +672,7 @@ GameObject:
   - component: {fileID: 447786350}
   - component: {fileID: 447786349}
   - component: {fileID: 447786351}
+  - component: {fileID: 447786352}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -724,6 +725,20 @@ MonoBehaviour:
   Arrow2: {fileID: 2000363274}
   Arrow3: {fileID: 621906111}
   playerA: {fileID: 1173107097}
+--- !u!114 &447786352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447786348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50a461e98b097e48b97dd4c53d55f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Retry: {fileID: 2007719344}
+  BacktoMainMenu: {fileID: 785458885}
 --- !u!1 &475126936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,9 +1212,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BottonScript, Assembly-CSharp
-        m_MethodName: MainMenu
+      - m_Target: {fileID: 447786352}
+        m_TargetAssemblyTypeName: Hardretry, Assembly-CSharp
+        m_MethodName: MainSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2534,8 +2549,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BottonScript, Assembly-CSharp
+      - m_Target: {fileID: 447786352}
+        m_TargetAssemblyTypeName: Hardretry, Assembly-CSharp
         m_MethodName: retry
         m_Mode: 1
         m_Arguments:

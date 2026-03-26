@@ -447,7 +447,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.9, z: 0.7}
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0.21}
 --- !u!54 &9031789726313979960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -509,6 +509,7 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 6386320751065638121}
   AppEnemy: {fileID: 0}
+  HardEnemy: {fileID: 0}
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   effectDuration: 2
