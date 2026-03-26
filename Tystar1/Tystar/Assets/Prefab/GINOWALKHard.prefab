@@ -213,7 +213,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 18.8, y: 36.4}
-  m_SizeDelta: {x: 3, y: 3}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1605904973941390402
 CanvasRenderer:
@@ -391,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 388b9eb8f0251a04db82a57e6b75c652, type: 3}
       propertyPath: m_Name
-      value: GINOWALKNormal
+      value: GINOWALKHard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -446,8 +446,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.6, y: 0.9, z: 0.7}
-  m_Center: {x: 0, y: 0.4, z: 0.36}
+  m_Size: {x: 0.6, y: 0.9, z: 1.05}
+  m_Center: {x: 0, y: 0.4, z: 0.31}
 --- !u!54 &9031789726313979960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   effectDuration: 2
-  speedtime: 7
+  speedtime: 12
 --- !u!95 &704391207264150154
 Animator:
   serializedVersion: 5

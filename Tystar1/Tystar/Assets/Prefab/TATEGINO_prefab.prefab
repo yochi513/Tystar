@@ -510,6 +510,7 @@ MonoBehaviour:
   enemyColor: {r: 0, g: 0, b: 0, a: 0}
   charge: {fileID: 763223589113229055}
   AppEnemy: {fileID: 0}
+  HardEnemy: {fileID: 0}
   dango: {fileID: 0}
   defeatEffectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
   effectDuration: 2
@@ -536,7 +537,7 @@ CapsuleCollider:
   m_Radius: 2.69
   m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 2.56, z: 0}
+  m_Center: {x: 0, y: 2.56, z: 1.09}
 --- !u!54 &2802231232989783932
 Rigidbody:
   m_ObjectHideFlags: 0
