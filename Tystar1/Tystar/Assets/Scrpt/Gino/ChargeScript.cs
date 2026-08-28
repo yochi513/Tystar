@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>敵ごとの入力チャージ、連鎖開始、撃破通知を担当する。</summary>
 public class ChargeScript : MonoBehaviour
 {
     [SerializeField] Image Char;
@@ -72,35 +73,36 @@ public class ChargeScript : MonoBehaviour
             UpdateGauge();
         }
     }
-    public void EntarCallback(GameObject target, HardEnemySpawnScript hardEnemy)
+    public void EntarCallback(GameObject target, EnemySpponScript appearScript, HardEnemySpawnScript hardEnemy)
     {
         if (currentCharge==MaxCharge)
         { if (Input.GetKeyDown(KeyCode.Return))
             {
                
-                Destroy(target);
+                ForceDefeatEnemy(target, appearScript, hardEnemy);
             }
         }
     }
 
-    // �� �B��̌��j��������
+    // ★ 唯一の撃破処理入口
     public void ForceDefeatEnemy(GameObject target, EnemySpponScript appearScript, HardEnemySpawnScript hardEnemy)
     {
+        // 破壊処理をここへ集約し、スコア・団子連携・エフェクトの漏れを防ぐ。
         if (target == null) return;
 
         tekiScript enemy = target.GetComponent<tekiScript>();
         if (enemy == null) return;
 
-       // ��d���j�h�~
+       // 二重撃破防止
 if (!enemy.TryDefeat()) return;
 
-        // �@ �A���I�u�W�F�N�g�ʒm
+        // ① 連動オブジェクト通知
         if (enemy.dango != null)
         {
             enemy.dango.OnDestroyed();
         }
 
-        // �A ���j�G�t�F�N�g
+        // ② 撃破エフェクト
         if (enemy.DefeatEffectPrefab != null)
         {
             Instantiate(
@@ -110,13 +112,17 @@ if (!enemy.TryDefeat()) return;
             );
         }
 
-        // �B �X�|�[���Ǘ��֕�
+        // ③ スポーン管理へ報告
         if (appearScript != null)
         {
             appearScript.ReportEnemyDefeated(100);
         }
+        else if (hardEnemy != null)
+        {
+            hardEnemy.ReportEnemyDefeated();
+        }
        
-        // �C �G�폜
+        // ④ 敵削除
         Destroy(target);
     }
 

@@ -1,8 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+/// <summary>ã‚¹ãƒ—ãƒ©ãƒƒã‚·ãƒ¥ç”»é¢ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ãƒ»è¡¨ç¤ºãƒ»ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã‚’é †ã«å®Ÿè¡Œã™ã‚‹ã€‚</summary>
 public class SplashFade : MonoBehaviour
 {
     [SerializeField] Image fadeImage;
@@ -17,13 +18,13 @@ public class SplashFade : MonoBehaviour
 
     IEnumerator FadeSequence()
     {
-        // ƒtƒF[ƒhƒCƒ“i•¨“§–¾j
+        // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ï¼ˆé»’â†’é€æ˜ï¼‰
         yield return Fade(1f, 0f, fadeInTime);
 
-        // •\¦ŠÔ
+        // è¡¨ç¤ºæ™‚é–“
         yield return new WaitForSeconds(stayTime);
 
-        // ƒtƒF[ƒhƒAƒEƒgi“§–¾¨•j
+        // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆï¼ˆé€æ˜â†’é»’ï¼‰
         yield return Fade(0f, 1f, fadeOutTime);
 
         SceneManager.LoadScene("SelectionScene");

@@ -1,21 +1,22 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>å›£å­ç·¨æˆã®æ’ƒç ´é †ã‚’ç®¡ç†ã—ã€æ¬¡ã«å€’ã›ã‚‹æ•µã‚’è§£æ”¾ã™ã‚‹ã€‚</summary>
 public class DangoManagerScript : MonoBehaviour
 {
-    public DangoBehaviorScript[] dangoList; // ã¨’†¨‰º ‚Ì‡‚ÉƒZƒbƒg
+    public DangoBehaviorScript[] dangoList; // ä¸Šâ†’ä¸­â†’ä¸‹ ã®é †ã«ã‚»ãƒƒãƒˆ
     private int currentIndex = 0;
 
     void Start()
     {
-        // Å‰‚Íã‚¾‚¯‚ª”j‰ó‰Â”\
+        // æœ€åˆã¯ä¸Šã ã‘ãŒç ´å£Šå¯èƒ½
         dangoList[0].canBeDestroyed = true;
     }
 
     public void OnDangoDestroyed(int destroyedIndex)
     {
-        // ³‚µ‚¢‡”Ô‚¾‚Á‚½‚Ì‚İŸ‚ğ‰ğ•ú
+        // æ­£ã—ã„é †ç•ªã ã£ãŸæ™‚ã®ã¿æ¬¡ã‚’è§£æ”¾
         if (destroyedIndex == currentIndex)
         {
             currentIndex++;

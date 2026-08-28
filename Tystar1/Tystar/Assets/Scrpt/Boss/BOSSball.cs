@@ -1,17 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>æŠ•å°„ç‰©ãŒç”Ÿæˆã•ã‚ŒãŸã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§ã€ã‚·ãƒ¼ãƒ³ã‚’ã¾ãŸã„ã§åŠ¹æœéŸ³ã‚’é³´ã‚‰ã™ã€‚</summary>
 public class ProjectileSound : MonoBehaviour
 {
-    [SerializeField] private AudioClip throwSound; // “Š±‚ÌŒø‰Ê‰¹
-    [SerializeField][Range(0f, 1f)] private float volume = 1.0f; // ‰¹—Ê
+    [SerializeField] private AudioClip throwSound; // æŠ•æ“²æ™‚ã®åŠ¹æœéŸ³
+    [SerializeField][Range(0f, 1f)] private float volume = 1.0f; // éŸ³é‡
 
-    private static GameObject soundPlayer; // Œø‰Ê‰¹Ä¶—p‚Ì‰i‘±ƒIƒuƒWƒFƒNƒg
+    private static GameObject soundPlayer; // åŠ¹æœéŸ³å†ç”Ÿç”¨ã®æ°¸ç¶šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
     void Start()
     {
-        // Œø‰Ê‰¹Ä¶—p‚Ì‰i‘±ƒIƒuƒWƒFƒNƒg‚ğì¬i‚Ü‚¾‚È‚¯‚ê‚Îj
+        // åŠ¹æœéŸ³å†ç”Ÿç”¨ã®æ°¸ç¶šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆï¼ˆã¾ã ãªã‘ã‚Œã°ï¼‰
         if (soundPlayer == null)
         {
             soundPlayer = new GameObject("ProjectileSoundPlayer");
@@ -19,7 +20,7 @@ public class ProjectileSound : MonoBehaviour
             DontDestroyOnLoad(soundPlayer);
         }
 
-        // “Š±‚³‚ê‚½uŠÔ‚ÉŒø‰Ê‰¹‚ğÄ¶
+        // æŠ•æ“²ã•ã‚ŒãŸç¬é–“ã«åŠ¹æœéŸ³ã‚’å†ç”Ÿ
         PlayThrowSound();
     }
 

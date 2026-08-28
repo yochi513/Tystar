@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>旧スポーン試作の保管用コンポーネント。現在のゲーム進行では使用しない。</summary>
 public class AppearEnemyScript : MonoBehaviour
 {
 //    [SerializeField] GameObject[] enemyPrefabs;
@@ -17,13 +18,13 @@ public class AppearEnemyScript : MonoBehaviour
 //    {
 //        // Wave 1
 //        SpawnWave();
-//        // Wave 2 �͐��b��
+//        // Wave 2 は数秒後
 //        StartCoroutine(SpawnSecondWaveAfterDelay(2f));
 //    }
 
 //    void Update()
 //    {
-//        // Wave 3�ȍ~�F4�̓|������
+//        // Wave 3以降：4体倒した後
 //        if (secondWaveSpawned && totalDefeated >= 4 && totalSpawned < maxEnemies)
 //        {
 //            totalDefeated = 0;
@@ -52,7 +53,7 @@ public class AppearEnemyScript : MonoBehaviour
 
 //    private IEnumerator SpawnSecondWaveAfterDelay(float delay)
 //    {
-//        yield return new WaitForSeconds(delay);//�w�肵���b��������U�����𒆒f
+//        yield return new WaitForSeconds(delay);//指定した秒数だけ一旦処理を中断
 //        SpawnWave();
 //        secondWaveSpawned = true;
 //    }

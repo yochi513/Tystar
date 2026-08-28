@@ -3,13 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using static BallScript;
 
+/// <summary>ボスとプレイヤーの間を移動するボール。反射後はボスへ戻る。</summary>
 public class BallScript : MonoBehaviour
 {
-    char letter;
     bool reflected = false;
     [SerializeField] Image letterImage;   // ← ボールの子のUI画像
     private int Num = 5;
-    private int Count=0;
     Transform player;
     Transform supar;
 
@@ -47,25 +46,21 @@ public class BallScript : MonoBehaviour
     }
     void Update()
     {
-        if (player == null) return;
- 
-    if (player == supar)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, player.position, 100f * Time.deltaTime);
-        }
-    //if (Count==0)
-    //    {
-            transform.position = Vector3.MoveTowards(transform.position, player.position, Num * Time.deltaTime);
-        //}
+        Transform target = reflected ? supar : player;
+        if (target == null) return;
 
+        float speed = reflected ? 100f : Num;
+        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+        if (Vector3.SqrMagnitude(transform.position - target.position) < 0.0001f)
+        {
+            Destroy(gameObject);
+        }
     }
     public void Reflect()
     {
       //  Debug.Log("Reflect呼ばれてる");
         if (reflected) return;
         reflected = true;
-        player = supar;
-      
-        
     }
 }

@@ -1,8 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸è¿‘ã¥ãæ•µã®ç§»å‹•ã€å…¥åŠ›åˆ¤å®šã€è¢«æ’ƒç ´çŠ¶æ…‹ã‚’ç®¡ç†ã™ã‚‹ã€‚</summary>
 public class tekiScript : MonoBehaviour
 {
     private GameObject target;
@@ -23,24 +24,25 @@ public class tekiScript : MonoBehaviour
     private Renderer rend;
     private Animator anim;
 
-    [Header("ƒGƒtƒFƒNƒgİ’è")]
+    [Header("ã‚¨ãƒ•ã‚§ã‚¯ãƒˆè¨­å®š")]
     [SerializeField] private GameObject defeatEffectPrefab;
     [SerializeField] private float effectDuration = 2f;
 
     // ================================
-    // š Œ‚”jó‘ÔŠÇ—i‚±‚±‚ªd—vj
+    // â˜… æ’ƒç ´çŠ¶æ…‹ç®¡ç†ï¼ˆã“ã“ãŒé‡è¦ï¼‰
     // ================================
     public bool IsDefeated { get; private set; } = false;
 
-    // š Œ‚”j‚ğŠm’è‚³‚¹‚é—Bˆê‚Ì“üŒû
+    // â˜… æ’ƒç ´ã‚’ç¢ºå®šã•ã›ã‚‹å”¯ä¸€ã®å…¥å£
     public bool TryDefeat()
     {
+        // é€£é–ãªã©è¤‡æ•°ã®çµŒè·¯ã‹ã‚‰åŒæ™‚ã«å€’ã•ã‚Œã¦ã‚‚ã€ä¸€åº¦ã ã‘æˆåŠŸã•ã›ã‚‹ã€‚
         if (IsDefeated) return false;
         IsDefeated = true;
         return true;
     }
 
-    // Œ‚”jƒGƒtƒFƒNƒgæ“¾—piŠO•”‚©‚çQÆj
+    // æ’ƒç ´ã‚¨ãƒ•ã‚§ã‚¯ãƒˆå–å¾—ç”¨ï¼ˆå¤–éƒ¨ã‹ã‚‰å‚ç…§ï¼‰
     public GameObject DefeatEffectPrefab => defeatEffectPrefab;
 
     public enum SPEED
@@ -153,7 +155,7 @@ public class tekiScript : MonoBehaviour
         {
             charge.Tystar(+1);
             charge.EntarWithCallback(gameObject, AppEnemy,HardEnemy);
-            charge.EntarCallback(gameObject, HardEnemy);
+            charge.EntarCallback(gameObject, AppEnemy, HardEnemy);
         }
         else
         {

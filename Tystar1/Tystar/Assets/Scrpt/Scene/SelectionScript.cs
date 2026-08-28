@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>タイトル、難易度選択、説明画面の表示を切り替える。</summary>
 public class SelectionScript : MonoBehaviour
 {
     [SerializeField] Button start;

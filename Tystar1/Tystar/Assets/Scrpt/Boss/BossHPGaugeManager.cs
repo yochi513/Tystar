@@ -1,13 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>å…±æœ‰ã—ã¦ã„ã‚‹ãƒœã‚¹HPã®å€¤ã‚’UIã‚²ãƒ¼ã‚¸ã«åæ˜ ã™ã‚‹è¡¨ç¤ºå°‚ç”¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã€‚</summary>
 public class BossHPGaugeManager : MonoBehaviour
 {
     [SerializeField] private Image bossHPGaugeImage;
+    private float previousHp = float.NaN;
+    private float previousMaxHp = float.NaN;
 
     void Start()
     {
-        // UI‚ÌImage‚ğæ“¾iƒCƒ“ƒXƒyƒNƒ^[‚Åİ’è‚³‚ê‚Ä‚¢‚È‚¢ê‡j
+        // UIã®Imageã‚’å–å¾—ï¼ˆã‚¤ãƒ³ã‚¹ãƒšã‚¯ã‚¿ãƒ¼ã§è¨­å®šã•ã‚Œã¦ã„ãªã„å ´åˆï¼‰
         if (bossHPGaugeImage == null)
         {
             bossHPGaugeImage = GetComponent<Image>();
@@ -18,8 +21,11 @@ public class BossHPGaugeManager : MonoBehaviour
 
     void Update()
     {
-        // í‚ÉƒQ[ƒW‚ğXViƒŠƒAƒ‹ƒ^ƒCƒ€‚Å”½‰fj
-        UpdateGauge();
+        if (!Mathf.Approximately(previousHp, staticScript.BossHP) ||
+            !Mathf.Approximately(previousMaxHp, staticScript.BossMaxHP))
+        {
+            UpdateGauge();
+        }
     }
 
     private void UpdateGauge()
@@ -28,6 +34,8 @@ public class BossHPGaugeManager : MonoBehaviour
         {
             float hpRatio = Mathf.Clamp01(staticScript.BossHP / staticScript.BossMaxHP);
             bossHPGaugeImage.fillAmount = hpRatio;
+            previousHp = staticScript.BossHP;
+            previousMaxHp = staticScript.BossMaxHP;
         }
     }
   public  void HPMAX(float a)

@@ -1,7 +1,8 @@
-using Unity.VisualScripting;
+ï»¿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>ãƒœã‚¹æˆ¦å‰ã®åå°„ãƒ•ã‚§ãƒ¼ã‚ºã‚’é€²ã‚ã€å®Œäº†å¾Œã«ãƒœã‚¹æ”»æ’ƒçŠ¶æ…‹ã¸åˆ‡ã‚Šæ›¿ãˆã‚‹ã€‚</summary>
 public class BossWaveScript : MonoBehaviour
 {
     [SerializeField] GameObject ballPrefab;
@@ -22,29 +23,44 @@ public class BossWaveScript : MonoBehaviour
     Sprite currentSprite;
 
     private bool isWaitingForReflect = false;
-    private bool bossPhaseStarted = false; // ƒ{ƒXƒtƒF[ƒYŠJnƒtƒ‰ƒO
+    private bool bossPhaseStarted = false; // ãƒœã‚¹ãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹ãƒ•ãƒ©ã‚°
+    private bool hasValidConfiguration;
 
 
+
+    void Awake()
+    {
+        hasValidConfiguration = ballPrefab != null && supar != null && player != null &&
+            Alphabet != null && Alphabet.Length > 0 && Entra != null && playerState != null;
+
+        if (!hasValidConfiguration)
+        {
+            Debug.LogError("BossWaveScript: Inspectorã®å¿…é ˆå‚ç…§ãŒä¸è¶³ã—ã¦ã„ã¾ã™ã€‚", this);
+            enabled = false;
+        }
+    }
 
     void Start()
     {
+        if (!hasValidConfiguration) return;
         StartNextPhase();
        Entra.SetActive(false);  
     }
 
     void StartNextPhase()
     {
+        // 3å›ã®åå°„ã«æˆåŠŸã—ãŸã‚‰ã€ãƒœãƒ¼ãƒ«æ“ä½œã§ã¯ãªããƒœã‚¹æ”»æ’ƒã¸ç§»ã‚‹ã€‚
         if (phase >= 3)
         {
             Entra.gameObject.SetActive(true);
             staticScript.BossCount++;
-            Debug.Log("BossƒtƒF[ƒY“Ë“ü‰ñ”" + staticScript.BossCount);
+            Debug.Log("Bossãƒ•ã‚§ãƒ¼ã‚ºçªå…¥å›æ•°" + staticScript.BossCount);
             if (!bossPhaseStarted)
             {
                 bossPhaseStarted = true;
                 playerState.BossAttack();
-                Debug.Log("ƒ{ƒXUŒ‚ƒtƒF[ƒYŠJnIƒXƒe[ƒg: " + PlayerStateScript.CurrentState);
-                Debug.Log("Œ»İ‚Ìƒ`ƒƒ[ƒW—Ê: " + staticScript.SaveCh);
+                Debug.Log("ãƒœã‚¹æ”»æ’ƒãƒ•ã‚§ãƒ¼ã‚ºé–‹å§‹ï¼ã‚¹ãƒ†ãƒ¼ãƒˆ: " + PlayerStateScript.CurrentState);
+                Debug.Log("ç¾åœ¨ã®ãƒãƒ£ãƒ¼ã‚¸é‡: " + staticScript.SaveCh);
             }
             return;
         }
@@ -55,19 +71,29 @@ public class BossWaveScript : MonoBehaviour
         currentSprite = Alphabet[index];
 
         ball = Instantiate(ballPrefab, supar.position, Quaternion.identity);
-        ball.GetComponent<BallScript>().Init(currentLetter, currentKey, player, supar, currentSprite);
+        BallScript ballScript = ball.GetComponent<BallScript>();
+        if (ballScript == null)
+        {
+            Debug.LogError("BossWaveScript: ballPrefabã«BallScriptãŒã‚ã‚Šã¾ã›ã‚“ã€‚", ball);
+            Destroy(ball);
+            enabled = false;
+            return;
+        }
+        ballScript.Init(currentLetter, currentKey, player, supar, currentSprite);
 
         isWaitingForReflect = true;
-        Debug.Log($"ƒtƒF[ƒY{phase + 1}: ƒL[ '{currentLetter}' ‚ğ‰Ÿ‚µ‚Äƒ{[ƒ‹‚ğ’µ‚Ë•Ô‚µ‚Ä‚­‚¾‚³‚¢");
+        Debug.Log($"ãƒ•ã‚§ãƒ¼ã‚º{phase + 1}: ã‚­ãƒ¼ '{currentLetter}' ã‚’æŠ¼ã—ã¦ãƒœãƒ¼ãƒ«ã‚’è·³ã­è¿”ã—ã¦ãã ã•ã„");
     }
 
     void Update()
     {
-        // ƒ{ƒXƒtƒF[ƒY‚ÉˆÚs‚µ‚½‚çƒL[“ü—Í‚ğó‚¯•t‚¯‚È‚¢
+        // ãƒœã‚¹ãƒ•ã‚§ãƒ¼ã‚ºã«ç§»è¡Œã—ãŸã‚‰ã‚­ãƒ¼å…¥åŠ›ã‚’å—ã‘ä»˜ã‘ãªã„
         if (bossPhaseStarted) return;
 
         if (isWaitingForReflect && Input.GetKeyDown(currentKey))
         {
+            if (ball == null) return;
+
             ball.GetComponent<BallScript>().Reflect();
 
             Animator suparAnimator = supar.GetComponent<Animator>();

@@ -1,17 +1,20 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>ä¸»äººå…¬ã®ãƒãƒ£ãƒ¼ã‚¸ã‚²ãƒ¼ã‚¸ã€ãƒœã‚¹ä¸­ã®ãƒ“ãƒ¼ãƒ ã€ãƒãƒ£ãƒ¼ã‚¸åˆ‡ã‚Œæ™‚ã®çµ‚äº†å‡¦ç†ã‚’ç®¡ç†ã™ã‚‹ã€‚</summary>
 public class CHScript : MonoBehaviour
 {
     [SerializeField] Image ch;
     [SerializeField] ParticleSystem beamEffect;
+    [SerializeField] Transform beamOrigin;
 
     private float Maxch = 50f;
     private float Minch = 0f;
     private bool isPlayingEffect = false;
+    private bool chargeWasBeingUsed = false;
     public BossScript bossScript;
 
     void Start()
@@ -21,12 +24,26 @@ public class CHScript : MonoBehaviour
             beamEffect = GetComponentInChildren<ParticleSystem>();
             if (beamEffect == null)
             {
-                Debug.LogError("ParticleSystem‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñI");
+                Debug.LogError("ParticleSystemãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼");
             }
         }
 
         if (beamEffect != null)
         {
+            // Prefabã‚¢ã‚»ãƒƒãƒˆãŒè¨­å®šã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ã€ä¸»äººå…¬ã®å­ã¨ã—ã¦å®Ÿä½“ã‚’ç”Ÿæˆã™ã‚‹ã€‚
+            if (!beamEffect.gameObject.scene.IsValid())
+            {
+                if (beamOrigin == null)
+                {
+                    GameObject player = GameObject.FindGameObjectWithTag("Player");
+                    beamOrigin = player != null ? player.transform : transform;
+                }
+
+                beamEffect = Instantiate(beamEffect, beamOrigin);
+                beamEffect.transform.localPosition = Vector3.zero;
+                beamEffect.transform.localRotation = Quaternion.identity;
+            }
+
             beamEffect.Stop();
         }
     }
@@ -37,14 +54,14 @@ public class CHScript : MonoBehaviour
         Minch = Mathf.Clamp(Minch, 0, Maxch);
         UpdateCh();
 
-        // ƒ{ƒXƒtƒF[ƒY‚Ì‚İƒQ[ƒWÁ”ï‚ÆƒGƒtƒFƒNƒg‚ğ—LŒø‰»
+        // ãƒœã‚¹ãƒ•ã‚§ãƒ¼ã‚ºã®ã¿ã‚²ãƒ¼ã‚¸æ¶ˆè²»ã¨ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’æœ‰åŠ¹åŒ–
         if (PlayerStateScript.CurrentState == PlayerStateScript.PlayerState.BossAttack)
         {
             Ae();
         }
         else
         {
-            // ƒ{ƒXƒtƒF[ƒYˆÈŠO‚Å‚ÍƒGƒtƒFƒNƒg‚ğ’â~
+            // ãƒœã‚¹ãƒ•ã‚§ãƒ¼ã‚ºä»¥å¤–ã§ã¯ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’åœæ­¢
             if (isPlayingEffect && beamEffect != null)
             {
                 beamEffect.Stop();
@@ -55,7 +72,7 @@ public class CHScript : MonoBehaviour
 
     public void ChAdd(float point)
     {
-        Minch += point;
+        Minch = Mathf.Clamp(Minch + point, 0, Maxch);
         staticScript.SaveCh = Minch;
     }
 
@@ -69,70 +86,44 @@ public class CHScript : MonoBehaviour
 
     public void Ae()
     {
-        // —‹ƒGƒtƒFƒNƒgÀs’†‚Í‰½‚à‚µ‚È‚¢
-        if (Lightning.isExecutingChain)
-        {
-            if (isPlayingEffect && beamEffect != null)
-            {
-                beamEffect.Stop();
-                isPlayingEffect = false;
-            }
-            return;
-        }
-
+        // ãƒœã‚¹ä¸­ã ã‘å‘¼ã°ã‚Œã‚‹ã€‚Enteré•·æŠ¼ã—ã§ã‚²ãƒ¼ã‚¸ã‚’æ¶ˆè²»ã—ãªãŒã‚‰ãƒ“ãƒ¼ãƒ ã‚’ç¶­æŒã™ã‚‹ã€‚
         bool enterPressed = Input.GetKey(KeyCode.Return);
 
         if (enterPressed && Minch > 0)
         {
-            // ƒ`ƒƒ[ƒW‚ğÁ”ïi–ˆƒtƒŒ[ƒ€j
-            Minch -= 10f * Time.deltaTime; // 1•b‚Å10Á”ï
+            // ãƒãƒ£ãƒ¼ã‚¸ã‚’æ¶ˆè²»ï¼ˆæ¯ãƒ•ãƒ¬ãƒ¼ãƒ ï¼‰
+            Minch -= 10f * Time.deltaTime; // 1ç§’ã§10æ¶ˆè²»
             Minch = Mathf.Max(Minch, 0);
+            chargeWasBeingUsed = true;
 
-            // ƒGƒtƒFƒNƒg‚ğÄ¶
+            // ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å†ç”Ÿ
             if (!isPlayingEffect && beamEffect != null)
             {
-                Debug.Log("isPlayingEffect‚ªfalse‚È‚Ì‚ÅÄ¶ŠJn‚µ‚Ü‚·");
-
                 if (beamEffect != null)
                 {
-                    Debug.Log("beamEffect.Play() ‚ğŒÄ‚Ño‚µ‚Ü‚·");
                     beamEffect.Play();
-
-                    // ƒGƒtƒFƒNƒg‚ªÀÛ‚ÉÄ¶‚³‚ê‚Ä‚¢‚é‚©Šm”F
-                    Debug.Log($"ƒGƒtƒFƒNƒgÄ¶ó‘Ô: isPlaying={beamEffect.isPlaying}, isEmitting={beamEffect.isEmitting}, particleCount={beamEffect.particleCount}");
-
                     isPlayingEffect = true;
-                    Debug.Log("ƒr[ƒ€”­ËŠJnI");
                 }
-
-            }
-            else
-            {
-                Debug.Log("‚·‚Å‚ÉÄ¶’†‚Å‚·");
             }
         }
         else
         {
-            if (!enterPressed)
-            {
-                Debug.Log("ƒGƒ“ƒ^[ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
-            }
-            if (Minch <= 0)
-            {
-                bossScript.BossTime();
-                Debug.Log("Minch‚ª0ˆÈ‰º‚Å‚·");
-            }
-
-            // ƒL[‚ğ—£‚µ‚½‚çƒGƒtƒFƒNƒg‚ğ’â~
+            // ã‚­ãƒ¼ã‚’é›¢ã—ãŸã‚‰ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’åœæ­¢
             if (isPlayingEffect && beamEffect != null)
             {
                 beamEffect.Stop();
                 isPlayingEffect = false;
-                Debug.Log("ƒr[ƒ€’â~");
             }
         }
 
-        // Ã“I•Ï”‚É”½‰f
+        // ãƒãƒ£ãƒ¼ã‚¸ã‚’ä½¿ã„åˆ‡ã£ãŸæ™‚ã ã‘çµ‚äº†ã™ã‚‹ã€‚é–‹å§‹æ™‚ã«0ã§ã‚‚å³çµ‚äº†ã—ãªã„ã€‚
+        if (chargeWasBeingUsed && Minch <= 0)
+        {
+            chargeWasBeingUsed = false;
+            bossScript?.BossTime();
+        }
+
+        // é™çš„å¤‰æ•°ã«åæ˜ 
         staticScript.SaveCh = Minch;
     }
 }

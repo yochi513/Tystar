@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/// <summary>通常の敵攻撃・ボス攻撃・ゲームオーバーの入力状態を切り替える。</summary>
 public class PlayerStateScript : MonoBehaviour
 {
     [SerializeField] GameObject Arrow0;
@@ -16,7 +17,7 @@ public class PlayerStateScript : MonoBehaviour
     {
         None,
         GinoAttack,
-        BossAttack�@//�{�X�U���ǉ�
+        BossAttack　//ボス攻撃追加
     }
     public static PlayerState CurrentState = PlayerState.None;
 

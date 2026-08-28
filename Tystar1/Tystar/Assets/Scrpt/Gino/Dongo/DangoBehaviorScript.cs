@@ -1,10 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>å›£å­ç·¨æˆå†…ã®ä¸€ä½“ã€‚Managerã‹ã‚‰è§£æ”¾ã•ã‚ŒãŸé †ç•ªã§ã®ã¿å€’ã›ã‚‹ã€‚</summary>
 public class DangoBehaviorScript : MonoBehaviour
 {
-    public int orderIndex;  // 0=ã,1=’†,2=‰º
+    public int orderIndex;  // 0=ä¸Š,1=ä¸­,2=ä¸‹
     public DangoManagerScript manager;
 
     [HideInInspector] public bool canBeDestroyed = false;
@@ -14,12 +15,12 @@ public class DangoBehaviorScript : MonoBehaviour
     void Start()
     {
         teki = GetComponent<tekiScript>();
-        teki.enabled = false; // Å‰‚Í‘€ì•s‰Âiã‚¾‚¯‹–‰Âj
+        teki.enabled = false; // æœ€åˆã¯æ“ä½œä¸å¯ï¼ˆä¸Šã ã‘è¨±å¯ï¼‰
     }
 
     void Update()
     {
-        // ‡”Ô‚ª—ˆ‚Ä‚¢‚È‚¢‚È‚ç”½‰‚µ‚È‚¢
+        // é †ç•ªãŒæ¥ã¦ã„ãªã„ãªã‚‰åå¿œã—ãªã„
         if (!canBeDestroyed) return;
 
         teki.enabled = true;

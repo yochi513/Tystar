@@ -1,28 +1,29 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>å¯¾è±¡ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç ´æ£„æ™‚ã«ã€ã‚·ãƒ¼ãƒ³ã‚’ã¾ãŸã„ã§åŠ¹æœéŸ³ã‚’å†ç”Ÿã™ã‚‹ã€‚</summary>
 public class PlaySoundOnDestroy : MonoBehaviour
 {
-    [SerializeField] private AudioClip defeatSound; // Œø‰Ê‰¹
-    [SerializeField] private float volume = 1.0f; // ‰¹—Ê
+    [SerializeField] private AudioClip defeatSound; // åŠ¹æœéŸ³
+    [SerializeField] private float volume = 1.0f; // éŸ³é‡
 
-    private static GameObject soundPlayer; // Œø‰Ê‰¹Ä¶—p‚Ì‰i‘±ƒIƒuƒWƒFƒNƒg
+    private static GameObject soundPlayer; // åŠ¹æœéŸ³å†ç”Ÿç”¨ã®æ°¸ç¶šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 
     void Start()
     {
-        // Œø‰Ê‰¹Ä¶—p‚Ì‰i‘±ƒIƒuƒWƒFƒNƒg‚ğì¬i‚Ü‚¾‚È‚¯‚ê‚Îj
+        // åŠ¹æœéŸ³å†ç”Ÿç”¨ã®æ°¸ç¶šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆï¼ˆã¾ã ãªã‘ã‚Œã°ï¼‰
         if (soundPlayer == null)
         {
             soundPlayer = new GameObject("SoundPlayer");
             soundPlayer.AddComponent<AudioSource>();
-            DontDestroyOnLoad(soundPlayer); // ƒV[ƒ“Ø‚è‘Ö‚¦‚Å‚àÁ‚¦‚È‚¢
+            DontDestroyOnLoad(soundPlayer); // ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã§ã‚‚æ¶ˆãˆãªã„
         }
     }
 
     void OnDestroy()
     {
-        // ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ª”j‰ó‚³‚ê‚é‚ÉŒø‰Ê‰¹‚ğÄ¶
+        // ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒç ´å£Šã•ã‚Œã‚‹æ™‚ã«åŠ¹æœéŸ³ã‚’å†ç”Ÿ
         if (defeatSound != null && soundPlayer != null)
         {
             AudioSource audioSource = soundPlayer.GetComponent<AudioSource>();

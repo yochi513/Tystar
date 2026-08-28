@@ -1,29 +1,30 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>Hardç”¨ã®æ•µã‚¦ã‚§ãƒ¼ãƒ–ã‚’ç”Ÿæˆã—ã€æŒ‡å®šã—ãŸç·æ•°ã§ç”Ÿæˆã‚’åœæ­¢ã™ã‚‹ã€‚</summary>
 public class HardEnemySpawnScript : MonoBehaviour
 {
-    [Header("ƒXƒ|[ƒ“‚·‚é“G‚Ìİ’è")]
+    [Header("ã‚¹ãƒãƒ¼ãƒ³ã™ã‚‹æ•µã®è¨­å®š")]
     [SerializeField] List<GameObject> ENEMYLIST = new List<GameObject>();
     [SerializeField] Sprite[] Alphabet;
     [SerializeField] Transform[] SpawnPoint;
     [SerializeField] int maxEnemyNum = 1000;
 
-    [Header("ƒXƒ|[ƒ“ŠÔŠu‚ÆŸ‚ÌƒEƒF[ƒuŠÔŠu")]
+    [Header("ã‚¹ãƒãƒ¼ãƒ³é–“éš”ã¨æ¬¡ã®ã‚¦ã‚§ãƒ¼ãƒ–é–“éš”")]
     [SerializeField] float TimeBetEnemy = 0.5f;
     [SerializeField] float TimeBetWave = 10f;
 
     private List<int> KillThisFrame = new List<int>();
-    private int EnemyCount = 0;
+    private int spawnedCount;
     private bool canSpawn = true;
     public EnemyUIScript EneUI;
 
 
-    //ƒXƒ|[ƒ“ƒpƒ^[ƒ“
+    //ã‚¹ãƒãƒ¼ãƒ³ãƒ‘ã‚¿ãƒ¼ãƒ³
     private List<int[]> SpawnPattern = new List<int[]>()
     {
         new int[] {0,1,2,3,4,5},
@@ -39,38 +40,32 @@ public class HardEnemySpawnScript : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnLoop());
-        EnemyCount =0;
+        spawnedCount = 0;
     }
 
-    // “¯‚ÉŒ‚”j‚µ‚½‚Ìˆ—
+    // åŒæ™‚ã«æ’ƒç ´ã—ãŸæ™‚ã®å‡¦ç†
     void Update()
     {
-        if (KillThisFrame.Count > 0)
+        if (KillThisFrame.Count > 0 && EneUI != null)
         {
-            if (KillThisFrame.Count >= 4)
-                ReportEnemy(+4);
-            else if (KillThisFrame.Count == 3)
-                ReportEnemy(+3);
-            else if (KillThisFrame.Count == 2)
-                ReportEnemy(+2);
-            else
-                ReportEnemy(+1);
+            EneUI.Count(KillThisFrame.Count);
         }
         KillThisFrame.Clear();
     }
 
     private IEnumerator SpawnLoop()
     {
-        while (true)
+        while (canSpawn && spawnedCount < maxEnemyNum)
         {
             int patternIndex = Random.Range(0, SpawnPattern.Count);
             int[] currentPattern = SpawnPattern[patternIndex];
 
             foreach (int pointIndex in currentPattern)
             {
+                if (!canSpawn || spawnedCount >= maxEnemyNum) yield break;
                 SpawnEnemy(pointIndex);
 
-                // ƒpƒ^[ƒ““à‚Å­‚µƒYƒ‰‚µ‚Äo‚µ‚½‚¢ê‡‚Í‚±‚±‚ğ—LŒø‚É‚·‚é
+                // ãƒ‘ã‚¿ãƒ¼ãƒ³å†…ã§å°‘ã—ã‚ºãƒ©ã—ã¦å‡ºã—ãŸã„å ´åˆã¯ã“ã“ã‚’æœ‰åŠ¹ã«ã™ã‚‹
                 yield return new WaitForSeconds(TimeBetEnemy);
             }
 
@@ -80,31 +75,15 @@ public class HardEnemySpawnScript : MonoBehaviour
     }
     private void SpawnEnemy(int pointIndex)
     {
-        if (ENEMYLIST.Count == 0 || SpawnPoint.Length == 0) return;
-
-        int index = Random.Range(0,Alphabet.Length);
-        char letter = (char)('A'+index);
-
-        GameObject EnemyPrefab = ENEMYLIST[Random.Range(0, ENEMYLIST.Count)];
-        GameObject enemy = Instantiate(EnemyPrefab, SpawnPoint[pointIndex].position, Quaternion.identity);
-
-        var script = enemy.GetComponent<tekiScript>();
-        if (script != null)
+        if (EnemySpawnUtility.TrySpawn(ENEMYLIST, Alphabet, SpawnPoint, pointIndex, null, this))
         {
-            script.assignedChar= letter;
-            script.assignedKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
-        }
-
-        Image img = enemy.GetComponentInChildren<Image>();
-        if (img != null)
-        {
-            img.sprite = Alphabet[index];
+            spawnedCount++;
         }
     }
-        public void ReportEnemy(int Enemy)
+    public void ReportEnemyDefeated()
     {
-        EneUI.Count(Enemy);
-        KillThisFrame.Add(Enemy);
+        // æ•µå´ã‹ã‚‰å±Šãæ’ƒç ´é€šçŸ¥ã‚’ã€åŒãƒ•ãƒ¬ãƒ¼ãƒ é›†è¨ˆç”¨ã®ä¸€è¦§ã¸è¿½åŠ ã™ã‚‹ã€‚
+        KillThisFrame.Add(1);
     }
    
 }

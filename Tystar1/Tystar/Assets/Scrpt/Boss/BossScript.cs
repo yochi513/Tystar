@@ -1,31 +1,33 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>ãƒœã‚¹HPã€åˆ¶é™æ™‚é–“ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ“ãƒ¼ãƒ æ”»æ’ƒã€ã‚¯ãƒªã‚¢é·ç§»ã‚’ç®¡ç†ã™ã‚‹ã€‚</summary>
 public class BossScript : MonoBehaviour
 {
     public float HP = 1500;
     private float MaxHP = 1500;
     [SerializeField] float bossTime = 5f;
-    [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1Á”ï‚²‚Æ‚Ìƒ_ƒ[ƒW—Ê
+    [SerializeField] private float damagePerCharge = 0.1f; // CH 0.1æ¶ˆè²»ã”ã¨ã®ãƒ€ãƒ¡ãƒ¼ã‚¸é‡
     [SerializeField] private Image bossHPGaugeImage;
     [SerializeField] private ParticleSystem defeatEffect;
     [SerializeField] private Animator animator;
+    private bool battleEnded;
 
     void Start()
     {
         if (bossHPGaugeImage == null)
         {
-            // GameObject‚Ì–¼‘O‚âƒ^ƒO‚ÅŒŸõ‚·‚é•û–@
-            GameObject gaugeObj = GameObject.Find("BossƒQ[ƒW–{‘Ì"); // šƒQ[ƒWƒIƒuƒWƒFƒNƒg‚Ì–¼‘O‚É‡‚í‚¹‚Ä•ÏX
+            // GameObjectã®åå‰ã‚„ã‚¿ã‚°ã§æ¤œç´¢ã™ã‚‹æ–¹æ³•
+            GameObject gaugeObj = GameObject.Find("Bossã‚²ãƒ¼ã‚¸æœ¬ä½“"); // â˜…ã‚²ãƒ¼ã‚¸ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰ã«åˆã‚ã›ã¦å¤‰æ›´
             if (gaugeObj != null)
             {
                 bossHPGaugeImage = gaugeObj.GetComponent<Image>();
             }
         }
 
-        //•Û‘¶‚³‚ê‚Ä‚¢‚éHP‚ª‚ ‚ê‚Î•œŒ³A‚È‚¯‚ê‚Î‰Šú’l
+        //ä¿å­˜ã•ã‚Œã¦ã„ã‚‹HPãŒã‚ã‚Œã°å¾©å…ƒã€ãªã‘ã‚Œã°åˆæœŸå€¤
         if (staticScript.BossHP > 0)
         {
             HP = staticScript.BossHP;
@@ -33,24 +35,21 @@ public class BossScript : MonoBehaviour
         }
         else
         {
-            // š’Ç‰Áš ‰‰ñ‹N“®‚ÍMaxHP‚ğ•Û‘¶
+            // â˜…è¿½åŠ â˜… åˆå›èµ·å‹•æ™‚ã¯MaxHPã‚’ä¿å­˜
             MaxHP = HP;
             staticScript.BossMaxHP = MaxHP;
             staticScript.BossHP = HP;
         }
 
-        // ƒ{ƒXíŠJn‚ÉƒXƒe[ƒg‚ğBossAttack‚É•ÏX@‚é‚¢’Ç‰Á
+        // ãƒœã‚¹æˆ¦é–‹å§‹æ™‚ã«ã‚¹ãƒ†ãƒ¼ãƒˆã‚’BossAttackã«å¤‰æ›´ã€€ã‚‹ã„è¿½åŠ 
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.BossAttack;
-        Debug.Log("ƒ{ƒXíŠJn! ƒXƒe[ƒg: " + PlayerStateScript.CurrentState);
-        Debug.Log("‰Šúƒ`ƒƒ[ƒW—Ê: " + staticScript.SaveCh);
-
         //maxHP = HP;
         UpdateHPGauge();
 
-        // CHƒQ[ƒW‚ğ–ƒ^ƒ“‚É‚·‚éiƒfƒoƒbƒO—pj
+        // CHã‚²ãƒ¼ã‚¸ã‚’æº€ã‚¿ãƒ³ã«ã™ã‚‹ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ï¼‰
       //  staticScript.SaveCh = 50f;
 
-        //HPƒQ[ƒW‚ğ–ƒ^ƒ“‚Å‰Šú‰»iƒfƒoƒbƒO—pj
+        //HPã‚²ãƒ¼ã‚¸ã‚’æº€ã‚¿ãƒ³ã§åˆæœŸåŒ–ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ï¼‰
         UpdateBossHPGauge();
 
 
@@ -59,43 +58,37 @@ public class BossScript : MonoBehaviour
 
     void Update()
     {
-        CheckBossAttack();
+        if (!battleEnded)
+        {
+            CheckBossAttack();
+        }
     }
 
     private void CheckBossAttack()
     {
-        Debug.Log($"ƒXƒe[ƒg: {PlayerStateScript.CurrentState}");
-
+        // ãƒœã‚¹æ”»æ’ƒçŠ¶æ…‹ä»¥å¤–ã§ã¯å…¥åŠ›ã‚’å—ã‘ä»˜ã‘ãªã„ã€‚
         if (PlayerStateScript.CurrentState != PlayerStateScript.PlayerState.BossAttack)
         {
-            Debug.Log(" ƒ{ƒXUŒ‚ƒXƒe[ƒg‚Å‚Í‚ ‚è‚Ü‚¹‚ñ");
             return;
         }
 
-        Debug.Log($"EnterƒL[: {Input.GetKey(KeyCode.Return)}, ƒ`ƒƒ[ƒW: {staticScript.SaveCh}");
-
         if (Input.GetKey(KeyCode.Return))
         {
-            Debug.Log(" EnterƒL[‰Ÿ‚³‚ê‚Ä‚¢‚Ü‚·");
-
             if (staticScript.SaveCh > 0)
             {
-                Debug.Log(" ƒ`ƒƒ[ƒW‚ ‚èIƒ_ƒ[ƒWˆ—ŠJn");
-
                 float damage = damagePerCharge * Time.deltaTime;
                 HP -= damage;
 
-                //HP‚ğ•Û‘¶
+                //HPã‚’ä¿å­˜
                 staticScript.BossHP = HP;
 
-                //HPƒQ[ƒW‚ğXV
+                //HPã‚²ãƒ¼ã‚¸ã‚’æ›´æ–°
                 UpdateBossHPGauge();
 
-                // HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç“|‚·
+                // HPãŒ0ä»¥ä¸‹ã«ãªã£ãŸã‚‰å€’ã™
                 if (HP <= 0)
                 {
                     OnBossDefeated();
-                    SceneManager.LoadScene("Clear");
                 }
             }
             
@@ -111,19 +104,19 @@ public class BossScript : MonoBehaviour
         SceneManager.LoadScene("Clear");
     }
 
-    //HPƒQ[ƒWXVƒƒ\ƒbƒh
+    //HPã‚²ãƒ¼ã‚¸æ›´æ–°ãƒ¡ã‚½ãƒƒãƒ‰
     private void UpdateBossHPGauge()
     {
         if (bossHPGaugeImage != null)
         {
-            // HP‚ÌŠ„‡‚ğŒvZi0`1‚Ì”ÍˆÍj
+            // HPã®å‰²åˆã‚’è¨ˆç®—ï¼ˆ0ï½1ã®ç¯„å›²ï¼‰
             float hpRatio = Mathf.Clamp01(HP / MaxHP);
-            // fillAmount‚ğXVi‰E‚©‚ç¶‚ÉŒ¸‚éj
+            // fillAmountã‚’æ›´æ–°ï¼ˆå³ã‹ã‚‰å·¦ã«æ¸›ã‚‹ï¼‰
             bossHPGaugeImage.fillAmount = hpRatio;
         }
     }
 
-    // HPƒQ[ƒWXVƒƒ\ƒbƒh
+    // HPã‚²ãƒ¼ã‚¸æ›´æ–°ãƒ¡ã‚½ãƒƒãƒ‰
     private void UpdateHPGauge()
     {
         
@@ -136,52 +129,28 @@ public class BossScript : MonoBehaviour
 
     private void OnBossDefeated()
     {
-        //ƒ{ƒXŒ‚”j‚ÉHP‚ğƒŠƒZƒbƒg
+        // è¤‡æ•°ãƒ•ãƒ¬ãƒ¼ãƒ ã§HPãŒ0ã«ãªã£ã¦ã‚‚ã€ã‚¯ãƒªã‚¢å‡¦ç†ã¯ä¸€åº¦ã ã‘å®Ÿè¡Œã™ã‚‹ã€‚
+        if (battleEnded) return;
+        battleEnded = true;
+        //ãƒœã‚¹æ’ƒç ´æ™‚ã«HPã‚’ãƒªã‚»ãƒƒãƒˆ
         staticScript.BossHP = 0;
         staticScript.BossMaxHP = 1500f;
 
-        Debug.Log("ƒ{ƒX‚ğ“|‚µ‚½!");
-
-        if (animator != null)
-        {
-            animator.SetTrigger("Death");
-        }
-
-        //Œ‚”jƒGƒtƒFƒNƒg‚ğÄ¶
-        if (defeatEffect != null)
-        {
-            defeatEffect.Play();
-            Debug.Log("Œ‚”jƒGƒtƒFƒNƒg‚ğÄ¶‚µ‚Ü‚µ‚½");
-        }
+        Debug.Log("ãƒœã‚¹ã‚’å€’ã—ãŸ!");
 
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
-
-        staticScript.IsGoingToBoss = false;  // © ’Ç‰Áiƒ{ƒXíŒãj
-
-        StartCoroutine(DestroyAndGoToVideo(2f));
-    }
-
-    private IEnumerator DestroyAndGoToVideo(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (!string.IsNullOrEmpty(staticScript.LastSceneName))
-        {
-            Debug.Log("ƒ{ƒXŒ‚”jI“®‰æƒV[ƒ“‚ÖˆÚ“®‚µ‚Ü‚·");
-            SceneManager.LoadScene("VideoTransitionScene");
-        }
-
-        Destroy(gameObject);
+        staticScript.IsGoingToBoss = false;
+        SceneManager.LoadScene("Clear");
     }
 
   private IEnumerator BossTimer()
     {
         yield return new WaitForSeconds(bossTime);
 
-        Debug.Log("ŠÔØ‚êI“®‰æƒV[ƒ“‚ÖˆÚ“®‚µ‚Ü‚·");
+        Debug.Log("æ™‚é–“åˆ‡ã‚Œï¼å‹•ç”»ã‚·ãƒ¼ãƒ³ã¸ç§»å‹•ã—ã¾ã™");
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
 
-        staticScript.IsGoingToBoss = false;  // © ’Ç‰Áiƒ{ƒXíŒãj
+        staticScript.IsGoingToBoss = false;  // â† è¿½åŠ ï¼ˆãƒœã‚¹æˆ¦å¾Œï¼‰
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
@@ -189,17 +158,18 @@ public class BossScript : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("–ß‚éƒV[ƒ“î•ñ‚ª‚ ‚è‚Ü‚¹‚ñ");
+            Debug.LogWarning("æˆ»ã‚‹ã‚·ãƒ¼ãƒ³æƒ…å ±ãŒã‚ã‚Šã¾ã›ã‚“");
         }
     }
     public void BossTime()
     {
-       
+        if (battleEnded) return;
+        battleEnded = true;
 
-        Debug.Log("ŠÔØ‚êI“®‰æƒV[ƒ“‚ÖˆÚ“®‚µ‚Ü‚·");
+        Debug.Log("æ™‚é–“åˆ‡ã‚Œï¼å‹•ç”»ã‚·ãƒ¼ãƒ³ã¸ç§»å‹•ã—ã¾ã™");
         PlayerStateScript.CurrentState = PlayerStateScript.PlayerState.GinoAttack;
 
-        staticScript.IsGoingToBoss = false;  // © ’Ç‰Áiƒ{ƒXíŒãj
+        staticScript.IsGoingToBoss = false;  // â† è¿½åŠ ï¼ˆãƒœã‚¹æˆ¦å¾Œï¼‰
 
         if (!string.IsNullOrEmpty(staticScript.LastSceneName))
         {
@@ -207,7 +177,7 @@ public class BossScript : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("–ß‚éƒV[ƒ“î•ñ‚ª‚ ‚è‚Ü‚¹‚ñ");
+            Debug.LogWarning("æˆ»ã‚‹ã‚·ãƒ¼ãƒ³æƒ…å ±ãŒã‚ã‚Šã¾ã›ã‚“");
         }
     }
 }

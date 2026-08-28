@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>スコア、討伐数、HP、チャージ報酬をまとめて表示するUI窓口。</summary>
 public class UItextScript : MonoBehaviour
 {
 
@@ -14,6 +15,7 @@ public class UItextScript : MonoBehaviour
     public Text HPText;
     private int score = 0;
     private int count = 0;
+    private int displayedHp = int.MinValue;
     public CHScript cHScript;
     public Playerscrpt playerScript;
 
@@ -27,8 +29,6 @@ public class UItextScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpscoreText();
-        UpcountText();
         UpHPText();
     }
     public void SetCount(int newScore, int newCount)
@@ -40,6 +40,7 @@ public class UItextScript : MonoBehaviour
     }
     public void Count(int x, int y)
     {
+        // xは今回獲得したスコア、yは同一フレームの撃破数（コンボ数）。
         score += x;
         count += y;
         UpscoreText();
@@ -54,20 +55,24 @@ public class UItextScript : MonoBehaviour
     }
     public void UpscoreText()
     {
-        scoreText.text = $"�X�R�A:{score}";
-        SCOREText.text = $"�X�R�A:{score}";
+        scoreText.text = $"スコア:{score}";
+        SCOREText.text = $"スコア:{score}";
     }
     public void UpcountText()
     {
-        countText.text = $"�M�m���j��:{count}";
-       // toGinoText.text = $"Boss�t�F�[�Y�܂�:{staticScript.SaveMaxGino-count}";
+        countText.text = $"ギノ撃破数:{count}";
+       // toGinoText.text = $"Bossフェーズまで:{staticScript.SaveMaxGino-count}";
     }
 
     public void UpHPText()
     {
         if (playerScript != null && HPText != null)
         {
-            HPText.text = playerScript.PlayerHP.ToString();
+            if (displayedHp != playerScript.PlayerHP)
+            {
+                displayedHp = playerScript.PlayerHP;
+                HPText.text = playerScript.PlayerHP.ToString();
+            }
         }
     }
     public void aiu(int a)

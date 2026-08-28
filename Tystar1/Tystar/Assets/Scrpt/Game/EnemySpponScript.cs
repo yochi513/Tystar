@@ -1,9 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// Easy/Normalç”¨ã®æ•µã‚¦ã‚§ãƒ¼ãƒ–ã€ã‚¹ã‚³ã‚¢ã€ãƒœã‚¹ç§»è¡Œã‚’ã¾ã¨ã‚ã¦ç®¡ç†ã™ã‚‹ã€‚
+/// ãƒœã‚¹å¾©å¸°å¾Œã¯è¨ä¼æ•°ã‚’0ã«æˆ»ã—ã€æ¬¡å›ã®å¿…è¦è¨ä¼æ•°ã ã‘ã‚’2å¢—ã‚„ã™ã€‚
+/// </summary>
 public class EnemySpponScript : MonoBehaviour
 {
     [SerializeField] List<GameObject> enemyList = new List<GameObject>();
@@ -23,13 +27,13 @@ public class EnemySpponScript : MonoBehaviour
     private List<int> KillsThisFrame = new List<int>();
     private int totalGinoCount = 0;
     private int totalGinoMax = 0;
-    private int totalScore = 0;
     private int stopGinoCount = 11;
     private bool canSpawn = true;
+    private bool isTransitioning;
     public int score = 0;
     public UItextScript UItext;
 
-    //ƒXƒ|[ƒ“ƒpƒ^[ƒ“
+    //ã‚¹ãƒãƒ¼ãƒ³ãƒ‘ã‚¿ãƒ¼ãƒ³
     private List<int[]> spawnPatterns = new List<int[]>()
     {
         new int[]{0,1,2,3},
@@ -49,7 +53,7 @@ public class EnemySpponScript : MonoBehaviour
 
     public void selctcount()
     {
-        //‘I‚ñ‚¾ƒ‚[ƒh‚É‚æ‚Á‚Äƒ{ƒXíˆÚs‚Ì”‚ğ•ÏX
+        //é¸ã‚“ã ãƒ¢ãƒ¼ãƒ‰ã«ã‚ˆã£ã¦ãƒœã‚¹æˆ¦ç§»è¡Œã®æ•°ã‚’å¤‰æ›´
         switch (stopcount)
         {
                 case GinoCount.easy:stopGinoCount=11; break;
@@ -69,23 +73,26 @@ public class EnemySpponScript : MonoBehaviour
         {
             staticScript.ReturnedFromBoss = false;
             
-            //ƒ{ƒXíI‚í‚Á‚½‚ç”’l–ß‚·‚Ì‚Æƒ{ƒXíˆÚs‚·‚é‚Ü‚Å‚Ì”’l+2
+            // ãƒœã‚¹æˆ¦å¾Œã¯è¨ä¼æ•°ã‚’ãƒªã‚»ãƒƒãƒˆã—ã€é›£æ˜“åº¦ã”ã¨ã®è¦å®šæ•°ã‚’æœ€åˆã‹ã‚‰æ•°ãˆç›´ã™ã€‚
             score = staticScript.SaveScore;
-            totalGinoCount = staticScript.SaveKillCount;
-            stopGinoCount = staticScript.SaveMaxGino;
-            UItext.SetCount(score, totalGinoCount);
-            stopGinoCount += 2;
+            totalGinoCount = 0;
+            totalGinoMax = 0;
+            stopGinoCount = staticScript.SaveMaxGino + 2;
+            staticScript.SaveKillCount = 0;
+            staticScript.SaveMaxGino = stopGinoCount;
+            UItext.SetCount(score, 0);
 
             StartCoroutine(SpawnLoop());
         }
         else
         {
-           //ƒXƒ^[ƒg‚È‚ç”’l0‚É
+           //ã‚¹ã‚¿ãƒ¼ãƒˆæ™‚ãªã‚‰æ•°å€¤0ã«
            // staticScript.BossHP = 1500;
             staticScript.SaveKillCount = totalGinoCount;
             staticScript.SaveMaxGino = stopGinoCount;
             staticScript.SaveScore = score;
             staticScript.SavePlayerHP = 6;
+            staticScript.RestorePlayerHpOnSceneLoad = false;
 
             // BossHp.HPMAX(1500);
             selctcount();
@@ -99,7 +106,8 @@ public class EnemySpponScript : MonoBehaviour
 
     void Update()
     {
-        // 1ƒtƒŒ[ƒ€’†‚É•¡”Œ‚”j‚ª‚ ‚Á‚½‚ç“¯Œ‚”jˆµ‚¢
+        // åŒã˜ãƒ•ãƒ¬ãƒ¼ãƒ ã«å€’ã—ãŸæ•µã¯ã‚³ãƒ³ãƒœã¨ã—ã¦ã¾ã¨ã‚ã¦æ¡ç‚¹ã™ã‚‹ã€‚
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ä¸­ã«è¤‡æ•°æ’ƒç ´ãŒã‚ã£ãŸã‚‰åŒæ™‚æ’ƒç ´æ‰±ã„
         if (KillsThisFrame.Count > 0)
         {
             if (KillsThisFrame.Count >= 4)
@@ -111,12 +119,12 @@ public class EnemySpponScript : MonoBehaviour
             else
                 SCORE(1f, 1);
         }
-        //ƒtƒŒ[ƒ€I—¹‚ÉƒŠƒZƒbƒg
+        //ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†æ™‚ã«ãƒªã‚»ãƒƒãƒˆ
         KillsThisFrame.Clear();
     }
 
 
-    //‚±‚±‚ª¡‚Ü‚Å‚Ìg‚Á‚Ä‚½•¨
+    //ã“ã“ãŒä»Šã¾ã§ã®ä½¿ã£ã¦ãŸç‰©
     //private IEnumerator SpawnLoop()
     //{
     //    canSpawn = true;
@@ -158,22 +166,22 @@ public class EnemySpponScript : MonoBehaviour
     //        img.sprite = Alphabet[index];
     //    }
     //}
-    //‚±‚±‚Ü‚Å‚ª‚Â‚©‚Á‚Ä‚½‚â‚Â
+    //ã“ã“ã¾ã§ãŒã¤ã‹ã£ã¦ãŸã‚„ã¤
 
     //private IEnumerator SpawnEnemiesWithDelay()
     //{
 
 
-    //    //ƒpƒ^[ƒ“ƒ‰ƒ“ƒ_ƒ€
+    //    //ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ©ãƒ³ãƒ€ãƒ 
     //    int[] chosenPattern = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
-    //    //‘I‚Î‚ê‚½‡”Ô‚ÉƒXƒ|[ƒ“
+    //    //é¸ã°ã‚ŒãŸé †ç•ªã«ã‚¹ãƒãƒ¼ãƒ³
     //    foreach (int i in chosenPattern)
     //    {
     //        GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
     //        if (totalSpawned >= maxEnemies) yield break;
     //        if (i >= spawnPoints.Length) continue;
 
-    //        //“G‚Éƒ‰ƒ“ƒ_ƒ€‚É•¶š•t—^
+    //        //æ•µã«ãƒ©ãƒ³ãƒ€ãƒ ã«æ–‡å­—ä»˜ä¸
     //        int index = Random.Range(0, Alphabet.Length);
     //        char letter = (char)('A' + index);
 
@@ -204,62 +212,32 @@ public class EnemySpponScript : MonoBehaviour
 
         while (canSpawn)
         {
-            // --- 1‰ò‘I‚Ô ---
+            // --- 1å¡Šé¸ã¶ ---
             int[] wave = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
 
-            // --- ‰ò‚Ì’†‚Ì4‘Ì‚ğ‡”Ô‚Éo‚· ---
+            // --- å¡Šã®ä¸­ã®4ä½“ã‚’é †ç•ªã«å‡ºã™ ---
             foreach (int spawnIndex in wave)
             {
                 SpawnOneEnemy(spawnIndex);
                 yield return new WaitForSeconds(timeBetweenEnemies);
             }
 
-            // --- Ÿ‚Ì‰ò‚Ü‚Å‘Ò‚Â ---
+            // --- æ¬¡ã®å¡Šã¾ã§å¾…ã¤ ---
             yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
     private void SpawnOneEnemy(int spawnIndex)
     {
-        if (enemyList.Count == 0 || spawnPoints.Length == 0) return;
-        if (spawnIndex < 0 || spawnIndex >= spawnPoints.Length) return;
-
-        //“G‚ğƒ‰ƒ“ƒ_ƒ€‚ÅoŒ»‚³‚¹‚é
-        GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
-
-        //oŒ»‚³‚¹‚é“G‚Éƒ‰ƒ“ƒ_ƒ€ƒAƒ‹ƒtƒ@ƒxƒbƒg•t—^
-        int index = Random.Range(0, Alphabet.Length);
-        //‘Î‰‚·‚é•¶š
-        char letter = (char)('A' + index);
-
-        //“G‚ğƒXƒ|[ƒ“‚³‚¹‚é
-        GameObject enemy = Instantiate(
-            enemyPrefab,
-            spawnPoints[spawnIndex].position,
-            Quaternion.identity
-        );
-
-        var script = enemy.GetComponent<tekiScript>();
-        if (script != null)
-        {
-            script.AppEnemy = this;
-            script.assignedChar = letter;
-            script.assignedKey =
-                (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
-        }
-
-        //ƒAƒ‹ƒtƒ@ƒxƒbƒg‚ÌUI(Image)‚ğ•\¦‚³‚¹‚é
-        Image img = enemy.GetComponentInChildren<Image>();
-        if (img != null)
-        {
-            img.sprite = Alphabet[index];
-        }
+        EnemySpawnUtility.TrySpawn(enemyList, Alphabet, spawnPoints, spawnIndex, this, null);
     }
 
 
 
-    //“G‚ª€‚ñ‚¾‚çŒÄ‚Î‚ê‚é
+    //æ•µãŒæ­»ã‚“ã ã‚‰å‘¼ã°ã‚Œã‚‹
     public void ReportEnemyDefeated(int baseScore)
     {
+        if (isTransitioning) return;
+
         totalGinoMax++;
         totalGinoCount++;
        // totalDefeated++;
@@ -267,27 +245,31 @@ public class EnemySpponScript : MonoBehaviour
 
         if (totalGinoMax >= stopGinoCount)
         {
-            Debug.Log($"‹K’è”“’B: {totalGinoMax}/{stopGinoCount}");
+            Debug.Log($"è¦å®šæ•°åˆ°é”: {totalGinoMax}/{stopGinoCount}");
             canSpawn = false;
+            isTransitioning = true;
             StartCoroutine(WaitAndGoBoss());
         }
     }
     private IEnumerator WaitAndGoBoss()
     {
-        //ƒV[ƒ“ˆÚ“®‚·‚é‘O‚É”’l‚Ì•Û‘¶
+        // å…ˆã«é€²è¡ŒçŠ¶æ³ã‚’ä¿å­˜ã—ã¦ã‹ã‚‰å‹•ç”»ã‚·ãƒ¼ãƒ³ã¸ç§»å‹•ã™ã‚‹ã€‚
+        //ã‚·ãƒ¼ãƒ³ç§»å‹•ã™ã‚‹å‰ã«æ•°å€¤ã®ä¿å­˜
         yield return new WaitForSeconds(0.1f);
         staticScript.LastSceneName = SceneManager.GetActiveScene().name;
-        staticScript.SaveScore = totalScore;
+        staticScript.SaveScore = score;
         staticScript.SavePlayerHP = GameObject.FindWithTag("Player")
             ?.GetComponent<Playerscrpt>()?.GetCurrentHP() ?? 0;
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
+        staticScript.RestorePlayerHpOnSceneLoad = true;
         
 
-        staticScript.IsGoingToBoss = true;  // © ’Ç‰Áiƒ{ƒXí‘Oj
+        staticScript.IsGoingToBoss = true;  // â† è¿½åŠ ï¼ˆãƒœã‚¹æˆ¦å‰ï¼‰
+        VideoTransition.SaveCurrentDifficultyScene(staticScript.LastSceneName);
 
-        Debug.Log("VideoTransitionScene‚ÉˆÚ“®‚µ‚Ü‚·");
+        Debug.Log("VideoTransitionSceneã«ç§»å‹•ã—ã¾ã™");
         UnityEngine.SceneManagement.SceneManager.LoadScene("VideoTransitionScene");
     }
     public void SCORE(float Multiple, int Enemy)
@@ -297,8 +279,7 @@ public class EnemySpponScript : MonoBehaviour
             total += s;
         total = Mathf.RoundToInt(total * Multiple);
         score += total;
-        UItext.Count(score, Enemy);
-        totalScore += score;
+        UItext.Count(total, Enemy);
     }
 
 }

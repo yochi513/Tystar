@@ -1,7 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>ãƒãƒ£ãƒ¼ã‚¸æ“ä½œä¸­ã®ãƒ«ãƒ¼ãƒ—åŠ¹æœéŸ³ã‚’é–‹å§‹ãƒ»åœæ­¢ã™ã‚‹ã€‚</summary>
 public class AnyKeyChargingSound : MonoBehaviour
 {
     [SerializeField] private AudioClip chargingSound;
@@ -10,7 +11,7 @@ public class AnyKeyChargingSound : MonoBehaviour
     private AudioSource audioSource;
     private bool isCharging = false;
 
-    // Start ƒƒ\ƒbƒh‚Í1‚Â‚¾‚¯
+    // Start ãƒ¡ã‚½ãƒƒãƒ‰ã¯1ã¤ã ã‘
     void Start()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -28,7 +29,7 @@ public class AnyKeyChargingSound : MonoBehaviour
             {
                 audioSource.clip = chargingSound;
                 audioSource.Play();
-                Debug.Log("Œø‰Ê‰¹Ä¶ŠJn");
+                Debug.Log("åŠ¹æœéŸ³å†ç”Ÿé–‹å§‹");
             }
         }
 
@@ -38,7 +39,7 @@ public class AnyKeyChargingSound : MonoBehaviour
             if (audioSource.isPlaying)
             {
                 audioSource.Stop();
-                Debug.Log("Œø‰Ê‰¹’â~");
+                Debug.Log("åŠ¹æœéŸ³åœæ­¢");
             }
         }
     }

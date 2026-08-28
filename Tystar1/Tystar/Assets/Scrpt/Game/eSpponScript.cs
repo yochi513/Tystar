@@ -1,9 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>æ—§ç‰ˆã®æ•µã‚¹ãƒãƒ¼ãƒŠãƒ¼ã€‚ç¾åœ¨ã¯EnemySpponScriptã¸çµ±åˆäºˆå®šã®äº’æ›ç”¨å®Ÿè£…ã€‚</summary>
 public class eSpponScript : MonoBehaviour
 {
     [SerializeField] List<GameObject> enemyList = new List<GameObject>();
@@ -29,7 +30,7 @@ public class eSpponScript : MonoBehaviour
     private int stopGinoCount = 11;
     private bool secondWaveSpawned = false;
     private bool canSpawn = true;
-    private bool isSpawning = false;//ƒEƒF[ƒu‚Ìis‚ª‚Ç‚¤‚©
+    private bool isSpawning = false;//ã‚¦ã‚§ãƒ¼ãƒ–ã®é€²è¡ŒãŒã©ã†ã‹
     public int score = 0;
     public UItextScript UItext;
 
@@ -69,7 +70,7 @@ public class eSpponScript : MonoBehaviour
 
     void Update()
     {
-        // 1ƒtƒŒ[ƒ€’†‚É•¡”Œ‚”j‚ª‚ ‚Á‚½‚ç“¯Œ‚”jˆµ‚¢
+        // 1ãƒ•ãƒ¬ãƒ¼ãƒ ä¸­ã«è¤‡æ•°æ’ƒç ´ãŒã‚ã£ãŸã‚‰åŒæ™‚æ’ƒç ´æ‰±ã„
         if (KillsThisFrame.Count > 0)
         {
             if (KillsThisFrame.Count >= 4)
@@ -81,7 +82,7 @@ public class eSpponScript : MonoBehaviour
             else
                 SCORE(1f, 1);
         }
-        //ƒtƒŒ[ƒ€I—¹‚ÉƒŠƒZƒbƒg
+        //ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚äº†æ™‚ã«ãƒªã‚»ãƒƒãƒˆ
         KillsThisFrame.Clear();
     }
 
@@ -132,16 +133,16 @@ public class eSpponScript : MonoBehaviour
     //{
 
 
-    //    //ƒpƒ^[ƒ“ƒ‰ƒ“ƒ_ƒ€
+    //    //ãƒ‘ã‚¿ãƒ¼ãƒ³ãƒ©ãƒ³ãƒ€ãƒ 
     //    int[] chosenPattern = spawnPatterns[Random.Range(0, spawnPatterns.Count)];
-    //    //‘I‚Î‚ê‚½‡”Ô‚ÉƒXƒ|[ƒ“
+    //    //é¸ã°ã‚ŒãŸé †ç•ªã«ã‚¹ãƒãƒ¼ãƒ³
     //    foreach (int i in chosenPattern)
     //    {
     //        GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
     //        if (totalSpawned >= maxEnemies) yield break;
     //        if (i >= spawnPoints.Length) continue;
 
-    //        //“G‚Éƒ‰ƒ“ƒ_ƒ€‚É•¶š•t—^
+    //        //æ•µã«ãƒ©ãƒ³ãƒ€ãƒ ã«æ–‡å­—ä»˜ä¸
     //        int index = Random.Range(0, Alphabet.Length);
     //        char letter = (char)('A' + index);
 
@@ -166,7 +167,7 @@ public class eSpponScript : MonoBehaviour
     //    }
     //}
 
-    //“G‚ª€‚ñ‚¾‚çŒÄ‚Î‚ê‚é
+    //æ•µãŒæ­»ã‚“ã ã‚‰å‘¼ã°ã‚Œã‚‹
     public void ReportEnemyDefeated(int baseScore)
     {
         totalGinoMax++;
@@ -176,7 +177,7 @@ public class eSpponScript : MonoBehaviour
 
         if (totalGinoMax >= stopGinoCount)
         {
-            Debug.Log($"‹K’è”“’B: {totalGinoMax}/{stopGinoCount}");
+            Debug.Log($"è¦å®šæ•°åˆ°é”: {totalGinoMax}/{stopGinoCount}");
             canSpawn = false;
             StartCoroutine(WaitAndGoBoss());
         }
@@ -191,7 +192,7 @@ public class eSpponScript : MonoBehaviour
         staticScript.SaveKillCount = totalGinoCount;
         staticScript.SaveMaxGino = stopGinoCount;
         staticScript.ReturnedFromBoss = true;
-        Debug.Log("VideoTransitionScene‚ÉˆÚ“®‚µ‚Ü‚·");
+        Debug.Log("VideoTransitionSceneã«ç§»å‹•ã—ã¾ã™");
         UnityEngine.SceneManagement.SceneManager.LoadScene("VideoTransitionScene");
     }
     public void SCORE(float Multiple, int Enemy)

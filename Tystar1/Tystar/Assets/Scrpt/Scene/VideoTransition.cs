@@ -1,78 +1,80 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 using UnityEngine.UI;
 
+/// <summary>ãƒœã‚¹æˆ¦ã®å‰å¾Œã§å‹•ç”»ã‚’å†ç”Ÿã—ã€é›£æ˜“åº¦ã«å¯¾å¿œã—ãŸæ¬¡ã®ã‚·ãƒ¼ãƒ³ã¸é·ç§»ã™ã‚‹ã€‚</summary>
 public class VideoTransition : MonoBehaviour
 {
-    [Header("“®‰æİ’è")]
+    [Header("å‹•ç”»è¨­å®š")]
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private RawImage videoDisplay;
 
-    [Header("“®‰æƒtƒ@ƒCƒ‹")]
-    [SerializeField] private VideoClip bossBeforeVideo;  // © ƒ{ƒXí‘O‚Ì“®‰æ
-    [SerializeField] private VideoClip bossAfterVideo;   // © ƒ{ƒXíŒã‚Ì“®‰æ
+    [Header("å‹•ç”»ãƒ•ã‚¡ã‚¤ãƒ«")]
+    [SerializeField] private VideoClip bossBeforeVideo;  // â† ãƒœã‚¹æˆ¦å‰ã®å‹•ç”»
+    [SerializeField] private VideoClip bossAfterVideo;   // â† ãƒœã‚¹æˆ¦å¾Œã®å‹•ç”»
 
-    [Header("“ïˆÕ“x•Êƒ{ƒXƒV[ƒ“İ’èiš’Ç‰Ášj")]
-    [SerializeField] private string easyBossSceneName = "BossScene";       // Easy“ïˆÕ“x‚Ìƒ{ƒXƒV[ƒ“–¼
-    [SerializeField] private string normalBossSceneName = "NormalBossScene";   // Normal“ïˆÕ“x‚Ìƒ{ƒXƒV[ƒ“–¼
-    [SerializeField] private string hardBossSceneName = "HardBossScene";       // Hard“ïˆÕ“x‚Ìƒ{ƒXƒV[ƒ“–¼
+    [Header("é›£æ˜“åº¦åˆ¥ãƒœã‚¹ã‚·ãƒ¼ãƒ³è¨­å®šï¼ˆâ˜…è¿½åŠ â˜…ï¼‰")]
+    [SerializeField] private string easyBossSceneName = "BossScene";       // Easyé›£æ˜“åº¦ã®ãƒœã‚¹ã‚·ãƒ¼ãƒ³å
+    [SerializeField] private string normalBossSceneName = "NormalBossScene";   // Normalé›£æ˜“åº¦ã®ãƒœã‚¹ã‚·ãƒ¼ãƒ³å
+    [SerializeField] private string hardBossSceneName = "HardBossScene";       // Hardé›£æ˜“åº¦ã®ãƒœã‚¹ã‚·ãƒ¼ãƒ³å
 
-    [Header("“ïˆÕ“x•ÊƒƒCƒ“ƒV[ƒ“İ’èiš’Ç‰Ášj")]
-    [SerializeField] private string easySceneName = "MainScene";    // Easy“ïˆÕ“x‚ÌƒƒCƒ“ƒV[ƒ“–¼
-    [SerializeField] private string normalSceneName = "NormalScene"; // Normal“ïˆÕ“x‚ÌƒƒCƒ“ƒV[ƒ“–¼
-    [SerializeField] private string hardSceneName = "HardScene";     // Hard“ïˆÕ“x‚ÌƒƒCƒ“ƒV[ƒ“–¼
+    [Header("é›£æ˜“åº¦åˆ¥ãƒ¡ã‚¤ãƒ³ã‚·ãƒ¼ãƒ³è¨­å®šï¼ˆâ˜…è¿½åŠ â˜…ï¼‰")]
+    [SerializeField] private string easySceneName = "MainScene";    // Easyé›£æ˜“åº¦ã®ãƒ¡ã‚¤ãƒ³ã‚·ãƒ¼ãƒ³å
+    [SerializeField] private string normalSceneName = "NormalScene"; // Normalé›£æ˜“åº¦ã®ãƒ¡ã‚¤ãƒ³ã‚·ãƒ¼ãƒ³å
+    [SerializeField] private string hardSceneName = "HardScene";     // Hardé›£æ˜“åº¦ã®ãƒ¡ã‚¤ãƒ³ã‚·ãƒ¼ãƒ³å
 
-    [Header("ƒXƒLƒbƒvİ’è")]
+    [Header("ã‚¹ã‚­ãƒƒãƒ—è¨­å®š")]
     [SerializeField] private bool allowSkip = true;
     [SerializeField] private Text skipText;
 
     private bool isVideoPlaying = false;
     private string nextSceneName;
 
-    // Œ»İ‚Ì“ïˆÕ“xƒV[ƒ“‚ğ•Û‘¶‚·‚éÃ“I•Ï”iš’Ç‰Ášj
+    // ç¾åœ¨ã®é›£æ˜“åº¦ã‚·ãƒ¼ãƒ³ã‚’ä¿å­˜ã™ã‚‹é™çš„å¤‰æ•°ï¼ˆâ˜…è¿½åŠ â˜…ï¼‰
     public static string currentDifficultyScene = "";
 
     void Start()
     {
-        // ƒ{ƒXí‘O‚©Œã‚©‚Å“®‰æ‚ÆƒV[ƒ“‚ğØ‚è‘Ö‚¦
+        // é·ç§»ç†ç”±ã‚’å…±æœ‰çŠ¶æ…‹ã‹ã‚‰èª­ã¿ã€å†ç”Ÿã™ã‚‹å‹•ç”»ã¨è¡Œãå…ˆã‚’æ±ºã‚ã‚‹ã€‚
+        // ãƒœã‚¹æˆ¦å‰ã‹å¾Œã‹ã§å‹•ç”»ã¨ã‚·ãƒ¼ãƒ³ã‚’åˆ‡ã‚Šæ›¿ãˆ
         if (staticScript.IsGoingToBoss)
         {
-            // ƒ{ƒXí‘O
+            // ãƒœã‚¹æˆ¦å‰
             if (bossBeforeVideo != null)
             {
                 videoPlayer.clip = bossBeforeVideo;
-                Debug.Log("ƒ{ƒXí‘O‚Ì“®‰æ‚ğÄ¶");
+                Debug.Log("ãƒœã‚¹æˆ¦å‰ã®å‹•ç”»ã‚’å†ç”Ÿ");
             }
 
-            // •Û‘¶‚³‚ê‚Ä‚¢‚é“ïˆÕ“x‚É‰‚¶‚½ƒ{ƒXƒV[ƒ“‚ğİ’èišC³šj
+            // ä¿å­˜ã•ã‚Œã¦ã„ã‚‹é›£æ˜“åº¦ã«å¿œã˜ãŸãƒœã‚¹ã‚·ãƒ¼ãƒ³ã‚’è¨­å®šï¼ˆâ˜…ä¿®æ­£â˜…ï¼‰
             nextSceneName = GetBossSceneByDifficulty();
-            Debug.Log("Ÿ‚Ìƒ{ƒXƒV[ƒ“: " + nextSceneName);
+            Debug.Log("æ¬¡ã®ãƒœã‚¹ã‚·ãƒ¼ãƒ³: " + nextSceneName);
         }
         else
         {
-            // ƒ{ƒXíŒãišC³šj
+            // ãƒœã‚¹æˆ¦å¾Œï¼ˆâ˜…ä¿®æ­£â˜…ï¼‰
             if (bossAfterVideo != null)
             {
                 videoPlayer.clip = bossAfterVideo;
-                Debug.Log("ƒ{ƒXíŒã‚Ì“®‰æ‚ğÄ¶");
+                Debug.Log("ãƒœã‚¹æˆ¦å¾Œã®å‹•ç”»ã‚’å†ç”Ÿ");
             }
 
-            // •Û‘¶‚³‚ê‚Ä‚¢‚é“ïˆÕ“xƒV[ƒ“‚É–ß‚éiš’Ç‰Ášj
+            // ä¿å­˜ã•ã‚Œã¦ã„ã‚‹é›£æ˜“åº¦ã‚·ãƒ¼ãƒ³ã«æˆ»ã‚‹ï¼ˆâ˜…è¿½åŠ â˜…ï¼‰
             if (!string.IsNullOrEmpty(currentDifficultyScene))
             {
                 nextSceneName = currentDifficultyScene;
-                Debug.Log("•Û‘¶‚³‚ê‚Ä‚¢‚½“ïˆÕ“xƒV[ƒ“‚É–ß‚è‚Ü‚·: " + nextSceneName);
+                Debug.Log("ä¿å­˜ã•ã‚Œã¦ã„ãŸé›£æ˜“åº¦ã‚·ãƒ¼ãƒ³ã«æˆ»ã‚Šã¾ã™: " + nextSceneName);
             }
-            // ŒİŠ·«‚Ì‚½‚ßAstaticScript.LastSceneName‚àƒ`ƒFƒbƒN
+            // äº’æ›æ€§ã®ãŸã‚ã€staticScript.LastSceneNameã‚‚ãƒã‚§ãƒƒã‚¯
             else if (!string.IsNullOrEmpty(staticScript.LastSceneName))
             {
                 nextSceneName = staticScript.LastSceneName;
-                Debug.Log("LastSceneName‚ğg—p: " + nextSceneName);
+                Debug.Log("LastSceneNameã‚’ä½¿ç”¨: " + nextSceneName);
             }
             else
             {
-                Debug.LogWarning("–ß‚éƒV[ƒ“‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+                Debug.LogWarning("æˆ»ã‚‹ã‚·ãƒ¼ãƒ³ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
             }
         }
 
@@ -91,7 +93,7 @@ public class VideoTransition : MonoBehaviour
         }
         else
         {
-            Debug.LogError("VideoPlayer ‚Ü‚½‚Í RawImage ‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            Debug.LogError("VideoPlayer ã¾ãŸã¯ RawImage ãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
         }
     }
 
@@ -132,61 +134,61 @@ public class VideoTransition : MonoBehaviour
 
         if (!string.IsNullOrEmpty(nextSceneName))
         {
-            Debug.Log($"Ÿ‚ÌƒV[ƒ“‚ÉˆÚ“®: {nextSceneName}");
+            Debug.Log($"æ¬¡ã®ã‚·ãƒ¼ãƒ³ã«ç§»å‹•: {nextSceneName}");
             SceneManager.LoadScene(nextSceneName);
         }
         else
         {
-            Debug.LogError("Ÿ‚ÌƒV[ƒ“–¼‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            Debug.LogError("æ¬¡ã®ã‚·ãƒ¼ãƒ³åãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
         }
     }
 
-    // š’Ç‰Áš ŠO•”‚©‚ç“ïˆÕ“xƒV[ƒ“‚ğ•Û‘¶‚·‚éƒƒ\ƒbƒh
+    // â˜…è¿½åŠ â˜… å¤–éƒ¨ã‹ã‚‰é›£æ˜“åº¦ã‚·ãƒ¼ãƒ³ã‚’ä¿å­˜ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public static void SaveCurrentDifficultyScene(string sceneName)
     {
         currentDifficultyScene = sceneName;
-        Debug.Log("“ïˆÕ“xƒV[ƒ“‚ğ•Û‘¶: " + sceneName);
+        Debug.Log("é›£æ˜“åº¦ã‚·ãƒ¼ãƒ³ã‚’ä¿å­˜: " + sceneName);
     }
 
-    // š’Ç‰Áš ŠO•”‚©‚ç“ïˆÕ“xƒV[ƒ“‚ğ•Û‘¶‚µ‚Ä“®‰æƒV[ƒ“‚ÉˆÚ“®
+    // â˜…è¿½åŠ â˜… å¤–éƒ¨ã‹ã‚‰é›£æ˜“åº¦ã‚·ãƒ¼ãƒ³ã‚’ä¿å­˜ã—ã¦å‹•ç”»ã‚·ãƒ¼ãƒ³ã«ç§»å‹•
     public static void GoToVideoWithDifficulty(string videoSceneName)
     {
-        // Œ»İ‚ÌƒV[ƒ“–¼‚ğ•Û‘¶
+        // ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³åã‚’ä¿å­˜
         currentDifficultyScene = SceneManager.GetActiveScene().name;
-        Debug.Log("Œ»İ‚ÌƒV[ƒ“‚ğ•Û‘¶: " + currentDifficultyScene);
+        Debug.Log("ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã‚’ä¿å­˜: " + currentDifficultyScene);
 
-        // “®‰æƒV[ƒ“‚ÉˆÚ“®
+        // å‹•ç”»ã‚·ãƒ¼ãƒ³ã«ç§»å‹•
         SceneManager.LoadScene(videoSceneName);
     }
 
-    // š’Ç‰Áš •Û‘¶‚³‚ê‚Ä‚¢‚é“ïˆÕ“x‚É‰‚¶‚½ƒ{ƒXƒV[ƒ“‚ğæ“¾
+    // â˜…è¿½åŠ â˜… ä¿å­˜ã•ã‚Œã¦ã„ã‚‹é›£æ˜“åº¦ã«å¿œã˜ãŸãƒœã‚¹ã‚·ãƒ¼ãƒ³ã‚’å–å¾—
     private string GetBossSceneByDifficulty()
     {
         if (string.IsNullOrEmpty(currentDifficultyScene))
         {
-            Debug.LogWarning("“ïˆÕ“xƒV[ƒ“‚ª•Û‘¶‚³‚ê‚Ä‚¢‚Ü‚¹‚ñIƒfƒtƒHƒ‹ƒg‚ÌEasyƒ{ƒXƒV[ƒ“‚ğg—p‚µ‚Ü‚·");
+            Debug.LogWarning("é›£æ˜“åº¦ã‚·ãƒ¼ãƒ³ãŒä¿å­˜ã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®Easyãƒœã‚¹ã‚·ãƒ¼ãƒ³ã‚’ä½¿ç”¨ã—ã¾ã™");
             return easyBossSceneName;
         }
 
-        // •Û‘¶‚³‚ê‚Ä‚¢‚éƒV[ƒ“–¼‚©‚ç“ïˆÕ“x‚ğ”»’è
+        // ä¿å­˜ã•ã‚Œã¦ã„ã‚‹ã‚·ãƒ¼ãƒ³åã‹ã‚‰é›£æ˜“åº¦ã‚’åˆ¤å®š
         if (currentDifficultyScene.Contains("Easy") || currentDifficultyScene == easySceneName)
         {
-            Debug.Log("“ïˆÕ“x: Easy ¨ " + easyBossSceneName);
+            Debug.Log("é›£æ˜“åº¦: Easy â†’ " + easyBossSceneName);
             return easyBossSceneName;
         }
         else if (currentDifficultyScene.Contains("Normal") || currentDifficultyScene == normalSceneName)
         {
-            Debug.Log("“ïˆÕ“x: Normal ¨ " + normalBossSceneName);
+            Debug.Log("é›£æ˜“åº¦: Normal â†’ " + normalBossSceneName);
             return normalBossSceneName;
         }
         else if (currentDifficultyScene.Contains("Hard") || currentDifficultyScene == hardSceneName)
         {
-            Debug.Log("“ïˆÕ“x: Hard ¨ " + hardBossSceneName);
+            Debug.Log("é›£æ˜“åº¦: Hard â†’ " + hardBossSceneName);
             return hardBossSceneName;
         }
         else
         {
-            Debug.LogWarning("“ïˆÕ“x‚ğ”»’è‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½BEasyƒ{ƒXƒV[ƒ“‚ğg—p‚µ‚Ü‚·");
+            Debug.LogWarning("é›£æ˜“åº¦ã‚’åˆ¤å®šã§ãã¾ã›ã‚“ã§ã—ãŸã€‚Easyãƒœã‚¹ã‚·ãƒ¼ãƒ³ã‚’ä½¿ç”¨ã—ã¾ã™");
             return easyBossSceneName;
         }
     }

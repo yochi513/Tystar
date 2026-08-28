@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>結果画面のリトライとタイトルへ戻る操作を提供する。</summary>
 public class BottonScript : MonoBehaviour
 {
     [SerializeField] Button Retry;

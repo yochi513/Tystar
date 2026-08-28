@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>説明用Spriteをキー操作で前後に切り替える。</summary>
 public class ExplanationScript : MonoBehaviour
 {
     [SerializeField] Image targetImage;
@@ -14,6 +15,13 @@ public class ExplanationScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (targetImage == null || spritsList == null || spritsList.Count == 0)
+        {
+            Debug.LogWarning("ExplanationScript: 表示先Imageまたは説明用Spriteが設定されていません。", this);
+            enabled = false;
+            return;
+        }
+
         if (spritsList.Count > 0)
         {
             targetImage.sprite=spritsList[0];
@@ -35,9 +43,9 @@ public class ExplanationScript : MonoBehaviour
         else if (Input.GetKeyDown(BackKey))
         {
             index--;
-            if (index <= spritsList.Count)
+            if (index < 0)
             {
-                index = 0;
+                index = spritsList.Count - 1;
             }
             targetImage.sprite = spritsList[index];
         }

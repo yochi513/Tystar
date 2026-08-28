@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>ボール反射パートで使うチャージゲージの表示と値を管理する。</summary>
 public class BallCHScrpt : MonoBehaviour
 {
     [SerializeField] Image Char;
@@ -36,7 +37,7 @@ public class BallCHScrpt : MonoBehaviour
 
     void UpdateUI()
     {
-        if (Char != null)
+        if (Char != null && maxCharge > 0f)
             Char.fillAmount = currentCharge / maxCharge;
     }
 }
