@@ -1,0 +1,111 @@
+﻿using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+/// <summary>ボス戦前の反射フェーズを進め、完了後にボス攻撃状態へ切り替える。</summary>
+public class BossWaveScript : MonoBehaviour
+{
+    [SerializeField] GameObject ballPrefab;
+    [SerializeField] Transform supar;
+    [SerializeField] Transform player;
+    [SerializeField] Sprite[] Alphabet;
+    [SerializeField] GameObject Entra;
+
+    public BallCHScrpt BallCH;
+    public PlayerStateScript playerState;
+    public BallScript Ball;
+   
+
+    int phase = 0;
+    GameObject ball;
+    char currentLetter;
+    public KeyCode currentKey;
+    Sprite currentSprite;
+
+    private bool isWaitingForReflect = false;
+    private bool bossPhaseStarted = false; // ボスフェーズ開始フラグ
+    private bool hasValidConfiguration;
+
+
+
+    void Awake()
+    {
+        hasValidConfiguration = ballPrefab != null && supar != null && player != null &&
+            Alphabet != null && Alphabet.Length > 0 && Entra != null && playerState != null;
+
+        if (!hasValidConfiguration)
+        {
+            Debug.LogError("BossWaveScript: Inspectorの必須参照が不足しています。", this);
+            enabled = false;
+        }
+    }
+
+    void Start()
+    {
+        if (!hasValidConfiguration) return;
+        StartNextPhase();
+       Entra.SetActive(false);  
+    }
+
+    void StartNextPhase()
+    {
+        // 3回の反射に成功したら、ボール操作ではなくボス攻撃へ移る。
+        if (phase >= 3)
+        {
+            Entra.gameObject.SetActive(true);
+            staticScript.BossCount++;
+            Debug.Log("Bossフェーズ突入回数" + staticScript.BossCount);
+            if (!bossPhaseStarted)
+            {
+                bossPhaseStarted = true;
+                playerState.BossAttack();
+                Debug.Log("ボス攻撃フェーズ開始！ステート: " + PlayerStateScript.CurrentState);
+                Debug.Log("現在のチャージ量: " + staticScript.SaveCh);
+            }
+            return;
+        }
+
+        int index = Random.Range(0, Alphabet.Length);
+        currentLetter = (char)('A' + index);
+        currentKey = (KeyCode)System.Enum.Parse(typeof(KeyCode), currentLetter.ToString());
+        currentSprite = Alphabet[index];
+
+        ball = Instantiate(ballPrefab, supar.position, Quaternion.identity);
+        BallScript ballScript = ball.GetComponent<BallScript>();
+        if (ballScript == null)
+        {
+            Debug.LogError("BossWaveScript: ballPrefabにBallScriptがありません。", ball);
+            Destroy(ball);
+            enabled = false;
+            return;
+        }
+        ballScript.Init(currentLetter, currentKey, player, supar, currentSprite);
+
+        isWaitingForReflect = true;
+        Debug.Log($"フェーズ{phase + 1}: キー '{currentLetter}' を押してボールを跳ね返してください");
+    }
+
+    void Update()
+    {
+        // ボスフェーズに移行したらキー入力を受け付けない
+        if (bossPhaseStarted) return;
+
+        if (isWaitingForReflect && Input.GetKeyDown(currentKey))
+        {
+            if (ball == null) return;
+
+            ball.GetComponent<BallScript>().Reflect();
+
+            Animator suparAnimator = supar.GetComponent<Animator>();
+            if (suparAnimator != null)
+            {
+                suparAnimator.SetTrigger("Attack");
+            }
+
+            isWaitingForReflect = false;
+            phase++;
+
+            Invoke(nameof(StartNextPhase), 1f);
+        }
+    }
+}

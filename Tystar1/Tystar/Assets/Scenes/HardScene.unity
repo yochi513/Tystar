@@ -1660,7 +1660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82e919b637f3ef4bbd3c9e0baf575b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHP: 1
+  playerHP: 1
   isInvincible: 0
   invincibleTime: 1.5
   Gameover: {fileID: 190343268}
