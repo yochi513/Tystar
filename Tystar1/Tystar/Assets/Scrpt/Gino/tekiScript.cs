@@ -123,6 +123,7 @@ public class tekiScript : MonoBehaviour
 
     public void Speed()
     {
+
         switch (speedtime)
         {
             case SPEED.Zero:     speed = 1f; break;

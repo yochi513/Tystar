@@ -18,22 +18,18 @@ public class EnemySpponScript : MonoBehaviour
     [SerializeField] int ginoMax = 10;
     [SerializeField] int totalPhaes = 3;
     public BossScript boss;
-    BossHPGaugeManager BossHp;
+
 
     private List<int> KillsThisFrame = new List<int>();
-    private int totalSpawned = 0;
-    private int totalDefeated = 0;
     private int totalGinoCount = 0;
     private int totalGinoMax = 0;
     private int totalScore = 0;
-    private int currentWave = 1;
     private int stopGinoCount = 11;
-    private bool secondWaveSpawned = false;
     private bool canSpawn = true;
-    private bool isSpawning = false;//ウェーブの進行がどうか
     public int score = 0;
     public UItextScript UItext;
 
+    //スポーンパターン
     private List<int[]> spawnPatterns = new List<int[]>()
     {
         new int[]{0,1,2,3},
@@ -45,16 +41,15 @@ public class EnemySpponScript : MonoBehaviour
     };
     public enum GinoCount
     {
-       
         easy,
         normal,
-        hard,
-
+        hard
     }
     public GinoCount stopcount =GinoCount.easy;
 
     public void selctcount()
     {
+        //選んだモードによってボス戦移行の数を変更
         switch (stopcount)
         {
                 case GinoCount.easy:stopGinoCount=11; break;
@@ -69,10 +64,12 @@ public class EnemySpponScript : MonoBehaviour
     void Start()
     {
         selctcount();
+
         if (staticScript.ReturnedFromBoss)
         {
             staticScript.ReturnedFromBoss = false;
-
+            
+            //ボス戦終わったら数値戻すのとボス戦移行するまでの数値+2
             score = staticScript.SaveScore;
             totalGinoCount = staticScript.SaveKillCount;
             stopGinoCount = staticScript.SaveMaxGino;
@@ -83,6 +80,7 @@ public class EnemySpponScript : MonoBehaviour
         }
         else
         {
+           //スタート時なら数値0に
            // staticScript.BossHP = 1500;
             staticScript.SaveKillCount = totalGinoCount;
             staticScript.SaveMaxGino = stopGinoCount;
@@ -225,11 +223,15 @@ public class EnemySpponScript : MonoBehaviour
         if (enemyList.Count == 0 || spawnPoints.Length == 0) return;
         if (spawnIndex < 0 || spawnIndex >= spawnPoints.Length) return;
 
+        //敵をランダムで出現させる
         GameObject enemyPrefab = enemyList[Random.Range(0, enemyList.Count)];
 
+        //出現させる敵にランダムアルファベット付与
         int index = Random.Range(0, Alphabet.Length);
+        //対応する文字
         char letter = (char)('A' + index);
 
+        //敵をスポーンさせる
         GameObject enemy = Instantiate(
             enemyPrefab,
             spawnPoints[spawnIndex].position,
@@ -245,6 +247,7 @@ public class EnemySpponScript : MonoBehaviour
                 (KeyCode)System.Enum.Parse(typeof(KeyCode), letter.ToString());
         }
 
+        //アルファベットのUI(Image)を表示させる
         Image img = enemy.GetComponentInChildren<Image>();
         if (img != null)
         {
@@ -271,6 +274,7 @@ public class EnemySpponScript : MonoBehaviour
     }
     private IEnumerator WaitAndGoBoss()
     {
+        //シーン移動する前に数値の保存
         yield return new WaitForSeconds(0.1f);
         staticScript.LastSceneName = SceneManager.GetActiveScene().name;
         staticScript.SaveScore = totalScore;
